@@ -1,0 +1,14 @@
+{
+  "expo": {
+    "name": "SoundFree",
+    "slug": "soundfree",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "soundfree",
+    "userInterfaceStyle": "dark",
+    "android": {
+      "package": "com.soundfree.app"
+    },
+    "plugins": ["expo-router"]
+  }
+}
