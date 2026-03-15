@@ -24,3 +24,14 @@
 2026-03-15 12:14:10 | INFO     | services.stream_service:34 - Extracting stream URL for video_id: INVALID_VIDEO_ID_123
 2026-03-15 12:14:12 | ERROR    | services.stream_service:45 - yt-dlp failed for INVALID_VIDEO_ID_123: ERROR: [youtube] INVALID_VID: Video unavailable
 2026-03-15 12:14:12 | INFO     | main:46 - GET /stream/INVALID_VIDEO_ID_123 → 422 (1391.8ms)
+2026-03-15 12:34:32 | INFO     | routers.metadata:39 - Cache MISS for metadata: bSnlKl_PoQU — fetching
+2026-03-15 12:34:32 | INFO     | services.search_service:43 - Searching YouTube Music: 'bSnlKl_PoQU'
+2026-03-15 12:34:34 | INFO     | services.search_service:72 - Search returned 1 tracks for 'bSnlKl_PoQU'
+2026-03-15 12:34:34 | INFO     | services.musicbrainz_service:49 - MusicBrainz lookup: Queen — Bohemian Rhapsody
+2026-03-15 12:34:36 | INFO     | services.musicbrainz_service:95 - MusicBrainz found: Bohemian Rhapsody | album: 1986‐06‐21: Reigns the World: Maimarktgelände, Mannheim, Germany | year: None
+2026-03-15 12:34:36 | INFO     | services.coverart_service:16 - Fetching cover art for album MBID: 3825e786-fb15-43f6-8287-61444165cf9d
+2026-03-15 12:34:44 | INFO     | services.coverart_service:44 - Cover art found for 3825e786-fb15-43f6-8287-61444165cf9d
+2026-03-15 12:34:44 | INFO     | routers.metadata:97 - Metadata cached for bSnlKl_PoQU
+2026-03-15 12:34:44 | INFO     | main:47 - GET /metadata/bSnlKl_PoQU → 200 (12102.0ms)
+2026-03-15 12:36:23 | INFO     | routers.metadata:134 - Redis HIT for metadata: bSnlKl_PoQU
+2026-03-15 12:36:23 | INFO     | main:47 - GET /metadata/bSnlKl_PoQU → 200 (9.3ms)
