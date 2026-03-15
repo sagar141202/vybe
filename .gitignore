@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+htmlcov/
+.coverage
+dist/
+build/
+
+# Node / Expo
+node_modules/
+.expo/
+.expo-shared/
+web-build/
+*.jsbundle
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Audio cache
+backend/audio_cache/
+*.webm
+*.m4a
+*.opus
+
+# Annoy index
+backend/*.ann
+backend/*.pkl
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
