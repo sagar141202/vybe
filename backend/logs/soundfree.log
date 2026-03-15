@@ -11,3 +11,8 @@
 2026-03-15 12:06:58 | INFO     | main:46 - GET /search → 200 (2165.5ms)
 2026-03-15 12:07:23 | INFO     | routers.search:40 - Cache HIT for search: 'bohemian rhapsody'
 2026-03-15 12:07:23 | INFO     | main:46 - GET /search → 200 (3.8ms)
+2026-03-15 12:11:56 | INFO     | routers.stream:37 - Cache MISS for stream: bSnlKl_PoQU — calling yt-dlp
+2026-03-15 12:11:56 | INFO     | services.stream_service:34 - Extracting stream URL for video_id: bSnlKl_PoQU
+2026-03-15 12:11:59 | INFO     | services.stream_service:59 - Got stream URL for bSnlKl_PoQU | format: 251 - audio only (medium)
+2026-03-15 12:11:59 | INFO     | routers.stream:55 - Cached stream URL for bSnlKl_PoQU (TTL: 5h)
+2026-03-15 12:11:59 | INFO     | main:46 - GET /stream/bSnlKl_PoQU → 200 (3760.8ms)

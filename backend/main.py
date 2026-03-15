@@ -7,11 +7,10 @@ from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 from slowapi.middleware import SlowAPIMiddleware
 
-from cache import cache_get, cache_set
 from config import settings
 from limiter import limiter
 from logger import setup_logging
-from routers import search
+from routers import search, stream
 
 setup_logging()
 
@@ -36,6 +35,7 @@ app.add_middleware(
 )
 
 app.include_router(search.router, prefix="/search", tags=["search"])
+app.include_router(stream.router, prefix="/stream", tags=["stream"])
 
 
 @app.middleware("http")
@@ -57,10 +57,3 @@ async def root() -> dict:
 @app.get("/health")
 async def health() -> dict:
     return {"status": "ok", "version": settings.app_version}
-
-
-@app.get("/test-redis")
-async def test_redis() -> dict:
-    await cache_set("test_key", {"hello": "soundfree"}, ttl_seconds=60)
-    value = await cache_get("test_key")
-    return {"cached": value}
