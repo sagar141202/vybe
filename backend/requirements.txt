@@ -1,0 +1,42 @@
+# Web framework
+fastapi==0.115.6
+uvicorn[standard]==0.32.1
+gunicorn==23.0.0
+pydantic==2.10.3
+pydantic-settings==2.7.0
+
+# Database
+sqlalchemy==2.0.36
+asyncpg==0.30.0
+alembic==1.14.0
+
+# Cache
+redis[asyncio]==5.2.1
+
+# Audio & streaming
+yt-dlp==2025.1.15
+ytmusicapi==1.8.2
+librosa==0.10.2.post1
+soundfile==0.12.1
+
+# HTTP client
+httpx==0.28.1
+
+# Lyrics
+lyricsgenius==3.0.1
+syncedlyrics==0.4.3
+
+# ML / recommendations
+scikit-learn==1.6.0
+annoy==1.17.3
+numpy==1.26.4
+pandas==2.2.3
+
+# Background jobs
+apscheduler==3.10.4
+
+# Discord Rich Presence
+pypresence==4.3.0
+
+# Logging
+loguru==0.7.3
