@@ -366,3 +366,74 @@
 2026-03-15 22:14:55 | INFO     | main:47 - GET /search → 200 (659.4ms)
 2026-03-15 22:14:57 | INFO     | routers.stream:31 - Cache HIT for stream: uT_HXrrmHX8
 2026-03-15 22:14:57 | INFO     | main:47 - GET /stream/uT_HXrrmHX8 → 200 (3.2ms)
+2026-03-15 22:20:52 | INFO     | main:47 - GET /health → 200 (2.3ms)
+2026-03-15 22:21:06 | INFO     | main:47 - GET /health → 200 (0.6ms)
+2026-03-15 22:21:26 | INFO     | routers.search:43 - Cache MISS for search: 'dhun' — fetching from YouTube Music
+2026-03-15 22:21:26 | INFO     | services.search_service:43 - Searching YouTube Music: 'dhun'
+2026-03-15 22:21:27 | INFO     | services.search_service:72 - Search returned 20 tracks for 'dhun'
+2026-03-15 22:21:27 | INFO     | routers.search:60 - Cached 20 results for 'dhun' (TTL: 30min)
+2026-03-15 22:21:27 | INFO     | main:47 - GET /search → 200 (876.2ms)
+2026-03-15 22:21:28 | INFO     | routers.stream:31 - Cache HIT for stream: Wqu4MRQOgyo
+2026-03-15 22:21:28 | INFO     | main:47 - GET /stream/Wqu4MRQOgyo → 200 (1.8ms)
+2026-03-15 22:21:29 | INFO     | routers.stream:31 - Cache HIT for stream: Wqu4MRQOgyo
+2026-03-15 22:21:29 | INFO     | main:47 - GET /stream/Wqu4MRQOgyo → 200 (4.7ms)
+2026-03-15 22:21:52 | INFO     | main:47 - GET /health → 200 (0.9ms)
+2026-03-15 22:21:57 | INFO     | routers.search:43 - Cache MISS for search: 'Bollywood' — fetching from YouTube Music
+2026-03-15 22:21:57 | INFO     | services.search_service:43 - Searching YouTube Music: 'Bollywood'
+2026-03-15 22:21:58 | INFO     | services.search_service:72 - Search returned 20 tracks for 'Bollywood'
+2026-03-15 22:21:58 | INFO     | routers.search:60 - Cached 20 results for 'Bollywood' (TTL: 30min)
+2026-03-15 22:21:58 | INFO     | main:47 - GET /search → 200 (1127.7ms)
+2026-03-15 22:22:05 | INFO     | routers.search:39 - Cache HIT for search: 'dhun'
+2026-03-15 22:22:05 | INFO     | main:47 - GET /search → 200 (2.4ms)
+2026-03-15 22:22:07 | INFO     | routers.stream:31 - Cache HIT for stream: Wqu4MRQOgyo
+2026-03-15 22:22:07 | INFO     | main:47 - GET /stream/Wqu4MRQOgyo → 200 (2.3ms)
+2026-03-15 22:22:28 | INFO     | routers.stream:35 - Cache MISS for stream: YmIaKmfhrb0 — calling yt-dlp
+2026-03-15 22:22:28 | INFO     | services.stream_service:34 - Extracting stream URL for video_id: YmIaKmfhrb0
+2026-03-15 22:22:30 | INFO     | routers.stream:31 - Cache HIT for stream: Wqu4MRQOgyo
+2026-03-15 22:22:30 | INFO     | main:47 - GET /stream/Wqu4MRQOgyo → 200 (5.4ms)
+2026-03-15 22:22:31 | INFO     | services.stream_service:59 - Got stream URL for YmIaKmfhrb0 | format: 251 - audio only (medium)
+2026-03-15 22:22:31 | INFO     | routers.stream:53 - Cached stream URL for YmIaKmfhrb0 (TTL: 5h)
+2026-03-15 22:22:31 | INFO     | main:47 - GET /stream/YmIaKmfhrb0 → 200 (3258.6ms)
+2026-03-15 22:22:31 | INFO     | routers.stream:31 - Cache HIT for stream: YmIaKmfhrb0
+2026-03-15 22:22:31 | INFO     | main:47 - GET /stream/YmIaKmfhrb0 → 200 (2.0ms)
+2026-03-15 22:22:32 | INFO     | routers.stream:35 - Cache MISS for stream: nJIx5lFLIwM — calling yt-dlp
+2026-03-15 22:22:32 | INFO     | services.stream_service:34 - Extracting stream URL for video_id: nJIx5lFLIwM
+2026-03-15 22:22:34 | INFO     | services.stream_service:59 - Got stream URL for nJIx5lFLIwM | format: 251 - audio only (medium)
+2026-03-15 22:22:34 | INFO     | routers.stream:53 - Cached stream URL for nJIx5lFLIwM (TTL: 5h)
+2026-03-15 22:22:34 | INFO     | main:47 - GET /stream/nJIx5lFLIwM → 200 (2063.8ms)
+2026-03-15 22:22:39 | INFO     | routers.search:43 - Cache MISS for search: 'sit' — fetching from YouTube Music
+2026-03-15 22:22:39 | INFO     | services.search_service:43 - Searching YouTube Music: 'sit'
+2026-03-15 22:22:40 | INFO     | services.search_service:72 - Search returned 20 tracks for 'sit'
+2026-03-15 22:22:40 | INFO     | routers.search:60 - Cached 20 results for 'sit' (TTL: 30min)
+2026-03-15 22:22:40 | INFO     | main:47 - GET /search → 200 (659.9ms)
+2026-03-15 22:22:40 | INFO     | routers.search:43 - Cache MISS for search: 'sita' — fetching from YouTube Music
+2026-03-15 22:22:40 | INFO     | services.search_service:43 - Searching YouTube Music: 'sita'
+2026-03-15 22:22:41 | INFO     | services.search_service:72 - Search returned 20 tracks for 'sita'
+2026-03-15 22:22:41 | INFO     | routers.search:60 - Cached 20 results for 'sita' (TTL: 30min)
+2026-03-15 22:22:41 | INFO     | main:47 - GET /search → 200 (591.9ms)
+2026-03-15 22:22:44 | INFO     | routers.search:43 - Cache MISS for search: 'sitaa' — fetching from YouTube Music
+2026-03-15 22:22:44 | INFO     | services.search_service:43 - Searching YouTube Music: 'sitaa'
+2026-03-15 22:22:44 | INFO     | services.search_service:72 - Search returned 20 tracks for 'sitaa'
+2026-03-15 22:22:44 | INFO     | routers.search:60 - Cached 20 results for 'sitaa' (TTL: 30min)
+2026-03-15 22:22:44 | INFO     | main:47 - GET /search → 200 (732.1ms)
+2026-03-15 22:22:44 | INFO     | routers.search:39 - Cache HIT for search: 'sitaare'
+2026-03-15 22:22:44 | INFO     | main:47 - GET /search → 200 (1.4ms)
+2026-03-15 22:22:46 | INFO     | routers.stream:31 - Cache HIT for stream: uT_HXrrmHX8
+2026-03-15 22:22:46 | INFO     | main:47 - GET /stream/uT_HXrrmHX8 → 200 (3.1ms)
+2026-03-15 22:22:48 | INFO     | routers.stream:35 - Cache MISS for stream: 4smEofP_5Q4 — calling yt-dlp
+2026-03-15 22:22:48 | INFO     | services.stream_service:34 - Extracting stream URL for video_id: 4smEofP_5Q4
+2026-03-15 22:22:51 | INFO     | routers.stream:35 - Cache MISS for stream: WwzbqTaSp7M — calling yt-dlp
+2026-03-15 22:22:51 | INFO     | services.stream_service:34 - Extracting stream URL for video_id: WwzbqTaSp7M
+2026-03-15 22:22:51 | INFO     | services.stream_service:59 - Got stream URL for 4smEofP_5Q4 | format: 251 - audio only (medium)
+2026-03-15 22:22:51 | INFO     | routers.stream:53 - Cached stream URL for 4smEofP_5Q4 (TTL: 5h)
+2026-03-15 22:22:51 | INFO     | main:47 - GET /stream/4smEofP_5Q4 → 200 (2819.4ms)
+2026-03-15 22:22:53 | INFO     | services.stream_service:59 - Got stream URL for WwzbqTaSp7M | format: 251 - audio only (medium)
+2026-03-15 22:22:53 | INFO     | routers.stream:53 - Cached stream URL for WwzbqTaSp7M (TTL: 5h)
+2026-03-15 22:22:53 | INFO     | main:47 - GET /stream/WwzbqTaSp7M → 200 (2202.1ms)
+2026-03-15 22:22:57 | INFO     | routers.stream:31 - Cache HIT for stream: 4smEofP_5Q4
+2026-03-15 22:22:57 | INFO     | main:47 - GET /stream/4smEofP_5Q4 → 200 (4.7ms)
+2026-03-15 22:22:58 | INFO     | routers.stream:31 - Cache HIT for stream: uT_HXrrmHX8
+2026-03-15 22:22:58 | INFO     | main:47 - GET /stream/uT_HXrrmHX8 → 200 (4.0ms)
+2026-03-15 22:23:15 | INFO     | routers.stream:31 - Cache HIT for stream: 4smEofP_5Q4
+2026-03-15 22:23:15 | INFO     | main:47 - GET /stream/4smEofP_5Q4 → 200 (2.2ms)
+2026-03-15 22:23:45 | INFO     | main:47 - GET /health → 200 (2.3ms)
