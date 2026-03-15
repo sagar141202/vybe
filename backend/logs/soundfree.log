@@ -461,3 +461,48 @@
 2026-03-15 22:29:16 | INFO     | main:47 - GET /search → 200 (4.4ms)
 2026-03-15 22:29:18 | INFO     | routers.stream:31 - Cache HIT for stream: Wqu4MRQOgyo
 2026-03-15 22:29:18 | INFO     | main:47 - GET /stream/Wqu4MRQOgyo → 200 (7.7ms)
+2026-03-15 22:29:49 | INFO     | routers.stream:31 - Cache HIT for stream: Wqu4MRQOgyo
+2026-03-15 22:29:49 | INFO     | main:47 - GET /stream/Wqu4MRQOgyo → 200 (5.4ms)
+2026-03-15 22:30:39 | INFO     | routers.lyrics:52 - Fetching lyrics for: Unknown — Unknown
+2026-03-15 22:30:39 | INFO     | services.lyrics_service:47 - lrclib lookup: Unknown — Unknown
+2026-03-15 22:30:40 | WARNING  | services.lyrics_service:63 - lrclib: no result for Unknown — Unknown
+2026-03-15 22:30:40 | INFO     | services.lyrics_service:96 - lrclib search: Unknown — Unknown
+2026-03-15 22:30:42 | INFO     | main:48 - GET /lyrics/bSnlKl_PoQU → 200 (3085.0ms)
+2026-03-15 22:31:29 | INFO     | routers.search:39 - Cache HIT for search: 'Bollywood'
+2026-03-15 22:31:29 | INFO     | main:48 - GET /search → 200 (7.2ms)
+2026-03-15 22:31:30 | INFO     | routers.stream:35 - Cache MISS for stream: 5XTxuz-_myg — calling yt-dlp
+2026-03-15 22:31:30 | INFO     | services.stream_service:34 - Extracting stream URL for video_id: 5XTxuz-_myg
+2026-03-15 22:31:32 | INFO     | routers.stream:35 - Cache MISS for stream: YALvuUpY_b0 — calling yt-dlp
+2026-03-15 22:31:32 | INFO     | services.stream_service:34 - Extracting stream URL for video_id: YALvuUpY_b0
+2026-03-15 22:31:33 | INFO     | services.stream_service:59 - Got stream URL for 5XTxuz-_myg | format: 251 - audio only (medium)
+2026-03-15 22:31:33 | INFO     | routers.stream:53 - Cached stream URL for 5XTxuz-_myg (TTL: 5h)
+2026-03-15 22:31:33 | INFO     | main:48 - GET /stream/5XTxuz-_myg → 200 (2525.3ms)
+2026-03-15 22:31:35 | INFO     | services.stream_service:59 - Got stream URL for YALvuUpY_b0 | format: 251 - audio only (medium)
+2026-03-15 22:31:35 | INFO     | routers.stream:53 - Cached stream URL for YALvuUpY_b0 (TTL: 5h)
+2026-03-15 22:31:35 | INFO     | main:48 - GET /stream/YALvuUpY_b0 → 200 (2199.7ms)
+2026-03-15 22:31:35 | INFO     | routers.stream:31 - Cache HIT for stream: YALvuUpY_b0
+2026-03-15 22:31:35 | INFO     | main:48 - GET /stream/YALvuUpY_b0 → 200 (2.3ms)
+2026-03-15 22:31:44 | INFO     | routers.lyrics:47 - Cache HIT for lyrics: bSnlKl_PoQU
+2026-03-15 22:31:44 | INFO     | main:48 - GET /lyrics/bSnlKl_PoQU → 200 (2.3ms)
+2026-03-15 22:32:11 | INFO     | routers.lyrics:52 - Fetching lyrics for: Unknown — Unknown
+2026-03-15 22:32:11 | INFO     | services.lyrics_service:47 - lrclib lookup: Unknown — Unknown
+2026-03-15 22:32:13 | WARNING  | services.lyrics_service:63 - lrclib: no result for Unknown — Unknown
+2026-03-15 22:32:13 | INFO     | services.lyrics_service:96 - lrclib search: Unknown — Unknown
+2026-03-15 22:32:14 | INFO     | main:48 - GET /lyrics/bSnlKl_PoQU → 200 (2875.2ms)
+2026-03-15 22:32:26 | INFO     | routers.stream:35 - Cache MISS for stream: n9qQiuwBywU — calling yt-dlp
+2026-03-15 22:32:26 | INFO     | services.stream_service:34 - Extracting stream URL for video_id: n9qQiuwBywU
+2026-03-15 22:32:28 | INFO     | services.stream_service:59 - Got stream URL for n9qQiuwBywU | format: 251 - audio only (medium)
+2026-03-15 22:32:28 | INFO     | routers.stream:53 - Cached stream URL for n9qQiuwBywU (TTL: 5h)
+2026-03-15 22:32:28 | INFO     | main:48 - GET /stream/n9qQiuwBywU → 200 (2171.6ms)
+2026-03-15 22:33:09 | INFO     | routers.lyrics:47 - Cache HIT for lyrics: bSnlKl_PoQU
+2026-03-15 22:33:09 | INFO     | main:48 - GET /lyrics/bSnlKl_PoQU → 200 (9.4ms)
+2026-03-15 22:34:24 | INFO     | main:48 - GET /docs → 200 (2.9ms)
+2026-03-15 22:36:44 | INFO     | routers.lyrics:59 - Fetching lyrics: Queen - Bohemian Rhapsody
+2026-03-15 22:36:44 | INFO     | services.lyrics_service:47 - lrclib lookup: Queen — Bohemian Rhapsody
+2026-03-15 22:36:46 | INFO     | services.lyrics_service:74 - lrclib: synced lyrics found (50 lines)
+2026-03-15 22:36:46 | INFO     | main:48 - GET /lyrics/bSnlKl_PoQU → 200 (2301.3ms)
+2026-03-15 22:37:21 | INFO     | main:48 - GET /health → 200 (1.0ms)
+2026-03-15 22:37:31 | INFO     | routers.search:39 - Cache HIT for search: 'sitaare'
+2026-03-15 22:37:31 | INFO     | main:48 - GET /search → 200 (9.4ms)
+2026-03-15 22:37:33 | INFO     | routers.stream:31 - Cache HIT for stream: uT_HXrrmHX8
+2026-03-15 22:37:33 | INFO     | main:48 - GET /stream/uT_HXrrmHX8 → 200 (6.3ms)
