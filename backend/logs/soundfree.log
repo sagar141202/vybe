@@ -353,3 +353,16 @@
 2026-03-15 19:24:32 | INFO     | main:47 - GET /search → 200 (637.4ms)
 2026-03-15 19:24:47 | INFO     | routers.stream:31 - Cache HIT for stream: Wqu4MRQOgyo
 2026-03-15 19:24:47 | INFO     | main:47 - GET /stream/Wqu4MRQOgyo → 200 (4.5ms)
+2026-03-15 22:14:23 | INFO     | main:47 - GET /health → 200 (3.2ms)
+2026-03-15 22:14:49 | INFO     | routers.search:43 - Cache MISS for search: 'au' — fetching from YouTube Music
+2026-03-15 22:14:49 | INFO     | services.search_service:43 - Searching YouTube Music: 'au'
+2026-03-15 22:14:50 | INFO     | services.search_service:72 - Search returned 20 tracks for 'au'
+2026-03-15 22:14:50 | INFO     | routers.search:60 - Cached 20 results for 'au' (TTL: 30min)
+2026-03-15 22:14:50 | INFO     | main:47 - GET /search → 200 (1067.5ms)
+2026-03-15 22:14:55 | INFO     | routers.search:43 - Cache MISS for search: 'sitaare' — fetching from YouTube Music
+2026-03-15 22:14:55 | INFO     | services.search_service:43 - Searching YouTube Music: 'sitaare'
+2026-03-15 22:14:55 | INFO     | services.search_service:72 - Search returned 20 tracks for 'sitaare'
+2026-03-15 22:14:55 | INFO     | routers.search:60 - Cached 20 results for 'sitaare' (TTL: 30min)
+2026-03-15 22:14:55 | INFO     | main:47 - GET /search → 200 (659.4ms)
+2026-03-15 22:14:57 | INFO     | routers.stream:31 - Cache HIT for stream: uT_HXrrmHX8
+2026-03-15 22:14:57 | INFO     | main:47 - GET /stream/uT_HXrrmHX8 → 200 (3.2ms)

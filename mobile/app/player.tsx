@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { router } from 'expo-router';
 import { usePlayerStore } from '../stores/playerStore';
 import { usePlayTrack } from '../hooks/usePlayTrack';
@@ -21,9 +21,67 @@ const THUMB_COLORS = [
 
 function formatTime(ms: number): string {
   const totalSec = Math.floor(ms / 1000);
-  const min = Math.floor(totalSec / 60);
-  const sec = totalSec % 60;
-  return `${min}:${sec.toString().padStart(2, '0')}`;
+  return `${Math.floor(totalSec / 60)}:${(totalSec % 60).toString().padStart(2, '0')}`;
+}
+
+function BlurredBackground({ imageUrl, colors }: { imageUrl: string | null; colors: [string, string] }) {
+  const opacity = useRef(new Animated.Value(0)).current;
+  const [currentUrl, setCurrentUrl] = useState(imageUrl);
+  const [nextUrl, setNextUrl] = useState<string | null>(null);
+  const nextOpacity = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (imageUrl === currentUrl) return;
+    setNextUrl(imageUrl);
+    nextOpacity.setValue(0);
+    Animated.timing(nextOpacity, {
+      toValue: 1, duration: 600, useNativeDriver: true,
+    }).start(() => {
+      setCurrentUrl(imageUrl);
+      setNextUrl(null);
+      nextOpacity.setValue(0);
+    });
+  }, [imageUrl]);
+
+  useEffect(() => {
+    Animated.timing(opacity, { toValue: 1, duration: 400, useNativeDriver: true }).start();
+  }, []);
+
+  return (
+    <View style={StyleSheet.absoluteFillObject}>
+      {/* Base gradient */}
+      <LinearGradient
+        colors={['#F0F4FF', '#FAFBFF', '#F8F0FF']}
+        style={StyleSheet.absoluteFillObject}
+      />
+
+      {/* Current blurred art */}
+      {currentUrl && (
+        <Animated.Image
+          source={{ uri: currentUrl }}
+          style={[styles.bgImage, { opacity }]}
+          blurRadius={25}
+          resizeMode="cover"
+        />
+      )}
+
+      {/* Next blurred art (crossfade) */}
+      {nextUrl && (
+        <Animated.Image
+          source={{ uri: nextUrl }}
+          style={[styles.bgImage, { opacity: nextOpacity }]}
+          blurRadius={25}
+          resizeMode="cover"
+        />
+      )}
+
+      {/* Overlay to lighten */}
+      <LinearGradient
+        colors={['rgba(250,251,255,0.75)', 'rgba(240,244,255,0.6)', 'rgba(248,240,255,0.75)']}
+        style={StyleSheet.absoluteFillObject}
+      />
+    </View>
+  );
 }
 
 export default function FullPlayer() {
@@ -39,45 +97,51 @@ export default function FullPlayer() {
   const toggleRepeat = usePlayerStore(s => s.toggleRepeat);
   const { togglePlayPause } = usePlayTrack();
 
-  const artScale = useRef(new Animated.Value(0.95)).current;
+  const artScale = useRef(new Animated.Value(0.92)).current;
   const slideAnim = useRef(new Animated.Value(height)).current;
+  const artOpacity = useRef(new Animated.Value(1)).current;
+  const [liked, setLiked] = useState(false);
 
   useEffect(() => {
     Animated.spring(slideAnim, {
-      toValue: 0, useNativeDriver: true,
-      tension: 60, friction: 12,
+      toValue: 0, useNativeDriver: true, tension: 60, friction: 12,
     }).start();
   }, []);
 
   useEffect(() => {
     Animated.spring(artScale, {
       toValue: isPlaying ? 1.0 : 0.92,
-      useNativeDriver: true,
-      tension: 60, friction: 10,
+      useNativeDriver: true, tension: 60, friction: 10,
     }).start();
   }, [isPlaying]);
 
-  const progress = duration > 0 ? position / duration : 0;
-  const colorIndex = currentTrack ? currentTrack.video_id.charCodeAt(0) % THUMB_COLORS.length : 0;
+  // Art crossfade on track change
+  const prevTrackId = useRef<string | null>(null);
+  useEffect(() => {
+    if (!currentTrack) return;
+    if (prevTrackId.current && prevTrackId.current !== currentTrack.video_id) {
+      Animated.sequence([
+        Animated.timing(artOpacity, { toValue: 0, duration: 150, useNativeDriver: true }),
+        Animated.timing(artOpacity, { toValue: 1, duration: 200, useNativeDriver: true }),
+      ]).start();
+    }
+    prevTrackId.current = currentTrack.video_id;
+  }, [currentTrack?.video_id]);
 
-  if (!currentTrack) {
-    router.back();
-    return null;
-  }
+  if (!currentTrack) { router.back(); return null; }
+
+  const progress = duration > 0 ? position / duration : 0;
+  const colorIndex = currentTrack.video_id.charCodeAt(0) % THUMB_COLORS.length;
 
   return (
     <Animated.View style={[styles.container, { transform: [{ translateY: slideAnim }] }]}>
       <StatusBar style="dark" />
 
-      {/* Background */}
-      <LinearGradient
-        colors={['#F0F4FF', '#FAFBFF', '#F8F0FF']}
-        style={StyleSheet.absoluteFillObject}
+      {/* Blurred background */}
+      <BlurredBackground
+        imageUrl={currentTrack.thumbnail_url}
+        colors={THUMB_COLORS[colorIndex] as [string, string]}
       />
-
-      {/* Blurred blob background */}
-      <View style={styles.blob1} />
-      <View style={styles.blob2} />
 
       {/* Header */}
       <View style={styles.header}>
@@ -87,6 +151,7 @@ export default function FullPlayer() {
         </TouchableOpacity>
         <View style={styles.headerCenter}>
           <Text style={styles.headerLabel}>NOW PLAYING</Text>
+          {currentTrack.album && <Text style={styles.headerAlbum} numberOfLines={1}>{currentTrack.album}</Text>}
         </View>
         <TouchableOpacity style={styles.moreBtn}>
           <Text style={styles.moreIcon}>⋮</Text>
@@ -95,23 +160,12 @@ export default function FullPlayer() {
 
       {/* Album Art */}
       <View style={styles.artWrap}>
-        <Animated.View style={[styles.artContainer, { transform: [{ scale: artScale }] }]}>
-          {/* Glow */}
-          <LinearGradient
-            colors={['rgba(167,139,250,0.4)', 'rgba(125,211,252,0.3)']}
-            style={styles.artGlow}
-          />
+        <Animated.View style={[styles.artContainer, { transform: [{ scale: artScale }], opacity: artOpacity }]}>
+          <View style={styles.artShadow} />
           {currentTrack.thumbnail_url ? (
-            <Image
-              source={{ uri: currentTrack.thumbnail_url }}
-              style={styles.art}
-              resizeMode="cover"
-            />
+            <Image source={{ uri: currentTrack.thumbnail_url }} style={styles.art} resizeMode="cover" />
           ) : (
-            <LinearGradient
-              colors={THUMB_COLORS[colorIndex] as [string, string]}
-              style={styles.art}
-            >
+            <LinearGradient colors={THUMB_COLORS[colorIndex] as [string, string]} style={styles.art}>
               <Text style={styles.artEmoji}>��</Text>
             </LinearGradient>
           )}
@@ -122,20 +176,16 @@ export default function FullPlayer() {
       <View style={styles.trackInfo}>
         <View style={styles.trackInfoRow}>
           <View style={styles.trackInfoText}>
-            <Text style={styles.trackTitle} numberOfLines={1}>
-              {currentTrack.title}
-            </Text>
-            <Text style={styles.trackArtist} numberOfLines={1}>
-              {currentTrack.artist}
-            </Text>
+            <Text style={styles.trackTitle} numberOfLines={1}>{currentTrack.title}</Text>
+            <Text style={styles.trackArtist} numberOfLines={1}>{currentTrack.artist}</Text>
           </View>
-          <TouchableOpacity style={styles.likeBtn}>
-            <Text style={styles.likeIcon}>🤍</Text>
+          <TouchableOpacity style={styles.likeBtn} onPress={() => setLiked(!liked)}>
+            <Text style={styles.likeIcon}>{liked ? '❤️' : '🤍'}</Text>
           </TouchableOpacity>
         </View>
       </View>
 
-      {/* Progress bar */}
+      {/* Progress */}
       <View style={styles.progressSection}>
         <View style={styles.progressBg}>
           <LinearGradient
@@ -143,8 +193,7 @@ export default function FullPlayer() {
             style={[styles.progressFill, { width: `${progress * 100}%` }]}
             start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
           />
-          {/* Thumb */}
-          <View style={[styles.progressThumb, { left: `${progress * 100}%` }]} />
+          <View style={[styles.progressThumb, { left: `${Math.min(progress * 100, 97)}%` }]} />
         </View>
         <View style={styles.timeRow}>
           <Text style={styles.timeText}>{formatTime(position)}</Text>
@@ -154,35 +203,22 @@ export default function FullPlayer() {
 
       {/* Controls */}
       <View style={styles.controls}>
-        {/* Shuffle */}
         <TouchableOpacity style={styles.controlBtn} onPress={toggleShuffle}>
-          <Text style={[styles.controlIcon, isShuffled && styles.controlIconActive]}>⇄</Text>
+          <Text style={[styles.controlIcon, isShuffled && styles.controlActive]}>⇄</Text>
         </TouchableOpacity>
-
-        {/* Previous */}
         <TouchableOpacity style={styles.controlBtn} onPress={previousTrack}>
           <Text style={styles.controlIconLg}>⏮</Text>
         </TouchableOpacity>
-
-        {/* Play/Pause */}
         <TouchableOpacity style={styles.playBtn} onPress={togglePlayPause}>
-          <LinearGradient
-            colors={['#C4B5FD', '#A78BFA', '#818CF8']}
-            style={styles.playGrad}
-            start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}
-          >
+          <LinearGradient colors={['#C4B5FD', '#A78BFA', '#818CF8']} style={styles.playGrad} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}>
             <Text style={styles.playIcon}>{isPlaying ? '⏸' : '▶'}</Text>
           </LinearGradient>
         </TouchableOpacity>
-
-        {/* Next */}
         <TouchableOpacity style={styles.controlBtn} onPress={nextTrack}>
           <Text style={styles.controlIconLg}>⏭</Text>
         </TouchableOpacity>
-
-        {/* Repeat */}
         <TouchableOpacity style={styles.controlBtn} onPress={toggleRepeat}>
-          <Text style={[styles.controlIcon, repeatMode !== 'none' && styles.controlIconActive]}>
+          <Text style={[styles.controlIcon, repeatMode !== 'none' && styles.controlActive]}>
             {repeatMode === 'one' ? '🔂' : '🔁'}
           </Text>
         </TouchableOpacity>
@@ -199,115 +235,60 @@ export default function FullPlayer() {
         ].map((a, i) => (
           <TouchableOpacity key={i} style={styles.actionBtn}>
             <View style={styles.actionIconWrap}>
-              <LinearGradient
-                colors={['rgba(167,139,250,0.15)', 'rgba(125,211,252,0.08)']}
-                style={StyleSheet.absoluteFillObject}
-              />
+              <LinearGradient colors={['rgba(167,139,250,0.15)', 'rgba(125,211,252,0.08)']} style={StyleSheet.absoluteFillObject} />
               <Text style={styles.actionIcon}>{a.icon}</Text>
             </View>
             <Text style={styles.actionLabel}>{a.label}</Text>
           </TouchableOpacity>
         ))}
       </View>
-
     </Animated.View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#FAFBFF' },
-  blob1: {
-    position: 'absolute', top: -100, left: -80,
-    width: width * 1.2, height: 400, borderRadius: 300,
-    backgroundColor: 'rgba(167,139,250,0.15)',
-  },
-  blob2: {
-    position: 'absolute', bottom: 100, right: -80,
-    width: width, height: 350, borderRadius: 300,
-    backgroundColor: 'rgba(125,211,252,0.1)',
-  },
-  header: {
-    flexDirection: 'row', alignItems: 'center',
-    paddingTop: 56, paddingHorizontal: 24, paddingBottom: 16,
-  },
-  backBtn: {
-    width: 42, height: 42, borderRadius: 21,
-    alignItems: 'center', justifyContent: 'center',
-    overflow: 'hidden', borderWidth: 1.5,
-    borderColor: 'rgba(167,139,250,0.3)',
-  },
+  container: { flex: 1 },
+  bgImage: { position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, width, height },
+  header: { flexDirection: 'row', alignItems: 'center', paddingTop: 56, paddingHorizontal: 24, paddingBottom: 8 },
+  backBtn: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center', overflow: 'hidden', borderWidth: 1.5, borderColor: 'rgba(167,139,250,0.3)' },
   backIcon: { fontSize: 20, color: '#7C3AED' },
   headerCenter: { flex: 1, alignItems: 'center' },
   headerLabel: { fontSize: 11, color: '#7C3AED', fontWeight: '800', letterSpacing: 2 },
+  headerAlbum: { fontSize: 12, color: '#6B7280', marginTop: 2, maxWidth: 200 },
   moreBtn: { width: 42, height: 42, alignItems: 'center', justifyContent: 'center' },
   moreIcon: { fontSize: 24, color: '#6B7280' },
-
-  artWrap: { alignItems: 'center', paddingVertical: 24 },
+  artWrap: { alignItems: 'center', paddingVertical: 20 },
   artContainer: { position: 'relative' },
-  artGlow: {
-    position: 'absolute', top: -20, left: -20,
-    right: -20, bottom: -20, borderRadius: 50,
-    opacity: 0.6,
+  artShadow: {
+    position: 'absolute', top: 12, left: 12, right: 12, bottom: -8,
+    borderRadius: 28, backgroundColor: 'rgba(167,139,250,0.3)',
   },
-  art: {
-    width: width * 0.72, height: width * 0.72,
-    borderRadius: 28,
-    alignItems: 'center', justifyContent: 'center',
-    borderWidth: 2, borderColor: 'rgba(255,255,255,0.9)',
-  },
+  art: { width: width * 0.72, height: width * 0.72, borderRadius: 28, alignItems: 'center', justifyContent: 'center', borderWidth: 2, borderColor: 'rgba(255,255,255,0.9)' },
   artEmoji: { fontSize: 80 },
-
-  trackInfo: { paddingHorizontal: 28, marginBottom: 20 },
+  trackInfo: { paddingHorizontal: 28, marginBottom: 16 },
   trackInfoRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   trackInfoText: { flex: 1 },
   trackTitle: { fontSize: 24, fontWeight: '900', color: '#1E1B4B', letterSpacing: -0.5, marginBottom: 4 },
   trackArtist: { fontSize: 16, color: '#6B7280', fontWeight: '500' },
   likeBtn: { width: 44, height: 44, alignItems: 'center', justifyContent: 'center' },
   likeIcon: { fontSize: 26 },
-
-  progressSection: { paddingHorizontal: 28, marginBottom: 24 },
-  progressBg: {
-    height: 5, backgroundColor: 'rgba(167,139,250,0.2)',
-    borderRadius: 3, marginBottom: 8, position: 'relative',
-  },
+  progressSection: { paddingHorizontal: 28, marginBottom: 20 },
+  progressBg: { height: 5, backgroundColor: 'rgba(167,139,250,0.2)', borderRadius: 3, marginBottom: 8, position: 'relative' },
   progressFill: { height: 5, borderRadius: 3 },
-  progressThumb: {
-    position: 'absolute', top: -5,
-    width: 14, height: 14, borderRadius: 7,
-    backgroundColor: '#A78BFA', marginLeft: -7,
-    borderWidth: 2, borderColor: '#FFFFFF',
-    shadowColor: '#A78BFA', shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.4, shadowRadius: 4, elevation: 4,
-  },
+  progressThumb: { position: 'absolute', top: -5, width: 14, height: 14, borderRadius: 7, backgroundColor: '#A78BFA', marginLeft: -7, borderWidth: 2, borderColor: '#FFFFFF', elevation: 4 },
   timeRow: { flexDirection: 'row', justifyContent: 'space-between' },
   timeText: { fontSize: 12, color: '#9CA3AF', fontWeight: '500' },
-
-  controls: {
-    flexDirection: 'row', alignItems: 'center',
-    justifyContent: 'space-between', paddingHorizontal: 28, marginBottom: 32,
-  },
+  controls: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 28, marginBottom: 28 },
   controlBtn: { width: 48, height: 48, alignItems: 'center', justifyContent: 'center' },
   controlIcon: { fontSize: 22, color: '#9CA3AF' },
-  controlIconActive: { color: '#7C3AED' },
+  controlActive: { color: '#7C3AED' },
   controlIconLg: { fontSize: 28, color: '#1E1B4B' },
   playBtn: { borderRadius: 40, overflow: 'hidden' },
-  playGrad: {
-    width: 72, height: 72, borderRadius: 36,
-    alignItems: 'center', justifyContent: 'center',
-  },
+  playGrad: { width: 72, height: 72, borderRadius: 36, alignItems: 'center', justifyContent: 'center' },
   playIcon: { fontSize: 28, color: '#FFFFFF' },
-
-  actionRow: {
-    flexDirection: 'row', justifyContent: 'space-around',
-    paddingHorizontal: 24,
-  },
+  actionRow: { flexDirection: 'row', justifyContent: 'space-around', paddingHorizontal: 24 },
   actionBtn: { alignItems: 'center', gap: 6 },
-  actionIconWrap: {
-    width: 48, height: 48, borderRadius: 16,
-    alignItems: 'center', justifyContent: 'center',
-    overflow: 'hidden', borderWidth: 1.5,
-    borderColor: 'rgba(167,139,250,0.2)',
-  },
+  actionIconWrap: { width: 48, height: 48, borderRadius: 16, alignItems: 'center', justifyContent: 'center', overflow: 'hidden', borderWidth: 1.5, borderColor: 'rgba(167,139,250,0.2)' },
   actionIcon: { fontSize: 20 },
   actionLabel: { fontSize: 11, color: '#6B7280', fontWeight: '600' },
 });
