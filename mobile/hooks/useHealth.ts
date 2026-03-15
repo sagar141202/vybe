@@ -7,6 +7,5 @@ export function useHealth() {
     queryFn: checkHealth,
     retry: false,
     staleTime: 1000 * 30,
-    refetchInterval: 1000 * 60,
   });
 }

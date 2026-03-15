@@ -7,60 +7,35 @@ interface SettingsState {
   playbackSpeed: number;
   lastfmUsername: string;
   audioQuality: 'low' | 'medium' | 'high';
-  setCrossfadeDuration: (duration: number) => void;
-  setSleepTimer: (minutes: number | null) => void;
-  setPlaybackSpeed: (speed: number) => void;
-  setLastfmUsername: (username: string) => void;
-  setAudioQuality: (quality: 'low' | 'medium' | 'high') => void;
+  setCrossfadeDuration: (d: number) => void;
+  setSleepTimer: (m: number | null) => void;
+  setPlaybackSpeed: (s: number) => void;
+  setLastfmUsername: (u: string) => void;
+  setAudioQuality: (q: 'low' | 'medium' | 'high') => void;
   loadFromStorage: () => Promise<void>;
 }
 
-export const useSettingsStore = create<SettingsState>((set, get) => ({
+export const useSettingsStore = create<SettingsState>((set) => ({
   crossfadeDuration: 3,
   sleepTimerMinutes: null,
   playbackSpeed: 1.0,
   lastfmUsername: '',
   audioQuality: 'high',
-
-  setCrossfadeDuration: async (duration) => {
-    set({ crossfadeDuration: duration });
-    await AsyncStorage.setItem('settings_crossfade', String(duration));
-  },
-
-  setSleepTimer: async (minutes) => {
-    set({ sleepTimerMinutes: minutes });
-    await AsyncStorage.setItem('settings_sleep', String(minutes ?? ''));
-  },
-
-  setPlaybackSpeed: async (speed) => {
-    set({ playbackSpeed: speed });
-    await AsyncStorage.setItem('settings_speed', String(speed));
-  },
-
-  setLastfmUsername: async (username) => {
-    set({ lastfmUsername: username });
-    await AsyncStorage.setItem('settings_lastfm', username);
-  },
-
-  setAudioQuality: async (quality) => {
-    set({ audioQuality: quality });
-    await AsyncStorage.setItem('settings_quality', quality);
-  },
-
+  setCrossfadeDuration: (d) => set({ crossfadeDuration: d }),
+  setSleepTimer: (m) => set({ sleepTimerMinutes: m }),
+  setPlaybackSpeed: (s) => set({ playbackSpeed: s }),
+  setLastfmUsername: (u) => set({ lastfmUsername: u }),
+  setAudioQuality: (q) => set({ audioQuality: q }),
   loadFromStorage: async () => {
     try {
-      const crossfade = await AsyncStorage.getItem('settings_crossfade');
       const speed = await AsyncStorage.getItem('settings_speed');
       const lastfm = await AsyncStorage.getItem('settings_lastfm');
       const quality = await AsyncStorage.getItem('settings_quality');
       set({
-        crossfadeDuration: crossfade ? Number(crossfade) : 3,
         playbackSpeed: speed ? Number(speed) : 1.0,
         lastfmUsername: lastfm ?? '',
-        audioQuality: (quality as 'low' | 'medium' | 'high') ?? 'high',
+        audioQuality: (quality as any) ?? 'high',
       });
-    } catch (e) {
-      console.warn('Failed to load settings', e);
-    }
+    } catch (e) { console.warn('Settings load failed', e); }
   },
 }));

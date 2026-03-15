@@ -4,7 +4,6 @@ import { useDebounce } from './useDebounce';
 
 export function useSearch(query: string) {
   const debouncedQuery = useDebounce(query, 300);
-
   return useQuery({
     queryKey: ['search', debouncedQuery],
     queryFn: () => searchTracks(debouncedQuery),

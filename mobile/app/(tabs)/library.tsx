@@ -42,16 +42,11 @@ export default function LibraryScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#FAFBFF' },
-  scroll: { paddingBottom: 120 },
+  scroll: { paddingBottom: 160 },
   header: { paddingTop: 64, paddingHorizontal: 24, marginBottom: 32 },
   title: { fontSize: 36, fontWeight: '900', color: '#1E1B4B', letterSpacing: -1 },
   sub: { fontSize: 14, color: '#6B7280', marginTop: 4 },
-  card: {
-    flexDirection: 'row', alignItems: 'center', gap: 16,
-    marginHorizontal: 24, marginBottom: 12, padding: 18,
-    borderRadius: 20, overflow: 'hidden',
-    borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.9)',
-  },
+  card: { flexDirection: 'row', alignItems: 'center', gap: 16, marginHorizontal: 24, marginBottom: 12, padding: 18, borderRadius: 20, overflow: 'hidden', borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.9)' },
   cardBorder: { position: 'absolute', inset: 0, borderRadius: 20, borderWidth: 1, borderColor: 'rgba(167,139,250,0.15)' },
   cardIcon: { width: 50, height: 50, borderRadius: 14, alignItems: 'center', justifyContent: 'center' },
   cardEmoji: { fontSize: 22 },

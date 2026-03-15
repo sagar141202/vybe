@@ -1,9 +1,10 @@
 import { Tabs } from 'expo-router';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 import MiniPlayer from '../../components/MiniPlayer';
 
-function TabIcon({ icon, focused }: { icon: string; focused: boolean }) {
+function TabIcon({ name, focused }: { name: any; focused: boolean }) {
   return (
     <View style={[styles.iconWrap, focused && styles.iconActive]}>
       {focused && (
@@ -12,7 +13,7 @@ function TabIcon({ icon, focused }: { icon: string; focused: boolean }) {
           style={StyleSheet.absoluteFillObject}
         />
       )}
-      <Text style={{ fontSize: 18 }}>{icon}</Text>
+      <Ionicons name={name} size={22} color={focused ? '#7C3AED' : '#9CA3AF'} />
     </View>
   );
 }
@@ -34,28 +35,20 @@ export default function TabLayout() {
           },
           tabBarActiveTintColor: '#7C3AED',
           tabBarInactiveTintColor: '#9CA3AF',
-          tabBarLabelStyle: {
-            fontSize: 11, fontWeight: '700', letterSpacing: 0.3,
-          },
+          tabBarLabelStyle: { fontSize: 11, fontWeight: '700', letterSpacing: 0.3 },
         }}
       >
-        <Tabs.Screen name="index" options={{ title: 'Home', tabBarIcon: ({ focused }) => <TabIcon icon="🏠" focused={focused} /> }} />
-        <Tabs.Screen name="search" options={{ title: 'Search', tabBarIcon: ({ focused }) => <TabIcon icon="🔍" focused={focused} /> }} />
-        <Tabs.Screen name="library" options={{ title: 'Library', tabBarIcon: ({ focused }) => <TabIcon icon="📚" focused={focused} /> }} />
-        <Tabs.Screen name="profile" options={{ title: 'Profile', tabBarIcon: ({ focused }) => <TabIcon icon="👤" focused={focused} /> }} />
+        <Tabs.Screen name="index" options={{ title: 'Home', tabBarIcon: ({ focused }) => <TabIcon name={focused ? 'home' : 'home-outline'} focused={focused} /> }} />
+        <Tabs.Screen name="search" options={{ title: 'Search', tabBarIcon: ({ focused }) => <TabIcon name={focused ? 'search' : 'search-outline'} focused={focused} /> }} />
+        <Tabs.Screen name="library" options={{ title: 'Library', tabBarIcon: ({ focused }) => <TabIcon name={focused ? 'library' : 'library-outline'} focused={focused} /> }} />
+        <Tabs.Screen name="profile" options={{ title: 'Profile', tabBarIcon: ({ focused }) => <TabIcon name={focused ? 'person' : 'person-outline'} focused={focused} /> }} />
       </Tabs>
-
-      {/* MiniPlayer sits above tab bar */}
       <MiniPlayer onPress={() => console.log('Open full player')} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  iconWrap: {
-    width: 40, height: 28,
-    alignItems: 'center', justifyContent: 'center',
-    borderRadius: 10, overflow: 'hidden',
-  },
+  iconWrap: { width: 40, height: 28, alignItems: 'center', justifyContent: 'center', borderRadius: 10, overflow: 'hidden' },
   iconActive: { borderRadius: 10 },
 });

@@ -1,4 +1,3 @@
-import '../global.css';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { QueryClientProvider } from '@tanstack/react-query';
@@ -14,7 +13,7 @@ function OfflineBanner() {
   if (!isError) return null;
   return (
     <View style={styles.banner}>
-      <Text style={styles.bannerText}>⚠️ Backend offline — playing from cache</Text>
+      <Text style={styles.bannerText}>⚠️ Backend offline</Text>
     </View>
   );
 }
@@ -22,12 +21,7 @@ function OfflineBanner() {
 function AppInit() {
   const loadLibrary = useLibraryStore(s => s.loadFromStorage);
   const loadSettings = useSettingsStore(s => s.loadFromStorage);
-
-  useEffect(() => {
-    loadLibrary();
-    loadSettings();
-  }, []);
-
+  useEffect(() => { loadLibrary(); loadSettings(); }, []);
   return null;
 }
 
@@ -43,17 +37,6 @@ export default function RootLayout() {
 }
 
 const styles = StyleSheet.create({
-  banner: {
-    backgroundColor: '#FDE68A',
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    alignItems: 'center',
-    zIndex: 999,
-  },
-  bannerText: {
-    fontSize: 12,
-    fontWeight: '700',
-    color: '#92400E',
-    letterSpacing: 0.3,
-  },
+  banner: { backgroundColor: '#FDE68A', paddingVertical: 8, paddingHorizontal: 16, alignItems: 'center' },
+  bannerText: { fontSize: 12, fontWeight: '700', color: '#92400E' },
 });

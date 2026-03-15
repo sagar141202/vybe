@@ -8,7 +8,6 @@ export const queryClient = new QueryClient({
         if (error?.message === 'OFFLINE') return false;
         return failureCount < 2;
       },
-      retryDelay: 1000,
     },
   },
 });
