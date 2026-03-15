@@ -88,3 +88,53 @@
 2026-03-15 17:06:22 | INFO     | main:47 - GET /health → 200 (3.6ms)
 2026-03-15 17:07:22 | INFO     | main:47 - GET /health → 200 (2.8ms)
 2026-03-15 17:08:22 | INFO     | main:47 - GET /health → 200 (2.9ms)
+2026-03-15 17:09:22 | INFO     | main:47 - GET /health → 200 (3.2ms)
+2026-03-15 17:10:22 | INFO     | main:47 - GET /health → 200 (11.5ms)
+2026-03-15 17:11:22 | INFO     | main:47 - GET /health → 200 (4.3ms)
+2026-03-15 17:12:22 | INFO     | main:47 - GET /health → 200 (3.9ms)
+2026-03-15 17:13:22 | INFO     | main:47 - GET /health → 200 (2.5ms)
+2026-03-15 17:14:06 | INFO     | routers.search:43 - Cache MISS for search: 'bo' — fetching from YouTube Music
+2026-03-15 17:14:06 | INFO     | services.search_service:43 - Searching YouTube Music: 'bo'
+2026-03-15 17:14:08 | INFO     | services.search_service:72 - Search returned 20 tracks for 'bo'
+2026-03-15 17:14:08 | INFO     | routers.search:60 - Cached 20 results for 'bo' (TTL: 30min)
+2026-03-15 17:14:08 | INFO     | main:47 - GET /search → 200 (2385.6ms)
+2026-03-15 17:14:10 | INFO     | routers.search:43 - Cache MISS for search: 'boh' — fetching from YouTube Music
+2026-03-15 17:14:10 | INFO     | services.search_service:43 - Searching YouTube Music: 'boh'
+2026-03-15 17:14:11 | INFO     | services.search_service:72 - Search returned 20 tracks for 'boh'
+2026-03-15 17:14:11 | INFO     | routers.search:60 - Cached 20 results for 'boh' (TTL: 30min)
+2026-03-15 17:14:11 | INFO     | main:47 - GET /search → 200 (655.3ms)
+2026-03-15 17:14:11 | INFO     | routers.search:43 - Cache MISS for search: 'bohe' — fetching from YouTube Music
+2026-03-15 17:14:11 | INFO     | services.search_service:43 - Searching YouTube Music: 'bohe'
+2026-03-15 17:14:12 | INFO     | services.search_service:72 - Search returned 20 tracks for 'bohe'
+2026-03-15 17:14:12 | INFO     | routers.search:60 - Cached 20 results for 'bohe' (TTL: 30min)
+2026-03-15 17:14:12 | INFO     | main:47 - GET /search → 200 (499.6ms)
+2026-03-15 17:14:13 | INFO     | routers.search:43 - Cache MISS for search: 'bohemian' — fetching from YouTube Music
+2026-03-15 17:14:13 | INFO     | services.search_service:43 - Searching YouTube Music: 'bohemian'
+2026-03-15 17:14:13 | INFO     | services.search_service:72 - Search returned 20 tracks for 'bohemian'
+2026-03-15 17:14:13 | INFO     | routers.search:60 - Cached 20 results for 'bohemian' (TTL: 30min)
+2026-03-15 17:14:13 | INFO     | main:47 - GET /search → 200 (778.1ms)
+2026-03-15 17:14:15 | INFO     | routers.search:39 - Cache HIT for search: 'bohemian '
+2026-03-15 17:14:15 | INFO     | main:47 - GET /search → 200 (2.5ms)
+2026-03-15 17:14:22 | INFO     | main:47 - GET /health → 200 (0.6ms)
+2026-03-15 17:14:24 | INFO     | routers.search:43 - Cache MISS for search: 'dil' — fetching from YouTube Music
+2026-03-15 17:14:24 | INFO     | services.search_service:43 - Searching YouTube Music: 'dil'
+2026-03-15 17:14:24 | INFO     | services.search_service:72 - Search returned 20 tracks for 'dil'
+2026-03-15 17:14:24 | INFO     | routers.search:60 - Cached 20 results for 'dil' (TTL: 30min)
+2026-03-15 17:14:24 | INFO     | main:47 - GET /search → 200 (821.7ms)
+2026-03-15 17:14:26 | INFO     | routers.search:39 - Cache HIT for search: 'Dil '
+2026-03-15 17:14:26 | INFO     | main:47 - GET /search → 200 (3.8ms)
+2026-03-15 17:14:29 | INFO     | routers.search:43 - Cache MISS for search: 'Dil bechara' — fetching from YouTube Music
+2026-03-15 17:14:29 | INFO     | services.search_service:43 - Searching YouTube Music: 'Dil bechara'
+2026-03-15 17:14:29 | INFO     | services.search_service:72 - Search returned 20 tracks for 'Dil bechara'
+2026-03-15 17:14:29 | INFO     | routers.search:60 - Cached 20 results for 'Dil bechara' (TTL: 30min)
+2026-03-15 17:14:29 | INFO     | main:47 - GET /search → 200 (544.7ms)
+2026-03-15 17:14:34 | INFO     | routers.search:43 - Cache MISS for search: 'munjaana' — fetching from YouTube Music
+2026-03-15 17:14:34 | INFO     | services.search_service:43 - Searching YouTube Music: 'munjaana'
+2026-03-15 17:14:34 | INFO     | services.search_service:72 - Search returned 20 tracks for 'munjaana'
+2026-03-15 17:14:34 | INFO     | routers.search:60 - Cached 20 results for 'munjaana' (TTL: 30min)
+2026-03-15 17:14:34 | INFO     | routers.search:43 - Cache MISS for search: 'munjaane ' — fetching from YouTube Music
+2026-03-15 17:14:34 | INFO     | services.search_service:43 - Searching YouTube Music: 'munjaane'
+2026-03-15 17:14:35 | INFO     | services.search_service:72 - Search returned 20 tracks for 'munjaane'
+2026-03-15 17:14:35 | INFO     | main:47 - GET /search → 200 (1190.4ms)
+2026-03-15 17:14:35 | INFO     | routers.search:60 - Cached 20 results for 'munjaane ' (TTL: 30min)
+2026-03-15 17:14:35 | INFO     | main:47 - GET /search → 200 (574.2ms)

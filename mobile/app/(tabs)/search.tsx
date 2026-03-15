@@ -6,11 +6,14 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import SearchBar from '../../components/SearchBar';
+import SearchResultsList from '../../components/SearchResultsList';
+import { useSearch } from '../../hooks/useSearch';
+import type { Track } from '../../components/TrackListItem';
 
 const { width } = Dimensions.get('window');
 
 const CATEGORIES = [
-  { name: 'Bollywood', emoji: '��', colors: ['#FCA5A5', '#F87171'] },
+  { name: 'Bollywood', emoji: '🎬', colors: ['#FCA5A5', '#F87171'] },
   { name: 'English Pop', emoji: '🎵', colors: ['#7DD3FC', '#93C5FD'] },
   { name: 'Lo-fi', emoji: '☕', colors: ['#C4B5FD', '#A78BFA'] },
   { name: 'Hip-Hop', emoji: '🎤', colors: ['#D8B4FE', '#C084FC'] },
@@ -24,6 +27,11 @@ const CATEGORIES = [
 
 export default function SearchScreen() {
   const [query, setQuery] = useState('');
+  const { data: tracks = [], isLoading } = useSearch(query);
+
+  const handleTrackPress = (track: Track) => {
+    console.log('Play track:', track.title);
+  };
 
   return (
     <View style={styles.container}>
@@ -49,13 +57,17 @@ export default function SearchScreen() {
           placeholder="Songs, artists, albums..."
         />
 
-        {/* Empty state hint */}
+        {/* Categories when no query */}
         {query.length === 0 && (
           <>
             <Text style={styles.section}>Browse Categories</Text>
             <View style={styles.grid}>
               {CATEGORIES.map((cat, i) => (
-                <TouchableOpacity key={i} style={styles.catCard}>
+                <TouchableOpacity
+                  key={i}
+                  style={styles.catCard}
+                  onPress={() => setQuery(cat.name)}
+                >
                   <LinearGradient
                     colors={cat.colors as [string, string]}
                     style={StyleSheet.absoluteFillObject}
@@ -71,18 +83,19 @@ export default function SearchScreen() {
           </>
         )}
 
-        {/* Search hint when typing */}
-        {query.length > 0 && query.length < 2 && (
-          <View style={styles.hintBox}>
-            <Text style={styles.hintText}>Keep typing to search...</Text>
-          </View>
+        {/* Results */}
+        {query.length >= 2 && (
+          <SearchResultsList
+            tracks={tracks}
+            isLoading={isLoading}
+            query={query}
+            onTrackPress={handleTrackPress}
+          />
         )}
 
-        {/* Results placeholder — wired up in T-044 */}
-        {query.length >= 2 && (
+        {query.length === 1 && (
           <View style={styles.hintBox}>
-            <Text style={styles.hintText}>🔍 Searching for "{query}"...</Text>
-            <Text style={styles.hintSub}>Results coming in T-044</Text>
+            <Text style={styles.hintText}>Keep typing...</Text>
           </View>
         )}
       </ScrollView>
@@ -116,6 +129,5 @@ const styles = StyleSheet.create({
     borderWidth: 1.5, borderColor: 'rgba(167,139,250,0.2)',
     alignItems: 'center',
   },
-  hintText: { fontSize: 16, color: '#7C3AED', fontWeight: '600', marginBottom: 4 },
-  hintSub: { fontSize: 13, color: '#9CA3AF' },
+  hintText: { fontSize: 16, color: '#7C3AED', fontWeight: '600' },
 });
