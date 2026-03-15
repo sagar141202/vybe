@@ -6,6 +6,15 @@ import { useUIStore } from '../stores/uiStore';
 import { getStreamUrl } from '../lib/api';
 import type { Track } from '../components/TrackListItem';
 
+async function _setupAudioSession() {
+  await Audio.setAudioModeAsync({
+    staysActiveInBackground: true,
+    playsInSilentModeIOS: true,
+    shouldDuckAndroid: true,
+    playThroughEarpieceAndroid: false,
+  });
+}
+
 async function _playTrack(track: Track) {
   try {
     const streamData = await getStreamUrl(track.video_id);
@@ -18,16 +27,16 @@ async function _playTrack(track: Track) {
       (global as any)._soundInstance = null;
     }
 
-    await Audio.setAudioModeAsync({
-      staysActiveInBackground: true,
-      playsInSilentModeIOS: true,
-      shouldDuckAndroid: true,
-      playThroughEarpieceAndroid: false,
-    });
+    await _setupAudioSession();
 
     const { sound } = await Audio.Sound.createAsync(
       { uri: streamData.stream_url },
-      { shouldPlay: true, progressUpdateIntervalMillis: 1000 },
+      {
+        shouldPlay: true,
+        progressUpdateIntervalMillis: 1000,
+        // Android notification metadata
+        androidImplementation: 'MediaPlayer',
+      },
       (status: any) => {
         if (status.isLoaded) {
           usePlayerStore.getState().setPosition(status.positionMillis ?? 0);
@@ -48,7 +57,6 @@ async function _playTrack(track: Track) {
   }
 }
 
-// Exported for playerStore auto-play
 export const playTrackAuto = _playTrack;
 
 export function usePlayTrack() {
