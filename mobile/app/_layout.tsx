@@ -4,7 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from '../lib/queryClient';
 import { useEffect } from 'react';
-import { View, Text, StyleSheet, Animated } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { useLibraryStore } from '../stores/libraryStore';
 import { useSettingsStore } from '../stores/settingsStore';
 import { useHealth } from '../hooks/useHealth';
@@ -19,10 +19,15 @@ function OfflineBanner() {
   );
 }
 
-function StoreLoader() {
+function AppInit() {
   const loadLibrary = useLibraryStore(s => s.loadFromStorage);
   const loadSettings = useSettingsStore(s => s.loadFromStorage);
-  useEffect(() => { loadLibrary(); loadSettings(); }, []);
+
+  useEffect(() => {
+    loadLibrary();
+    loadSettings();
+  }, []);
+
   return null;
 }
 
@@ -30,7 +35,7 @@ export default function RootLayout() {
   return (
     <QueryClientProvider client={queryClient}>
       <StatusBar style="dark" />
-      <StoreLoader />
+      <AppInit />
       <OfflineBanner />
       <Stack screenOptions={{ headerShown: false }} />
     </QueryClientProvider>

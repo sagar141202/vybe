@@ -5,10 +5,26 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "scheme": "soundfree",
-    "userInterfaceStyle": "dark",
+    "userInterfaceStyle": "light",
     "android": {
-      "package": "com.soundfree.app"
+      "package": "com.soundfree.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#FAFBFF"
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
+      ]
     },
-    "plugins": ["expo-router"]
+    "plugins": [
+      "expo-router",
+      "expo-av"
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "591a1994-87c5-4762-b7c5-dc0694133384"
+      }
+    }
   }
 }
