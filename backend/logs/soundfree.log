@@ -16,3 +16,11 @@
 2026-03-15 12:11:59 | INFO     | services.stream_service:59 - Got stream URL for bSnlKl_PoQU | format: 251 - audio only (medium)
 2026-03-15 12:11:59 | INFO     | routers.stream:55 - Cached stream URL for bSnlKl_PoQU (TTL: 5h)
 2026-03-15 12:11:59 | INFO     | main:46 - GET /stream/bSnlKl_PoQU → 200 (3760.8ms)
+2026-03-15 12:13:31 | INFO     | routers.stream:31 - Cache HIT for stream: bSnlKl_PoQU
+2026-03-15 12:13:31 | INFO     | main:46 - GET /stream/bSnlKl_PoQU → 200 (16.4ms)
+2026-03-15 12:13:42 | INFO     | routers.stream:31 - Cache HIT for stream: bSnlKl_PoQU
+2026-03-15 12:13:42 | INFO     | main:46 - GET /stream/bSnlKl_PoQU → 200 (4.4ms)
+2026-03-15 12:14:10 | INFO     | routers.stream:35 - Cache MISS for stream: INVALID_VIDEO_ID_123 — calling yt-dlp
+2026-03-15 12:14:10 | INFO     | services.stream_service:34 - Extracting stream URL for video_id: INVALID_VIDEO_ID_123
+2026-03-15 12:14:12 | ERROR    | services.stream_service:45 - yt-dlp failed for INVALID_VIDEO_ID_123: ERROR: [youtube] INVALID_VID: Video unavailable
+2026-03-15 12:14:12 | INFO     | main:46 - GET /stream/INVALID_VIDEO_ID_123 → 422 (1391.8ms)
