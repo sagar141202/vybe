@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from cache import cache_get, cache_set
 from config import settings
 
 app = FastAPI(
@@ -28,3 +29,10 @@ async def root() -> dict:
 @app.get("/health")
 async def health() -> dict:
     return {"status": "ok", "version": settings.app_version}
+
+
+@app.get("/test-redis")
+async def test_redis() -> dict:
+    await cache_set("test_key", {"hello": "soundfree"}, ttl_seconds=60)
+    value = await cache_get("test_key")
+    return {"cached": value}
