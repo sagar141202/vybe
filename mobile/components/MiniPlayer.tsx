@@ -1,6 +1,7 @@
 import { View, Text, TouchableOpacity, Image, StyleSheet, Animated, PanResponder } from 'react-native';
 import { useRef, useEffect } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
+import { router } from 'expo-router';
 import { usePlayerStore } from '../stores/playerStore';
 import { usePlayTrack } from '../hooks/usePlayTrack';
 
@@ -36,7 +37,7 @@ export default function MiniPlayer({ onPress }: { onPress?: () => void }) {
       <View style={styles.progressBg}>
         <LinearGradient colors={['#C4B5FD','#7DD3FC']} style={[styles.progressFill, { width: progress }]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} />
       </View>
-      <TouchableOpacity style={styles.content} onPress={onPress} activeOpacity={0.9}>
+      <TouchableOpacity style={styles.content} onPress={() => router.push('/player')} activeOpacity={0.9}>
         <View style={styles.thumbWrap}>
           {currentTrack.thumbnail_url
             ? <Image source={{ uri: currentTrack.thumbnail_url }} style={styles.thumb} resizeMode="cover" />
@@ -49,13 +50,13 @@ export default function MiniPlayer({ onPress }: { onPress?: () => void }) {
         </View>
         <View style={styles.controls}>
           <Animated.View style={{ transform: [{ scale: playBtnScale }] }}>
-            <TouchableOpacity style={styles.playBtn} onPress={togglePlayPause} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
+            <TouchableOpacity style={styles.playBtn} onPress={(e) => { e.stopPropagation(); togglePlayPause(); }} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
               <LinearGradient colors={['#C4B5FD','#A78BFA']} style={styles.playGrad}>
                 <Text style={styles.playIcon}>{isPlaying ? '⏸' : '▶'}</Text>
               </LinearGradient>
             </TouchableOpacity>
           </Animated.View>
-          <TouchableOpacity style={styles.nextBtn} onPress={nextTrack} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
+          <TouchableOpacity style={styles.nextBtn} onPress={(e) => { e.stopPropagation(); nextTrack(); }} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
             <Text style={styles.nextIcon}>⏭</Text>
           </TouchableOpacity>
         </View>
