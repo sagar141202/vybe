@@ -11,6 +11,7 @@ from cache import cache_get, cache_set
 from config import settings
 from limiter import limiter
 from logger import setup_logging
+from routers import search
 
 setup_logging()
 
@@ -22,7 +23,6 @@ app = FastAPI(
     redoc_url="/redoc",
 )
 
-# Rate limiter
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 app.add_middleware(SlowAPIMiddleware)
@@ -34,6 +34,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(search.router, prefix="/search", tags=["search"])
 
 
 @app.middleware("http")
