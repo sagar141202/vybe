@@ -99,7 +99,7 @@ export default function HomeScreen() {
   useEffect(() => {
     getRecommendations(10).then(setRecommendations).catch(() => {});
     getTrendingTracks('top hits 2025', 10).then(setTrending).catch(() => {});
-    getSimilarTracks(10).then(setSimilarTracks).catch(() => {});
+    getSimilarTracks(10).then(d => { console.log('Similar tracks:', d?.length); setSimilarTracks(d || []); }).catch(e => console.log('Similar error:', e?.message));
   }, []);
 
   return (
@@ -239,11 +239,11 @@ export default function HomeScreen() {
         )}
 
         {/* Based On Last Played */}
-        {similarTracks.length > 0 && currentTrack && (
+        {similarTracks.length > 0 ? (
           <View style={styles.section}>
-            <SectionHeader title={`🎯 Based on "${currentTrack.title.slice(0, 20)}${currentTrack.title.length > 20 ? '...' : ''}"`} />
+            <SectionHeader title="🎯 Similar to Your Taste" />
             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.horizontalScroll}>
-              {similarTracks.map((track, i) => (
+              {similarTracks.map((track: any, i: number) => (
                 <TrackCard
                   key={track.video_id}
                   track={track}
@@ -254,7 +254,7 @@ export default function HomeScreen() {
               ))}
             </ScrollView>
           </View>
-        )}
+        ) : null}
 
         {/* Trending */}
         {trending.length > 0 && (
