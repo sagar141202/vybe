@@ -1319,3 +1319,18 @@ DETAIL:  Failing row contains (5, null, oDyMLiIskPg, 2026-03-16 08:34:25.859818+
 2026-03-16 14:29:54 | INFO     | routers.download:42 - Downloading audio: bSnlKl_PoQU
 2026-03-16 14:29:59 | INFO     | routers.download:59 - Downloaded: /tmp/soundfree_downloads/bSnlKl_PoQU.opus (5736KB)
 2026-03-16 14:29:59 | INFO     | main:50 - GET /download/bSnlKl_PoQU → 200 (4996.6ms)
+2026-03-16 14:32:58 | INFO     | routers.stream:39 - Cache MISS for stream: vaSRih9ThTE — fetching
+2026-03-16 14:32:58 | INFO     | services.stream_service:34 - Extracting stream URL for video_id: vaSRih9ThTE
+2026-03-16 14:32:58 | INFO     | routers.lyrics:113 - Fetching lyrics: Bhupinder Babbal — Arjan Vailly
+2026-03-16 14:32:58 | INFO     | services.lyrics_service:47 - lrclib lookup: Bhupinder Babbal — Arjan Vailly
+2026-03-16 14:32:59 | INFO     | services.lyrics_service:74 - lrclib: synced lyrics found (29 lines)
+2026-03-16 14:32:59 | INFO     | routers.lyrics:82 - Saved lyrics to Postgres: vaSRih9ThTE
+2026-03-16 14:32:59 | INFO     | main:50 - GET /lyrics/vaSRih9ThTE → 200 (813.8ms)
+2026-03-16 14:33:00 | INFO     | services.stream_service:59 - Got stream URL for vaSRih9ThTE | format: 251 - audio only (medium)
+2026-03-16 14:33:00 | INFO     | main:50 - GET /stream/vaSRih9ThTE → 200 (2007.7ms)
+2026-03-16 14:33:00 | INFO     | routers.stream:36 - Cache HIT for stream: vaSRih9ThTE
+2026-03-16 14:33:00 | INFO     | main:50 - GET /stream/vaSRih9ThTE/proxy → 200 (11.8ms)
+2026-03-16 14:33:33 | INFO     | main:50 - POST /stream/vaSRih9ThTE/played → 200 (108.1ms)
+2026-03-16 14:33:49 | INFO     | routers.download:43 - Downloading audio: vaSRih9ThTE
+2026-03-16 14:33:52 | INFO     | routers.download:60 - Downloaded: /tmp/soundfree_downloads/vaSRih9ThTE.opus (2869KB)
+2026-03-16 14:33:52 | INFO     | main:50 - GET /download/vaSRih9ThTE → 200 (2991.8ms)

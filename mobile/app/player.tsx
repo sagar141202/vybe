@@ -14,6 +14,7 @@ import ProgressBar from '../components/ProgressBar';
 import LyricsView from '../components/LyricsView';
 import ProgressiveImage from '../components/ProgressiveImage';
 import AddToPlaylistSheet from '../components/AddToPlaylistSheet';
+import DownloadButton from '../components/DownloadButton';
 
 const { width, height } = Dimensions.get('window');
 
@@ -190,22 +191,34 @@ export default function FullPlayer() {
       {/* Action row */}
       <View style={styles.actionRow}>
         {[
-          { icon: '⬇️', label: 'Download', onPress: () => {}, active: false },
+          { icon: '⬇️', label: 'Download', onPress: () => {}, active: false, isDownload: true },
           { icon: '🎵', label: showLyrics ? 'Hide' : 'Lyrics', onPress: toggleLyrics, active: showLyrics },
           { icon: '📋', label: 'Queue', onPress: () => {}, active: false },
           { icon: '⏱️', label: 'Sleep', onPress: () => {}, active: false },
           { icon: '↗️', label: 'Share', onPress: () => {}, active: false },
-        ].map((a, i) => (
-          <TouchableOpacity key={i} style={styles.actionBtn} onPress={a.onPress}>
-            <View style={[styles.actionIconWrap, a.active && { borderColor: palette.accent }]}>
-              <LinearGradient
-                colors={a.active ? [palette.light, palette.light] : ['rgba(167,139,250,0.1)', 'rgba(125,211,252,0.05)']}
-                style={StyleSheet.absoluteFillObject}
-              />
-              <Text style={styles.actionIcon}>{a.icon}</Text>
-            </View>
-            <Text style={[styles.actionLabel, a.active && { color: palette.accent }]}>{a.label}</Text>
-          </TouchableOpacity>
+        ].map((a: any, i) => (
+          <View key={i} style={styles.actionBtn}>
+            {a.isDownload ? (
+              <>
+                <View style={[styles.actionIconWrap, { overflow: 'hidden' }]}>
+                  <LinearGradient colors={['rgba(167,139,250,0.1)', 'rgba(125,211,252,0.05)']} style={StyleSheet.absoluteFillObject} />
+                  <DownloadButton track={currentTrack} size={24} />
+                </View>
+                <Text style={styles.actionLabel}>Download</Text>
+              </>
+            ) : (
+              <TouchableOpacity onPress={a.onPress} style={{ alignItems: 'center', gap: 6 }}>
+                <View style={[styles.actionIconWrap, a.active && { borderColor: palette.accent }]}>
+                  <LinearGradient
+                    colors={a.active ? [palette.light, palette.light] : ['rgba(167,139,250,0.1)', 'rgba(125,211,252,0.05)']}
+                    style={StyleSheet.absoluteFillObject}
+                  />
+                  <Text style={styles.actionIcon}>{a.icon}</Text>
+                </View>
+                <Text style={[styles.actionLabel, a.active && { color: palette.accent }]}>{a.label}</Text>
+              </TouchableOpacity>
+            )}
+          </View>
         ))}
       </View>
 
