@@ -931,3 +931,15 @@ DETAIL:  Key (video_id)=(4smEofP_5Q4) is not present in table "tracks".
 2026-03-16 11:31:23 | INFO     | main:48 - GET /stream/0RU5euRGKT8 → 404 (30009.2ms)
 2026-03-16 11:31:24 | ERROR    | services.stream_service:70 - yt-dlp timed out for 0mAEW8BXRpU
 2026-03-16 11:31:24 | INFO     | main:48 - GET /stream/0mAEW8BXRpU → 404 (30006.9ms)
+2026-03-16 11:31:28 | INFO     | services.stream_service:59 - Got stream URL for 9QsfsXVS4YA | format: 251 - audio only (medium)
+2026-03-16 11:31:28 | INFO     | main:48 - GET /stream/9QsfsXVS4YA → 200 (25678.2ms)
+2026-03-16 11:35:01 | INFO     | routers.stream:39 - Cache MISS for stream: q_FLFbkoF9U — fetching
+2026-03-16 11:35:01 | INFO     | services.stream_service:34 - Extracting stream URL for video_id: q_FLFbkoF9U
+2026-03-16 11:35:04 | INFO     | services.stream_service:59 - Got stream URL for q_FLFbkoF9U | format: 251 - audio only (medium)
+2026-03-16 11:35:04 | INFO     | main:48 - GET /stream/q_FLFbkoF9U → 200 (3024.4ms)
+2026-03-16 11:35:04 | INFO     | routers.stream:36 - Cache HIT for stream: q_FLFbkoF9U
+2026-03-16 11:35:04 | INFO     | main:48 - GET /stream/q_FLFbkoF9U/proxy → 200 (12.1ms)
+2026-03-16 11:35:08 | INFO     | routers.stream:36 - Cache HIT for stream: Wqu4MRQOgyo
+2026-03-16 11:35:08 | INFO     | main:48 - GET /stream/Wqu4MRQOgyo → 200 (2.4ms)
+2026-03-16 11:35:08 | INFO     | routers.stream:36 - Cache HIT for stream: Wqu4MRQOgyo
+2026-03-16 11:35:08 | INFO     | main:48 - GET /stream/Wqu4MRQOgyo/proxy → 200 (9.5ms)

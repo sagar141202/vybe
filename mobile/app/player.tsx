@@ -1,17 +1,17 @@
 import {
   View, Text, StyleSheet, TouchableOpacity,
-  Dimensions, Animated, Image
+  Dimensions, Animated
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
 import { useRef, useEffect, useState } from 'react';
 import { router } from 'expo-router';
 import { usePlayerStore } from '../stores/playerStore';
-import { useUIStore } from '../stores/uiStore';
 import { usePlayTrack, seekToPosition } from '../hooks/usePlayTrack';
 import { useAccentColor } from '../hooks/useAccentColor';
 import ProgressBar from '../components/ProgressBar';
 import LyricsView from '../components/LyricsView';
+import ProgressiveImage from '../components/ProgressiveImage';
 
 const { width, height } = Dimensions.get('window');
 
@@ -109,6 +109,7 @@ export default function FullPlayer() {
   if (!currentTrack) { router.back(); return null; }
 
   const palette = getPalette(currentTrack.video_id);
+  const artSize = width * 0.72;
 
   return (
     <Animated.View style={[styles.container, { transform: [{ translateY: slideAnim }] }]}>
@@ -130,17 +131,17 @@ export default function FullPlayer() {
         </TouchableOpacity>
       </View>
 
-      {/* Album Art */}
+      {/* Album Art — progressive load */}
       <View style={styles.artWrap}>
-        <Animated.View style={[styles.artContainer, { transform: [{ scale: artScale }], opacity: artOpacity }]}>
-          <View style={[styles.artShadow, { backgroundColor: palette.light }]} />
-          {currentTrack.thumbnail_url ? (
-            <Image source={{ uri: currentTrack.thumbnail_url }} style={styles.art} resizeMode="cover" />
-          ) : (
-            <LinearGradient colors={palette.bg} style={styles.art}>
-              <Text style={styles.artEmoji}>🎵</Text>
-            </LinearGradient>
-          )}
+        <Animated.View style={[{ transform: [{ scale: artScale }], opacity: artOpacity }]}>
+          <View style={[styles.artShadow, { backgroundColor: palette.light, width: artSize, height: artSize }]} />
+          <ProgressiveImage
+            thumbnailUrl={currentTrack.thumbnail_url}
+            style={{ width: artSize, height: artSize }}
+            borderRadius={28}
+            fallbackColors={palette.bg}
+            fallbackEmoji="🎵"
+          />
         </Animated.View>
       </View>
 
@@ -158,12 +159,7 @@ export default function FullPlayer() {
       </View>
 
       {/* Progress Bar */}
-      <ProgressBar
-        position={position}
-        duration={duration}
-        onSeek={seekToPosition}
-        accentColors={palette.bg}
-      />
+      <ProgressBar position={position} duration={duration} onSeek={seekToPosition} accentColors={palette.bg} />
 
       {/* Controls */}
       <View style={styles.controls}>
@@ -174,7 +170,7 @@ export default function FullPlayer() {
           <Text style={styles.controlIconLg}>⏮</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.playBtn} onPress={togglePlayPause}>
-          <LinearGradient colors={[palette.bg[0], palette.bg[1]]} style={styles.playGrad} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}>
+          <LinearGradient colors={palette.bg} style={styles.playGrad} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}>
             <Text style={styles.playIcon}>{isPlaying ? '⏸' : '▶'}</Text>
           </LinearGradient>
         </TouchableOpacity>
@@ -249,10 +245,7 @@ const styles = StyleSheet.create({
   moreBtn: { width: 42, height: 42, alignItems: 'center', justifyContent: 'center' },
   moreIcon: { fontSize: 24, color: '#6B7280' },
   artWrap: { alignItems: 'center', paddingVertical: 16 },
-  artContainer: { position: 'relative' },
   artShadow: { position: 'absolute', top: 12, left: 12, right: 12, bottom: -8, borderRadius: 28 },
-  art: { width: width * 0.72, height: width * 0.72, borderRadius: 28, alignItems: 'center', justifyContent: 'center', borderWidth: 2, borderColor: 'rgba(255,255,255,0.9)' },
-  artEmoji: { fontSize: 80 },
   trackInfo: { paddingHorizontal: 28, marginBottom: 8 },
   trackInfoRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   trackInfoText: { flex: 1 },
