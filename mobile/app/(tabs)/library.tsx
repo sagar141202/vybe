@@ -6,6 +6,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
 import { router } from 'expo-router';
 import { useLibraryStore } from '../../stores/libraryStore';
+import { useEffect, useState } from 'react';
+import { getDownloadCount } from '../../services/localDb';
 import { usePlaylistStore } from '../../stores/playlistStore';
 import { usePlayTrack } from '../../hooks/usePlayTrack';
 import { Ionicons } from '@expo/vector-icons';
@@ -43,10 +45,15 @@ function TrackRow({ track, index, onPress }: any) {
 }
 
 export default function LibraryScreen() {
+  const [downloadCount, setDownloadCount] = useState(0);
   const likedTracks = useLibraryStore(s => s.likedTracks);
   const recentlyPlayed = useLibraryStore(s => s.recentlyPlayed);
   const playlists = usePlaylistStore(s => s.playlists);
   const { playTrack } = usePlayTrack();
+
+  useEffect(() => {
+    getDownloadCount().then(setDownloadCount);
+  }, []);
 
   const SECTIONS = [
     { name: 'Playlists', emoji: '🎵', count: `${playlists.length} playlists`, colors: ['#93C5FD', '#A5B4FC'] as [string, string], route: '/playlists' },
@@ -80,7 +87,7 @@ export default function LibraryScreen() {
             <View style={styles.cardOverlay} />
             <Text style={styles.cardIconEmoji}>⬇️</Text>
             <Text style={styles.cardTitle}>Downloads</Text>
-            <Text style={styles.cardCount}>0 tracks</Text>
+            <Text style={styles.cardCount}>{downloadCount} tracks</Text>
           </TouchableOpacity>
         </View>
 
