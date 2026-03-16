@@ -4,6 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { useEffect, useState } from 'react';
 import { isDownloaded } from '../hooks/useDownload';
+import { useNetworkStatus } from '../hooks/useNetworkStatus';
 
 export interface Track {
   video_id: string;
@@ -38,6 +39,7 @@ export default function TrackListItem({
 }) {
   const scaleAnim = useRef(new Animated.Value(1)).current;
   const [downloaded, setDownloaded] = useState(false);
+  const { isOffline } = useNetworkStatus();
 
   useEffect(() => {
     isDownloaded(track.video_id).then(setDownloaded);
@@ -47,7 +49,7 @@ export default function TrackListItem({
     <Animated.View style={[styles.wrapper, { transform: [{ scale: scaleAnim }] }]}>
       {/* Main tap area */}
       <TouchableOpacity
-        style={[styles.container, isPlaying && styles.containerActive]}
+        style={[styles.container, isPlaying && styles.containerActive, isOffline && !downloaded && styles.containerOffline]}
         onPress={onPress}
         onPressIn={() => Animated.spring(scaleAnim, { toValue: 0.97, useNativeDriver: true, tension: 100, friction: 8 }).start()}
         onPressOut={() => Animated.spring(scaleAnim, { toValue: 1, useNativeDriver: true, tension: 100, friction: 8 }).start()}
@@ -134,6 +136,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   containerActive: { borderColor: 'rgba(167,139,250,0.4)' },
+  containerOffline: { opacity: 0.4 },
   activeBar: {
     position: 'absolute', left: 0, top: 8, bottom: 8,
     width: 3, borderRadius: 2, backgroundColor: '#A78BFA',

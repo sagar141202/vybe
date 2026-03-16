@@ -9,13 +9,14 @@ import { useLibraryStore } from '../stores/libraryStore';
 import { usePlaylistStore } from '../stores/playlistStore';
 import { useSettingsStore } from '../stores/settingsStore';
 import { useHealth } from '../hooks/useHealth';
+import { useNetworkStatus } from '../hooks/useNetworkStatus';
 
 function OfflineBanner() {
-  const { isError } = useHealth();
-  if (!isError) return null;
+  const { isOffline } = useNetworkStatus();
+  if (!isOffline) return null;
   return (
     <View style={styles.banner}>
-      <Text style={styles.bannerText}>⚠️ Backend offline</Text>
+      <Text style={styles.bannerText}>📵 Offline — playing from downloaded library</Text>
     </View>
   );
 }
@@ -53,7 +54,15 @@ export default function RootLayout() {
 }
 
 const styles = StyleSheet.create({
-  banner: { backgroundColor: '#FDE68A', paddingVertical: 8, paddingHorizontal: 16, alignItems: 'center' },
-  bannerText: { fontSize: 12, fontWeight: '700', color: '#92400E' },
+  banner: {
+    position: 'absolute', bottom: 152, left: 16, right: 16,
+    backgroundColor: '#1E1B4B', paddingVertical: 12,
+    paddingHorizontal: 20, borderRadius: 16,
+    flexDirection: 'row', alignItems: 'center',
+    zIndex: 999, elevation: 10,
+    shadowColor: '#000', shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3, shadowRadius: 8,
+  },
+  bannerText: { fontSize: 13, fontWeight: '600', color: '#FFFFFF', flex: 1, textAlign: 'center' },
 });
 // Playlist store loaded in AppInit - handled by libraryStore
