@@ -75,7 +75,7 @@ export default function LibraryScreen() {
             <Text style={styles.cardCount}>{likedTracks.length} tracks</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.bigCard}>
+          <TouchableOpacity style={styles.bigCard} onPress={() => router.push('/downloads')}>
             <LinearGradient colors={['#86EFAC', '#6EE7B7']} style={StyleSheet.absoluteFillObject} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} />
             <View style={styles.cardOverlay} />
             <Text style={styles.cardIconEmoji}>⬇️</Text>
