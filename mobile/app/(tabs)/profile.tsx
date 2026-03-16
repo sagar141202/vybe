@@ -16,6 +16,7 @@ const SETTINGS = [
   { name: 'Daily Mix', value: 'AI playlist', emoji: '🤖', colors: ['#C4B5FD', '#A78BFA'] as [string,string], route: '/daily-mix' },
   { name: 'Discord RPC', value: 'Rich Presence', emoji: '🎮', colors: ['#A5B4FC', '#818CF8'] as [string,string], route: '/discord' },
   { name: 'Gym Mode', value: 'BPM filter', emoji: '💪', colors: ['#FB923C', '#EA580C'] as [string,string], route: '/gym-mode' },
+  { name: 'Vibe Search', value: 'AI semantic search', emoji: '✨', colors: ['#C4B5FD', '#A78BFA'] as [string,string], route: '/vibe-search' },
 ];
 
 export default function ProfileScreen() {

@@ -2452,3 +2452,42 @@ DETAIL:  Failing row contains (7, null, 4smEofP_5Q4, 2026-03-16 10:23:30.969966+
 2026-03-16 21:15:24 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.2033 Key=C#
 2026-03-16 21:15:24 | INFO     | services.recommendation_service:144 - Top recommendation: Track vaSRih9T (score=0.5432)
 2026-03-16 21:15:24 | ERROR    | services.scheduler:58 - Recommendation rebuild failed: cache_set() got an unexpected keyword argument 'ttl'
+2026-03-16 21:16:01 | INFO     | services.background_jobs:82 - Background worker task created
+2026-03-16 21:16:01 | INFO     | services.scheduler:96 - Scheduler started — nightly rebuild at 2:00 AM, warmup in 30s
+2026-03-16 21:16:01 | INFO     | main:64 - SoundFree API started
+2026-03-16 21:16:01 | INFO     | services.background_jobs:13 - Background job worker started
+2026-03-16 21:16:31 | INFO     | services.scheduler:27 - Nightly recommendation rebuild starting...
+2026-03-16 21:16:31 | INFO     | services.annoy_service:40 - Building index from 5 tracks
+2026-03-16 21:16:31 | INFO     | services.annoy_service:74 - Index built: 5 tracks → /tmp/soundfree_index/tracks_vectors.npy
+2026-03-16 21:16:31 | INFO     | services.scheduler:34 - Index rebuilt: {'status': 'ok', 'count': 5, 'path': '/tmp/soundfree_index/tracks_vectors.npy'}
+2026-03-16 21:16:31 | INFO     | services.recommendation_service:31 - Computing user vector from 33 plays
+2026-03-16 21:16:31 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.2033 Key=C#
+2026-03-16 21:16:31 | INFO     | services.recommendation_service:31 - Computing user vector from 33 plays
+2026-03-16 21:16:31 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.2033 Key=C#
+2026-03-16 21:16:31 | INFO     | services.recommendation_service:144 - Top recommendation: Track vaSRih9T (score=0.5432)
+2026-03-16 21:16:31 | ERROR    | services.scheduler:58 - Recommendation rebuild failed: cache_set() got an unexpected keyword argument 'ttl'
+2026-03-16 21:25:24 | WARNING  | routers.likes:32 - Like error: (sqlalchemy.dialects.postgresql.asyncpg.IntegrityError) <class 'asyncpg.exceptions.NotNullViolationError'>: null value in column "user_id" of relation "liked_tracks" violates not-null constraint
+DETAIL:  Failing row contains (8, null, DRZHVrSmcWU, 2026-03-16 15:55:24.194841+00).
+[SQL: INSERT INTO liked_tracks (user_id, video_id) VALUES ($1::UUID, $2::VARCHAR) RETURNING liked_tracks.id, liked_tracks.liked_at]
+[parameters: (None, 'DRZHVrSmcWU')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2026-03-16 21:25:24 | INFO     | main:72 - POST /likes/DRZHVrSmcWU → 200 (37.2ms)
+2026-03-16 21:32:58 | INFO     | services.background_jobs:82 - Background worker task created
+2026-03-16 21:32:58 | INFO     | services.scheduler:96 - Scheduler started — nightly rebuild at 2:00 AM, warmup in 30s
+2026-03-16 21:32:58 | INFO     | main:66 - SoundFree API started
+2026-03-16 21:32:58 | INFO     | services.background_jobs:13 - Background job worker started
+2026-03-16 21:32:58 | INFO     | main:74 - GET /trending → 307 (107.5ms)
+2026-03-16 21:32:58 | INFO     | main:74 - GET /trending → 307 (107.7ms)
+2026-03-16 21:32:58 | INFO     | services.vibe_service:95 - Vibe search: 'rainy night lofi chill study'
+2026-03-16 21:32:58 | INFO     | main:74 - POST /vibe/search → 400 (112.4ms)
+2026-03-16 21:32:58 | INFO     | routers.search:43 - Cache MISS for search: 'top hits 2025' — fetching from YouTube Music
+2026-03-16 21:32:58 | INFO     | services.search_service:43 - Searching YouTube Music: 'top hits 2025'
+2026-03-16 21:33:00 | INFO     | services.search_service:72 - Search returned 20 tracks for 'top hits 2025'
+2026-03-16 21:33:00 | INFO     | routers.search:43 - Cache MISS for search: 'top hits 2025' — fetching from YouTube Music
+2026-03-16 21:33:00 | INFO     | services.search_service:43 - Searching YouTube Music: 'top hits 2025'
+2026-03-16 21:33:01 | INFO     | services.search_service:72 - Search returned 20 tracks for 'top hits 2025'
+2026-03-16 21:33:01 | INFO     | routers.search:60 - Cached 20 results for 'top hits 2025' (TTL: 30min)
+2026-03-16 21:33:01 | INFO     | routers.search:60 - Cached 20 results for 'top hits 2025' (TTL: 30min)
+2026-03-16 21:33:01 | INFO     | main:74 - GET /search → 200 (2877.1ms)
+2026-03-16 21:33:01 | INFO     | main:74 - GET /search → 200 (2907.8ms)
+2026-03-16 21:33:01 | INFO     | services.vibe_service:71 - Building vibe index for 12 tracks...

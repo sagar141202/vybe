@@ -20,6 +20,7 @@ from routers import (
     search,
     stream,
     trending,
+    vibe,
 )
 from services.background_jobs import start_worker
 from services.scheduler import start_scheduler
@@ -55,6 +56,7 @@ app.include_router(download.router, prefix="/download", tags=["download"])
 app.include_router(recommendations.router, prefix="/recommendations", tags=["recommendations"])
 app.include_router(trending.router, prefix="/trending", tags=["trending"])
 app.include_router(discord.router, prefix="/discord", tags=["discord"])
+app.include_router(vibe.router, prefix="/vibe", tags=["vibe"])
 
 
 @app.on_event("startup")
