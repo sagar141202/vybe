@@ -98,7 +98,7 @@ export default function HomeScreen() {
 
   useEffect(() => {
     getRecommendations(10).then(setRecommendations).catch(() => {});
-    getTrendingTracks('top hits 2025', 10).then(setTrending).catch(() => {});
+    getTrendingTracks('', 10).then(d => { console.log('Trending:', d?.length, d?.[0]?.title); setTrending(d || []); }).catch(e => console.log('Trending err:', e?.message));
     getSimilarTracks(10).then(d => { console.log('Similar tracks:', d?.length); setSimilarTracks(d || []); }).catch(e => console.log('Similar error:', e?.message));
   }, []);
 

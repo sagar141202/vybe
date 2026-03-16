@@ -55,7 +55,7 @@ export const getRecommendations = async (limit = 20) => {
 
 export const getTrendingTracks = async (_query = '', limit = 10) => {
   try {
-    const { data } = await api.get('/trending/', { params: { limit } });
+    const { data } = await api.get('/trending', { params: { limit } });
     return data.slice(0, limit);
   } catch {
     // fallback to search
