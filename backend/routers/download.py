@@ -122,3 +122,19 @@ async def list_downloads() -> list:
                 }
             )
     return sorted(files, key=lambda x: x["size_bytes"], reverse=True)
+
+
+@router.post("/{video_id}/analyze")
+async def analyze_audio(video_id: str) -> dict:
+    """Trigger audio feature extraction for a downloaded track."""
+    from services.audio_analysis_service import analyze_and_store
+
+    cached = _get_cached_path(video_id)
+    if not cached:
+        raise HTTPException(status_code=404, detail="Track not downloaded yet")
+
+    features = await analyze_and_store(video_id, str(cached))
+    if not features:
+        raise HTTPException(status_code=500, detail="Feature extraction failed")
+
+    return {"video_id": video_id, **features}
