@@ -1,63 +1,35 @@
 import { useState, useEffect } from 'react';
-import { AppState } from 'react-native';
-
-// Simple connectivity check — ping the backend
-const API_URL = process.env.EXPO_PUBLIC_API_URL || 'http://10.53.24.112:8000';
+import NetInfo from '@react-native-community/netinfo';
 
 let isOnline = true;
 const listeners = new Set<(online: boolean) => void>();
 
 function notify(online: boolean) {
-  if (online !== isOnline) {
-    isOnline = online;
-    listeners.forEach(cb => cb(online));
-  }
+  isOnline = online;
+  listeners.forEach(cb => cb(online));
 }
 
-async function checkConnectivity(): Promise<boolean> {
-  try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 3000);
-    const res = await fetch(`${API_URL}/health`, {
-      signal: controller.signal,
-      cache: 'no-store',
-    });
-    clearTimeout(timeout);
-    return res.ok;
-  } catch {
-    return false;
-  }
-}
+// Subscribe to real network changes
+NetInfo.addEventListener(state => {
+  notify(!!state.isConnected && !!state.isInternetReachable);
+});
 
-// Start background polling
-let pollInterval: ReturnType<typeof setInterval> | null = null;
-
-function startPolling() {
-  if (pollInterval) return;
-  checkConnectivity().then(notify);
-  pollInterval = setInterval(async () => {
-    const online = await checkConnectivity();
-    notify(online);
-  }, 15000);
-}
-
-startPolling();
+// Initial check
+NetInfo.fetch().then(state => {
+  notify(!!state.isConnected && !!state.isInternetReachable);
+});
 
 export function useNetworkStatus() {
   const [online, setOnline] = useState(isOnline);
 
   useEffect(() => {
     listeners.add(setOnline);
-
-    // Check when app comes to foreground
-    const sub = AppState.addEventListener('change', (state) => {
-      if (state === 'active') checkConnectivity().then(notify);
+    // Refresh on mount
+    NetInfo.fetch().then(state => {
+      const connected = !!state.isConnected && !!state.isInternetReachable;
+      setOnline(connected);
     });
-
-    return () => {
-      listeners.delete(setOnline);
-      sub.remove();
-    };
+    return () => { listeners.delete(setOnline); };
   }, []);
 
   return { isOnline: online, isOffline: !online };

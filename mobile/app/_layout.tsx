@@ -2,43 +2,51 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from '../lib/queryClient';
-import { useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Audio } from 'expo-av';
+import { useEffect, useRef } from 'react';
+import { View, Text, StyleSheet, Animated } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useLibraryStore } from '../stores/libraryStore';
-import { usePlaylistStore } from '../stores/playlistStore';
 import { useSettingsStore } from '../stores/settingsStore';
-import { useHealth } from '../hooks/useHealth';
+import { usePlaylistStore } from '../stores/playlistStore';
 import { useNetworkStatus } from '../hooks/useNetworkStatus';
 
-function OfflineBanner() {
+function OfflineSnackbar() {
   const { isOffline } = useNetworkStatus();
-  if (!isOffline) return null;
+  const slideAnim = useRef(new Animated.Value(100)).current;
+  const opacityAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (isOffline) {
+      Animated.parallel([
+        Animated.spring(slideAnim, { toValue: 0, useNativeDriver: true, tension: 80, friction: 12 }),
+        Animated.timing(opacityAnim, { toValue: 1, duration: 300, useNativeDriver: true }),
+      ]).start();
+    } else {
+      Animated.parallel([
+        Animated.timing(slideAnim, { toValue: 100, duration: 300, useNativeDriver: true }),
+        Animated.timing(opacityAnim, { toValue: 0, duration: 300, useNativeDriver: true }),
+      ]).start();
+    }
+  }, [isOffline]);
+
   return (
-    <View style={styles.banner}>
-      <Text style={styles.bannerText}>📵 Offline — playing from downloaded library</Text>
-    </View>
+    <Animated.View style={[styles.snackbar, { transform: [{ translateY: slideAnim }], opacity: opacityAnim }]}>
+      <LinearGradient colors={['#1E1B4B', '#312E81']} style={StyleSheet.absoluteFillObject} />
+      <Text style={styles.snackbarIcon}>📵</Text>
+      <View style={styles.snackbarText}>
+        <Text style={styles.snackbarTitle}>You're offline</Text>
+        <Text style={styles.snackbarSub}>Playing from downloaded library</Text>
+      </View>
+      <View style={styles.snackbarDot} />
+    </Animated.View>
   );
 }
 
 function AppInit() {
   const loadLibrary = useLibraryStore(s => s.loadFromStorage);
-  const loadPlaylists = usePlaylistStore(s => s.loadFromStorage);
   const loadSettings = useSettingsStore(s => s.loadFromStorage);
-
-  useEffect(() => {
-    loadLibrary();
-    loadSettings();
-
-    // Setup audio session for background + media keys
-    Audio.setAudioModeAsync({
-      staysActiveInBackground: true,
-      playsInSilentModeIOS: true,
-      shouldDuckAndroid: true,
-      playThroughEarpieceAndroid: false,
-    });
-  }, []);
-
+  const loadPlaylists = usePlaylistStore(s => s.loadFromStorage);
+  useEffect(() => { loadLibrary(); loadSettings(); loadPlaylists(); }, []);
   return null;
 }
 
@@ -47,22 +55,27 @@ export default function RootLayout() {
     <QueryClientProvider client={queryClient}>
       <StatusBar style="dark" />
       <AppInit />
-      <OfflineBanner />
       <Stack screenOptions={{ headerShown: false }} />
+      <OfflineSnackbar />
     </QueryClientProvider>
   );
 }
 
 const styles = StyleSheet.create({
-  banner: {
-    position: 'absolute', bottom: 152, left: 16, right: 16,
-    backgroundColor: '#1E1B4B', paddingVertical: 12,
-    paddingHorizontal: 20, borderRadius: 16,
+  snackbar: {
+    position: 'absolute',
+    bottom: 152, left: 16, right: 16,
+    borderRadius: 18, overflow: 'hidden',
     flexDirection: 'row', alignItems: 'center',
-    zIndex: 999, elevation: 10,
-    shadowColor: '#000', shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3, shadowRadius: 8,
+    paddingVertical: 14, paddingHorizontal: 18,
+    gap: 12, zIndex: 9999, elevation: 12,
+    shadowColor: '#1E1B4B', shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.4, shadowRadius: 12,
+    borderWidth: 1, borderColor: 'rgba(167,139,250,0.3)',
   },
-  bannerText: { fontSize: 13, fontWeight: '600', color: '#FFFFFF', flex: 1, textAlign: 'center' },
+  snackbarIcon: { fontSize: 20 },
+  snackbarText: { flex: 1 },
+  snackbarTitle: { fontSize: 14, fontWeight: '800', color: '#FFFFFF', marginBottom: 2 },
+  snackbarSub: { fontSize: 12, color: 'rgba(255,255,255,0.7)' },
+  snackbarDot: { width: 8, height: 8, borderRadius: 4, backgroundColor: '#FCA5A5' },
 });
-// Playlist store loaded in AppInit - handled by libraryStore
