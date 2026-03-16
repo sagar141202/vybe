@@ -55,3 +55,18 @@ export const logPlay = async (videoId: string) => {
     await api.post(`/stream/${videoId}/played`);
   } catch (_) {}
 };
+
+export const likeTrack = async (videoId: string) => {
+  const { data } = await api.post(`/likes/${videoId}`);
+  return data;
+};
+
+export const unlikeTrack = async (videoId: string) => {
+  const { data } = await api.delete(`/likes/${videoId}`);
+  return data;
+};
+
+export const getLikedTracks = async () => {
+  const { data } = await api.get('/likes/');
+  return data;
+};

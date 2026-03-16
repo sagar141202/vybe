@@ -9,6 +9,7 @@ import { router } from 'expo-router';
 import { usePlayerStore } from '../stores/playerStore';
 import { usePlayTrack, seekToPosition } from '../hooks/usePlayTrack';
 import { useAccentColor } from '../hooks/useAccentColor';
+import { useLike } from '../hooks/useLike';
 import ProgressBar from '../components/ProgressBar';
 import LyricsView from '../components/LyricsView';
 import ProgressiveImage from '../components/ProgressiveImage';
@@ -71,7 +72,7 @@ export default function FullPlayer() {
   const slideAnim = useRef(new Animated.Value(height)).current;
   const artOpacity = useRef(new Animated.Value(1)).current;
   const lyricsSlide = useRef(new Animated.Value(height)).current;
-  const [liked, setLiked] = useState(false);
+  const { liked, toggleLike } = useLike(currentTrack);
   const [showLyrics, setShowLyrics] = useState(false);
   const prevTrackId = useRef<string | null>(null);
 
@@ -152,7 +153,7 @@ export default function FullPlayer() {
             <Text style={styles.trackTitle} numberOfLines={1}>{currentTrack.title}</Text>
             <Text style={styles.trackArtist} numberOfLines={1}>{currentTrack.artist}</Text>
           </View>
-          <TouchableOpacity style={styles.likeBtn} onPress={() => setLiked(!liked)}>
+          <TouchableOpacity style={styles.likeBtn} onPress={toggleLike}>
             <Text style={styles.likeIcon}>{liked ? '❤️' : '🤍'}</Text>
           </TouchableOpacity>
         </View>
