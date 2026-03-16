@@ -2186,3 +2186,26 @@ DETAIL:  Failing row contains (7, null, 4smEofP_5Q4, 2026-03-16 10:23:30.969966+
 2026-03-16 17:51:32 | INFO     | main:61 - GET /recommendations/cached → 200 (18.9ms)
 2026-03-16 17:52:45 | INFO     | routers.stream:122 - Logged play: PVDPkS4v8FQ
 2026-03-16 17:52:45 | INFO     | main:61 - POST /stream/PVDPkS4v8FQ/played → 200 (21.5ms)
+2026-03-16 17:56:29 | INFO     | main:61 - GET /trending → 307 (5.3ms)
+2026-03-16 17:56:29 | INFO     | routers.trending:60 - Trending cache HIT (20 tracks)
+2026-03-16 17:56:29 | INFO     | main:61 - GET /trending/ → 200 (3.6ms)
+2026-03-16 17:56:29 | INFO     | services.recommendation_service:31 - Computing user vector from 28 plays
+2026-03-16 17:56:29 | INFO     | services.recommendation_service:62 - User vector: BPM=155.8 Energy=0.1806 Key=C#
+2026-03-16 17:56:29 | INFO     | services.recommendation_service:31 - Computing user vector from 28 plays
+2026-03-16 17:56:29 | INFO     | services.recommendation_service:62 - User vector: BPM=155.8 Energy=0.1806 Key=C#
+2026-03-16 17:56:29 | INFO     | main:61 - GET /recommendations/similar → 200 (20.7ms)
+2026-03-16 17:56:29 | INFO     | main:61 - GET /recommendations/cached → 200 (32.9ms)
+2026-03-16 17:57:31 | INFO     | main:61 - GET /trending → 307 (22.1ms)
+2026-03-16 17:57:31 | INFO     | routers.trending:60 - Trending cache HIT (20 tracks)
+2026-03-16 17:57:31 | INFO     | main:61 - GET /trending/ → 200 (9.5ms)
+2026-03-16 17:57:31 | INFO     | services.recommendation_service:31 - Computing user vector from 28 plays
+2026-03-16 17:57:31 | INFO     | services.recommendation_service:62 - User vector: BPM=155.8 Energy=0.1806 Key=C#
+2026-03-16 17:57:31 | INFO     | services.recommendation_service:31 - Computing user vector from 28 plays
+2026-03-16 17:57:31 | INFO     | services.recommendation_service:62 - User vector: BPM=155.8 Energy=0.1806 Key=C#
+2026-03-16 17:57:31 | INFO     | main:61 - GET /recommendations/similar → 200 (123.3ms)
+2026-03-16 17:57:31 | INFO     | main:61 - GET /recommendations/cached → 200 (149.1ms)
+2026-03-16 18:00:00 | INFO     | services.scheduler:12 - Refreshing trending tracks cache...
+2026-03-16 18:00:00 | INFO     | services.search_service:43 - Searching YouTube Music: 'top hindi songs 2025'
+2026-03-16 18:00:01 | INFO     | services.search_service:72 - Search returned 20 tracks for 'top hindi songs 2025'
+2026-03-16 18:00:01 | INFO     | routers.trending:50 - Fetched 20 trending tracks
+2026-03-16 18:00:01 | INFO     | services.scheduler:20 - Trending cache refreshed: 20 tracks

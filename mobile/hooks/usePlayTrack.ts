@@ -5,6 +5,7 @@ import { usePlayerStore } from '../stores/playerStore';
 import { useLibraryStore } from '../stores/libraryStore';
 import { useUIStore } from '../stores/uiStore';
 import { getStreamUrl, logPlay } from '../lib/api';
+import { getLastfmConfig, scrobbleTrack, updateNowPlaying } from '../services/lastfmService';
 import { isDownloaded, getLocalPath } from './useDownload';
 import {
   getCurrentSound, setCurrentSound,
@@ -32,6 +33,7 @@ async function _playTrack(track: any) {
 
     usePlayerStore.getState().setCurrentTrack({ ...track, stream_url: playUrl });
     (global as any)._playLogged = false;
+    (global as any)._scrobbled = false;
 
     await Audio.setAudioModeAsync({
       staysActiveInBackground: true,
@@ -60,6 +62,17 @@ async function _playTrack(track: any) {
             title: track.title, artist: track.artist,
             album: track.album, duration_ms: track.duration_ms,
             thumbnail_url: track.thumbnail_url,
+          });
+          getLastfmConfig().then(config => {
+            if (config?.sessionKey) updateNowPlaying(config, track);
+          });
+        }
+        const dur = status.durationMillis || track.duration_ms || 0;
+        const scrobbleAt = Math.max(30000, dur * 0.5);
+        if (!(global as any)._scrobbled && dur > 0 && status.positionMillis >= scrobbleAt) {
+          (global as any)._scrobbled = true;
+          getLastfmConfig().then(config => {
+            if (config?.sessionKey) scrobbleTrack(config, track);
           });
         }
         if (status.didJustFinish) {
