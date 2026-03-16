@@ -33,3 +33,26 @@ async def get_recommended_tracks(limit: int = 20) -> list:
     if not recs:
         return []
     return recs
+
+
+@router.post("/index/build")
+async def build_annoy_index() -> dict:
+    """Build Annoy similarity index from all tracks with features."""
+    from services.annoy_service import build_index
+
+    result = await build_index()
+    return result
+
+
+@router.get("/similar")
+async def get_similar_tracks(limit: int = 20) -> list:
+    """Get similar tracks using Annoy index + user vector."""
+    from services.annoy_service import query_similar
+    from services.recommendation_service import compute_user_vector
+
+    user_vector = await compute_user_vector()
+    if not user_vector:
+        return []
+
+    results = query_similar(user_vector, n=limit)
+    return results
