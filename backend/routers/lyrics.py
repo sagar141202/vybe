@@ -3,12 +3,12 @@ import json
 from fastapi import APIRouter, Query
 from loguru import logger
 from pydantic import BaseModel
-from sqlalchemy import select
+from sqlalchemy import text
 
 from cache import cache_get, cache_set
 from config import settings
 from database import AsyncSessionLocal
-from models import LyricsCache, Track
+from models import Track
 from services.genius_service import get_lyrics_genius
 from services.lyrics_service import get_lyrics_lrclib, search_lyrics_lrclib
 
@@ -45,12 +45,14 @@ async def _get_from_postgres(video_id: str) -> dict | None:
     try:
         async with AsyncSessionLocal() as session:
             result = await session.execute(
-                select(LyricsCache).where(LyricsCache.video_id == video_id)
+                text("SELECT lyrics_json FROM lyrics_cache WHERE video_id = :vid"),
+                {"vid": video_id},
             )
-            row = result.scalar_one_or_none()
+            row = result.fetchone()
             if row:
                 logger.info(f"Postgres HIT for lyrics: {video_id}")
-                return json.loads(row.lyrics_json)
+                data = row[0]
+                return json.loads(data) if isinstance(data, str) else data
     except Exception as e:
         logger.warning(f"Postgres lyrics read error: {e}")
     return None
@@ -59,19 +61,23 @@ async def _get_from_postgres(video_id: str) -> dict | None:
 async def _save_to_postgres(video_id: str, data: dict) -> None:
     try:
         async with AsyncSessionLocal() as session:
-            existing = await session.execute(
-                select(LyricsCache).where(LyricsCache.video_id == video_id)
+            # Use raw SQL to avoid FK constraint — lyrics can exist without track
+            await session.execute(
+                text("""
+                    INSERT INTO lyrics_cache (video_id, lyrics_json, source, synced)
+                    VALUES (:vid, :json, :source, :synced)
+                    ON CONFLICT (video_id) DO UPDATE
+                    SET lyrics_json = EXCLUDED.lyrics_json,
+                        source = EXCLUDED.source,
+                        synced = EXCLUDED.synced
+                """),
+                {
+                    "vid": video_id,
+                    "json": json.dumps(data),
+                    "source": data.get("source", "none"),
+                    "synced": data.get("synced", False),
+                },
             )
-            row = existing.scalar_one_or_none()
-            if row:
-                row.lyrics_json = json.dumps(data)
-            else:
-                session.add(
-                    LyricsCache(
-                        video_id=video_id,
-                        lyrics_json=json.dumps(data),
-                    )
-                )
             await session.commit()
             logger.info(f"Saved lyrics to Postgres: {video_id}")
     except Exception as e:
