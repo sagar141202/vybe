@@ -10,6 +10,7 @@ import {
   getCurrentSound, setCurrentSound,
   fadeOutCurrent, fadeInNew, stopAll,
 } from '../services/crossfadeService';
+import { loadSavedSpeed } from '../app/playback-speed';
 
 async function _getPlayUrl(videoId: string): Promise<string | null> {
   const local = await isDownloaded(videoId);
@@ -74,6 +75,14 @@ async function _playTrack(track: any) {
       fadeOutPromise,
       fadeInNew(newSound),
     ]);
+
+    // Apply saved playback speed
+    loadSavedSpeed().then(rate => {
+      if (rate !== 1.0) {
+        const s = getCurrentSound();
+        if (s) s.setRateAsync(rate, true).catch(() => {});
+      }
+    });
 
     usePlayerStore.getState().setIsPlaying(true);
     console.log('Playing:', track.title);
