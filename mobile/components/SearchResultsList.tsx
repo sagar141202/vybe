@@ -1,10 +1,8 @@
 import { View, Text, StyleSheet, Animated } from 'react-native';
-import { FlashList } from '@shopify/flash-list';
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import TrackListItem, { Track } from './TrackListItem';
 import EmptyState from './EmptyState';
-import AddToPlaylistSheet from './AddToPlaylistSheet';
 
 function SkeletonItem({ index }: { index: number }) {
   const shimmer = useRef(new Animated.Value(0)).current;
@@ -29,13 +27,16 @@ function SkeletonItem({ index }: { index: number }) {
 
 export default function SearchResultsList({
   tracks, isLoading, query, currentTrackId,
-  onTrackPress, onClearSearch,
+  onTrackPress, onMorePress, onClearSearch,
 }: {
-  tracks: Track[]; isLoading: boolean; query: string; currentTrackId?: string;
-  onTrackPress?: (track: Track) => void; onClearSearch?: () => void;
+  tracks: Track[];
+  isLoading: boolean;
+  query: string;
+  currentTrackId?: string;
+  onTrackPress?: (track: Track) => void;
+  onMorePress?: (track: Track) => void;
+  onClearSearch?: () => void;
 }) {
-  const [selectedTrack, setSelectedTrack] = useState<Track | null>(null);
-
   if (isLoading) return (
     <View style={styles.container}>
       <Text style={styles.resultsLabel}>Searching for "{query}"...</Text>
@@ -58,29 +59,17 @@ export default function SearchResultsList({
       {tracks.length > 0 && (
         <Text style={styles.resultsLabel}>{tracks.length} results for "{query}"</Text>
       )}
-      <FlashList
-        data={tracks}
-        estimatedItemSize={72}
-        keyExtractor={(item) => item.video_id}
-        scrollEnabled={false}
-        renderItem={({ item, index }) => (
-          <TrackListItem
-            track={item}
-            index={index}
-            isPlaying={item.video_id === currentTrackId}
-            onPress={() => onTrackPress?.(item)}
-            onMorePress={() => setSelectedTrack(item)}
-          />
-        )}
-        ItemSeparatorComponent={() => <View style={{ height: 2 }} />}
-      />
-
-      {selectedTrack && (
-        <AddToPlaylistSheet
-          track={selectedTrack}
-          onClose={() => setSelectedTrack(null)}
+      {/* Plain map instead of FlashList to avoid touch event issues */}
+      {tracks.map((item, index) => (
+        <TrackListItem
+          key={item.video_id}
+          track={item}
+          index={index}
+          isPlaying={item.video_id === currentTrackId}
+          onPress={() => onTrackPress?.(item)}
+          onMorePress={() => onMorePress?.(item)}
         />
-      )}
+      ))}
     </View>
   );
 }

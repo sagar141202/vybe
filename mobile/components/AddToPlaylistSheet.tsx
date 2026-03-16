@@ -1,6 +1,6 @@
 import {
   View, Text, StyleSheet, TouchableOpacity,
-  ScrollView, Animated, Dimensions
+  ScrollView, Animated, Dimensions, Modal
 } from 'react-native';
 import { useRef, useEffect } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -19,28 +19,21 @@ export default function AddToPlaylistSheet({ track, onClose }: AddToPlaylistShee
   const playlists = usePlaylistStore(s => s.playlists);
   const addTrackToPlaylist = usePlaylistStore(s => s.addTrackToPlaylist);
   const slideAnim = useRef(new Animated.Value(height)).current;
-  const bgOpacity = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    Animated.parallel([
-      Animated.spring(slideAnim, {
-        toValue: 0, useNativeDriver: true,
-        tension: 70, friction: 12,
-      }),
-      Animated.timing(bgOpacity, {
-        toValue: 1, duration: 300, useNativeDriver: true,
-      }),
-    ]).start();
+    Animated.spring(slideAnim, {
+      toValue: 0, useNativeDriver: true,
+      tension: 70, friction: 12,
+    }).start();
   }, []);
 
   const handleClose = () => {
-    Animated.parallel([
-      Animated.timing(slideAnim, { toValue: height, duration: 300, useNativeDriver: true }),
-      Animated.timing(bgOpacity, { toValue: 0, duration: 300, useNativeDriver: true }),
-    ]).start(() => onClose());
+    Animated.timing(slideAnim, {
+      toValue: height, duration: 300, useNativeDriver: true,
+    }).start(() => onClose());
   };
 
-  const handleAdd = (playlistId: string, playlistName: string) => {
+  const handleAdd = (playlistId: string) => {
     addTrackToPlaylist(playlistId, track);
     handleClose();
   };
@@ -51,99 +44,101 @@ export default function AddToPlaylistSheet({ track, onClose }: AddToPlaylistShee
   };
 
   return (
-    <View style={StyleSheet.absoluteFillObject} pointerEvents="box-none">
-      {/* Backdrop */}
-      <Animated.View style={[styles.backdrop, { opacity: bgOpacity }]}>
-        <TouchableOpacity style={StyleSheet.absoluteFillObject} onPress={handleClose} />
-      </Animated.View>
-
-      {/* Sheet */}
-      <Animated.View style={[styles.sheet, { transform: [{ translateY: slideAnim }] }]}>
-        <LinearGradient
-          colors={['rgba(255,255,255,0.99)', 'rgba(240,244,255,0.99)']}
-          style={StyleSheet.absoluteFillObject}
-        />
-
-        {/* Handle */}
-        <View style={styles.handle} />
-
-        {/* Track info */}
-        <View style={styles.trackInfo}>
-          <Text style={styles.sheetTitle}>Add to Playlist</Text>
-          <Text style={styles.trackName} numberOfLines={1}>"{track.title}"</Text>
-        </View>
-
-        {playlists.length === 0 ? (
-          <View style={styles.emptyWrap}>
-            <Text style={styles.emptyText}>No playlists yet</Text>
-            <Text style={styles.emptySub}>Create a playlist from your Library first</Text>
+    <Modal
+      visible={true}
+      transparent
+      animationType="none"
+      onRequestClose={handleClose}
+    >
+      <View style={styles.overlay}>
+        <TouchableOpacity style={StyleSheet.absoluteFillObject} onPress={handleClose} activeOpacity={1} />
+        <Animated.View style={[styles.sheet, { transform: [{ translateY: slideAnim }] }]}>
+          <LinearGradient
+            colors={['rgba(255,255,255,0.99)', 'rgba(240,244,255,0.99)']}
+            style={StyleSheet.absoluteFillObject}
+          />
+          <View style={styles.handle} />
+          <View style={styles.trackInfo}>
+            <Text style={styles.sheetTitle}>Add to Playlist</Text>
+            <Text style={styles.trackName} numberOfLines={1}>"{track.title}"</Text>
           </View>
-        ) : (
-          <ScrollView
-            style={styles.list}
-            contentContainerStyle={styles.listContent}
-            showsVerticalScrollIndicator={false}
-          >
-            {playlists.map((playlist) => {
-              const added = isInPlaylist(playlist.id);
-              return (
-                <TouchableOpacity
-                  key={playlist.id}
-                  style={[styles.playlistRow, added && styles.playlistRowAdded]}
-                  onPress={() => !added && handleAdd(playlist.id, playlist.name)}
-                  activeOpacity={added ? 1 : 0.7}
-                >
-                  <LinearGradient
-                    colors={added ? ['rgba(167,139,250,0.1)', 'rgba(125,211,252,0.05)'] : ['rgba(255,255,255,0.8)', 'rgba(255,255,255,0.4)']}
-                    style={StyleSheet.absoluteFillObject}
-                  />
-                  <LinearGradient
-                    colors={playlist.coverColors}
-                    style={styles.playlistIcon}
-                    start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}
-                  >
-                    <Text style={styles.playlistEmoji}>{playlist.coverEmoji}</Text>
-                  </LinearGradient>
-                  <View style={styles.playlistInfo}>
-                    <Text style={[styles.playlistName, added && styles.playlistNameAdded]}>
-                      {playlist.name}
-                    </Text>
-                    <Text style={styles.playlistCount}>
-                      {playlist.tracks.length} tracks
-                    </Text>
-                  </View>
-                  {added ? (
-                    <View style={styles.addedBadge}>
-                      <LinearGradient colors={['#C4B5FD', '#A78BFA']} style={StyleSheet.absoluteFillObject} />
-                      <Ionicons name="checkmark" size={16} color="#FFFFFF" />
-                    </View>
-                  ) : (
-                    <View style={styles.addBtn}>
-                      <Ionicons name="add" size={22} color="#A78BFA" />
-                    </View>
-                  )}
-                </TouchableOpacity>
-              );
-            })}
-          </ScrollView>
-        )}
 
-        <TouchableOpacity style={styles.cancelBtn} onPress={handleClose}>
-          <LinearGradient colors={['rgba(167,139,250,0.1)', 'rgba(125,211,252,0.05)']} style={StyleSheet.absoluteFillObject} />
-          <Text style={styles.cancelText}>Cancel</Text>
-        </TouchableOpacity>
-      </Animated.View>
-    </View>
+          {playlists.length === 0 ? (
+            <View style={styles.emptyWrap}>
+              <Text style={styles.emptyText}>No playlists yet</Text>
+              <Text style={styles.emptySub}>Create a playlist from your Library first</Text>
+            </View>
+          ) : (
+            <ScrollView
+              style={styles.list}
+              contentContainerStyle={styles.listContent}
+              showsVerticalScrollIndicator={false}
+            >
+              {playlists.map((playlist) => {
+                const added = isInPlaylist(playlist.id);
+                return (
+                  <TouchableOpacity
+                    key={playlist.id}
+                    style={[styles.playlistRow, added && styles.playlistRowAdded]}
+                    onPress={() => !added && handleAdd(playlist.id)}
+                    activeOpacity={added ? 1 : 0.7}
+                  >
+                    <LinearGradient
+                      colors={added
+                        ? ['rgba(167,139,250,0.1)', 'rgba(125,211,252,0.05)']
+                        : ['rgba(255,255,255,0.8)', 'rgba(255,255,255,0.4)']
+                      }
+                      style={StyleSheet.absoluteFillObject}
+                    />
+                    <LinearGradient
+                      colors={playlist.coverColors}
+                      style={styles.playlistIcon}
+                      start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}
+                    >
+                      <Text style={styles.playlistEmoji}>{playlist.coverEmoji}</Text>
+                    </LinearGradient>
+                    <View style={styles.playlistInfo}>
+                      <Text style={[styles.playlistName, added && styles.playlistNameAdded]}>
+                        {playlist.name}
+                      </Text>
+                      <Text style={styles.playlistCount}>{playlist.tracks.length} tracks</Text>
+                    </View>
+                    {added ? (
+                      <View style={styles.addedBadge}>
+                        <LinearGradient colors={['#C4B5FD', '#A78BFA']} style={StyleSheet.absoluteFillObject} />
+                        <Ionicons name="checkmark" size={16} color="#FFFFFF" />
+                      </View>
+                    ) : (
+                      <View style={styles.addBtn}>
+                        <Ionicons name="add" size={22} color="#A78BFA" />
+                      </View>
+                    )}
+                  </TouchableOpacity>
+                );
+              })}
+            </ScrollView>
+          )}
+
+          <TouchableOpacity style={styles.cancelBtn} onPress={handleClose}>
+            <LinearGradient
+              colors={['rgba(167,139,250,0.1)', 'rgba(125,211,252,0.05)']}
+              style={StyleSheet.absoluteFillObject}
+            />
+            <Text style={styles.cancelText}>Cancel</Text>
+          </TouchableOpacity>
+        </Animated.View>
+      </View>
+    </Modal>
   );
 }
 
 const styles = StyleSheet.create({
-  backdrop: {
-    ...StyleSheet.absoluteFillObject,
+  overlay: {
+    flex: 1,
     backgroundColor: 'rgba(30,27,75,0.5)',
+    justifyContent: 'flex-end',
   },
   sheet: {
-    position: 'absolute', bottom: 0, left: 0, right: 0,
     borderTopLeftRadius: 32, borderTopRightRadius: 32,
     overflow: 'hidden', paddingBottom: 40,
     maxHeight: height * 0.75,

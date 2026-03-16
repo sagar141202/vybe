@@ -1,11 +1,18 @@
-import { View, Text, TouchableOpacity, Image, StyleSheet, Animated, PanResponder } from 'react-native';
+import {
+  View, Text, TouchableOpacity, Image,
+  StyleSheet, Animated, PanResponder
+} from 'react-native';
 import { useRef, useEffect } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { usePlayerStore } from '../stores/playerStore';
 import { usePlayTrack } from '../hooks/usePlayTrack';
 
-const THUMB_COLORS = [['#C4B5FD','#A78BFA'],['#7DD3FC','#93C5FD'],['#86EFAC','#6EE7B7'],['#FDE68A','#FCA5A5'],['#FBCFE8','#F9A8D4']];
+const THUMB_COLORS = [
+  ['#C4B5FD','#A78BFA'],['#7DD3FC','#93C5FD'],
+  ['#86EFAC','#6EE7B7'],['#FDE68A','#FCA5A5'],
+  ['#FBCFE8','#F9A8D4'],
+];
 
 export default function MiniPlayer({ onPress }: { onPress?: () => void }) {
   const currentTrack = usePlayerStore(s => s.currentTrack);
@@ -18,26 +25,45 @@ export default function MiniPlayer({ onPress }: { onPress?: () => void }) {
   const playBtnScale = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
-    Animated.spring(slideAnim, { toValue: currentTrack ? 0 : 100, useNativeDriver: true, tension: 80, friction: 10 }).start();
+    Animated.spring(slideAnim, {
+      toValue: currentTrack ? 0 : 100,
+      useNativeDriver: true, tension: 80, friction: 10,
+    }).start();
   }, [!!currentTrack]);
 
   const panResponder = useRef(PanResponder.create({
-    onMoveShouldSetPanResponder: (_, { dx, dy }) => Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10,
+    onMoveShouldSetPanResponder: (_, { dx, dy }) =>
+      Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10,
     onPanResponderRelease: (_, { dx }) => { if (dx < -50) nextTrack(); },
   })).current;
 
   if (!currentTrack) return null;
+
   const colorIndex = currentTrack.video_id.charCodeAt(0) % THUMB_COLORS.length;
   const progress = duration > 0 ? `${Math.round((position / duration) * 100)}%` : '0%';
 
   return (
-    <Animated.View style={[styles.wrapper, { transform: [{ translateY: slideAnim }] }]} {...panResponder.panHandlers}>
-      <LinearGradient colors={['rgba(255,255,255,0.97)', 'rgba(240,244,255,0.97)']} style={StyleSheet.absoluteFillObject} />
+    <Animated.View
+      style={[styles.wrapper, { transform: [{ translateY: slideAnim }] }]}
+      {...panResponder.panHandlers}
+    >
+      <LinearGradient
+        colors={['rgba(255,255,255,0.97)', 'rgba(240,244,255,0.97)']}
+        style={StyleSheet.absoluteFillObject}
+      />
       <View style={styles.border} />
       <View style={styles.progressBg}>
-        <LinearGradient colors={['#C4B5FD','#7DD3FC']} style={[styles.progressFill, { width: progress }]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} />
+        <LinearGradient
+          colors={['#C4B5FD','#7DD3FC']}
+          style={[styles.progressFill, { width: progress }]}
+          start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
+        />
       </View>
-      <TouchableOpacity style={styles.content} onPress={() => router.push('/player')} activeOpacity={0.9}>
+      <TouchableOpacity
+        style={styles.content}
+        onPress={() => router.push('/player')}
+        activeOpacity={0.9}
+      >
         <View style={styles.thumbWrap}>
           {currentTrack.thumbnail_url
             ? <Image source={{ uri: currentTrack.thumbnail_url }} style={styles.thumb} resizeMode="cover" />
@@ -50,13 +76,21 @@ export default function MiniPlayer({ onPress }: { onPress?: () => void }) {
         </View>
         <View style={styles.controls}>
           <Animated.View style={{ transform: [{ scale: playBtnScale }] }}>
-            <TouchableOpacity style={styles.playBtn} onPress={(e) => { e.stopPropagation(); togglePlayPause(); }} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
+            <TouchableOpacity
+              style={styles.playBtn}
+              onPress={(e) => { e.stopPropagation(); togglePlayPause(); }}
+              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            >
               <LinearGradient colors={['#C4B5FD','#A78BFA']} style={styles.playGrad}>
                 <Text style={styles.playIcon}>{isPlaying ? '⏸' : '▶'}</Text>
               </LinearGradient>
             </TouchableOpacity>
           </Animated.View>
-          <TouchableOpacity style={styles.nextBtn} onPress={(e) => { e.stopPropagation(); nextTrack(); }} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
+          <TouchableOpacity
+            style={styles.nextBtn}
+            onPress={(e) => { e.stopPropagation(); nextTrack(); }}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
             <Text style={styles.nextIcon}>⏭</Text>
           </TouchableOpacity>
         </View>
@@ -66,7 +100,14 @@ export default function MiniPlayer({ onPress }: { onPress?: () => void }) {
 }
 
 const styles = StyleSheet.create({
-  wrapper: { position: 'absolute', bottom: 72, left: 12, right: 12, borderRadius: 22, overflow: 'hidden', borderWidth: 1.5, borderColor: 'rgba(167,139,250,0.25)', shadowColor: '#A78BFA', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.2, shadowRadius: 12, elevation: 8, zIndex: 100 },
+  wrapper: {
+    position: 'absolute',
+    bottom: 80, left: 12, right: 12,
+    borderRadius: 22, overflow: 'hidden',
+    borderWidth: 1.5, borderColor: 'rgba(167,139,250,0.25)',
+    shadowColor: '#A78BFA', shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2, shadowRadius: 12, elevation: 8, zIndex: 100,
+  },
   border: { position: 'absolute', inset: 0, borderRadius: 22, borderWidth: 1, borderColor: 'rgba(255,255,255,0.8)' },
   progressBg: { height: 3, backgroundColor: 'rgba(167,139,250,0.15)' },
   progressFill: { height: 3, borderRadius: 2 },

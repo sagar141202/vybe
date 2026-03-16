@@ -1085,3 +1085,105 @@ DETAIL:  Failing row contains (2, null, Wqu4MRQOgyo, 2026-03-16 08:13:06.275007+
 2026-03-16 13:53:17 | INFO     | routers.stream:36 - Cache HIT for stream: uT_HXrrmHX8
 2026-03-16 13:53:17 | INFO     | main:49 - GET /stream/uT_HXrrmHX8/proxy → 200 (28.3ms)
 2026-03-16 13:53:48 | INFO     | main:49 - POST /stream/uT_HXrrmHX8/played → 200 (12.6ms)
+2026-03-16 13:57:03 | INFO     | routers.stream:36 - Cache HIT for stream: Wqu4MRQOgyo
+2026-03-16 13:57:03 | INFO     | main:49 - GET /stream/Wqu4MRQOgyo → 200 (12.4ms)
+2026-03-16 13:57:03 | INFO     | routers.stream:36 - Cache HIT for stream: Wqu4MRQOgyo
+2026-03-16 13:57:03 | INFO     | main:49 - GET /stream/Wqu4MRQOgyo/proxy → 200 (12.6ms)
+2026-03-16 13:57:21 | INFO     | routers.stream:36 - Cache HIT for stream: ge4M2dVBgTw
+2026-03-16 13:57:21 | INFO     | main:49 - GET /stream/ge4M2dVBgTw → 200 (11.9ms)
+2026-03-16 13:57:21 | INFO     | routers.stream:36 - Cache HIT for stream: ge4M2dVBgTw
+2026-03-16 13:57:21 | INFO     | main:49 - GET /stream/ge4M2dVBgTw/proxy → 200 (15.2ms)
+2026-03-16 13:57:28 | INFO     | main:49 - POST /stream/ge4M2dVBgTw/played → 200 (20.8ms)
+2026-03-16 13:57:31 | INFO     | routers.stream:36 - Cache HIT for stream: ge4M2dVBgTw
+2026-03-16 13:57:31 | INFO     | main:49 - GET /stream/ge4M2dVBgTw/proxy → 200 (17.2ms)
+2026-03-16 13:57:34 | INFO     | routers.stream:36 - Cache HIT for stream: ge4M2dVBgTw
+2026-03-16 13:57:34 | INFO     | main:49 - GET /stream/ge4M2dVBgTw/proxy → 200 (9.9ms)
+2026-03-16 13:57:50 | INFO     | main:49 - GET /health → 200 (2.3ms)
+2026-03-16 13:57:57 | INFO     | routers.stream:39 - Cache MISS for stream: A46Y2CLH4Bk — fetching
+2026-03-16 13:57:57 | INFO     | services.stream_service:34 - Extracting stream URL for video_id: A46Y2CLH4Bk
+2026-03-16 13:57:59 | INFO     | services.stream_service:59 - Got stream URL for A46Y2CLH4Bk | format: 251 - audio only (medium)
+2026-03-16 13:57:59 | INFO     | main:49 - GET /stream/A46Y2CLH4Bk → 200 (2327.4ms)
+2026-03-16 13:57:59 | INFO     | routers.stream:36 - Cache HIT for stream: A46Y2CLH4Bk
+2026-03-16 13:57:59 | INFO     | main:49 - GET /stream/A46Y2CLH4Bk/proxy → 200 (12.1ms)
+2026-03-16 13:58:02 | INFO     | routers.lyrics:98 - Redis HIT for lyrics: A46Y2CLH4Bk
+2026-03-16 13:58:02 | INFO     | main:49 - GET /lyrics/A46Y2CLH4Bk → 200 (5.7ms)
+2026-03-16 13:58:11 | WARNING  | routers.likes:32 - Like error: (sqlalchemy.dialects.postgresql.asyncpg.IntegrityError) <class 'asyncpg.exceptions.NotNullViolationError'>: null value in column "user_id" of relation "liked_tracks" violates not-null constraint
+DETAIL:  Failing row contains (3, null, A46Y2CLH4Bk, 2026-03-16 08:28:11.815473+00).
+[SQL: INSERT INTO liked_tracks (user_id, video_id) VALUES ($1::UUID, $2::VARCHAR) RETURNING liked_tracks.id, liked_tracks.liked_at]
+[parameters: (None, 'A46Y2CLH4Bk')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2026-03-16 13:58:11 | INFO     | main:49 - POST /likes/A46Y2CLH4Bk → 200 (17.2ms)
+2026-03-16 13:58:32 | INFO     | main:49 - POST /stream/A46Y2CLH4Bk/played → 200 (20.3ms)
+2026-03-16 14:01:15 | INFO     | routers.stream:39 - Cache MISS for stream: L2ZnALmOyvc — fetching
+2026-03-16 14:01:15 | INFO     | services.stream_service:34 - Extracting stream URL for video_id: L2ZnALmOyvc
+2026-03-16 14:01:19 | INFO     | services.stream_service:59 - Got stream URL for L2ZnALmOyvc | format: 251 - audio only (medium)
+2026-03-16 14:01:19 | INFO     | main:49 - GET /stream/L2ZnALmOyvc → 200 (4334.2ms)
+2026-03-16 14:01:20 | INFO     | routers.stream:36 - Cache HIT for stream: L2ZnALmOyvc
+2026-03-16 14:01:20 | INFO     | main:49 - GET /stream/L2ZnALmOyvc/proxy → 200 (12.5ms)
+2026-03-16 14:01:52 | INFO     | main:49 - POST /stream/L2ZnALmOyvc/played → 200 (26.9ms)
+2026-03-16 14:02:03 | INFO     | main:49 - GET /health → 200 (0.9ms)
+2026-03-16 14:02:12 | INFO     | routers.stream:39 - Cache MISS for stream: rHdS6g5XabA — fetching
+2026-03-16 14:02:12 | INFO     | services.stream_service:34 - Extracting stream URL for video_id: rHdS6g5XabA
+2026-03-16 14:02:14 | ERROR    | services.stream_service:45 - yt-dlp failed for rHdS6g5XabA: ERROR: [youtube] rHdS6g5XabA: Video unavailable. This video is not available
+2026-03-16 14:02:14 | INFO     | main:49 - GET /stream/rHdS6g5XabA → 404 (1379.5ms)
+2026-03-16 14:02:17 | INFO     | routers.stream:39 - Cache MISS for stream: HDMRTsPgSDU — fetching
+2026-03-16 14:02:17 | INFO     | services.stream_service:34 - Extracting stream URL for video_id: HDMRTsPgSDU
+2026-03-16 14:02:19 | INFO     | routers.stream:39 - Cache MISS for stream: UgM1RTch8Rw — fetching
+2026-03-16 14:02:19 | INFO     | services.stream_service:34 - Extracting stream URL for video_id: UgM1RTch8Rw
+2026-03-16 14:02:19 | INFO     | services.stream_service:59 - Got stream URL for HDMRTsPgSDU | format: 251 - audio only (medium)
+2026-03-16 14:02:19 | INFO     | main:49 - GET /stream/HDMRTsPgSDU → 200 (2063.2ms)
+2026-03-16 14:02:19 | INFO     | routers.stream:36 - Cache HIT for stream: HDMRTsPgSDU
+2026-03-16 14:02:19 | INFO     | main:49 - GET /stream/HDMRTsPgSDU/proxy → 200 (12.8ms)
+2026-03-16 14:02:21 | INFO     | services.stream_service:59 - Got stream URL for UgM1RTch8Rw | format: 251 - audio only (medium)
+2026-03-16 14:02:21 | INFO     | main:49 - GET /stream/UgM1RTch8Rw → 200 (1753.6ms)
+2026-03-16 14:02:21 | INFO     | routers.stream:36 - Cache HIT for stream: UgM1RTch8Rw
+2026-03-16 14:02:21 | INFO     | main:49 - GET /stream/UgM1RTch8Rw/proxy → 200 (10.2ms)
+2026-03-16 14:02:23 | INFO     | routers.lyrics:113 - Fetching lyrics: Marshmello — FRIENDS
+2026-03-16 14:02:23 | INFO     | services.lyrics_service:47 - lrclib lookup: Marshmello — FRIENDS
+2026-03-16 14:02:24 | INFO     | services.lyrics_service:74 - lrclib: synced lyrics found (66 lines)
+2026-03-16 14:02:24 | INFO     | routers.lyrics:82 - Saved lyrics to Postgres: UgM1RTch8Rw
+2026-03-16 14:02:24 | INFO     | main:49 - GET /lyrics/UgM1RTch8Rw → 200 (830.3ms)
+2026-03-16 14:02:52 | INFO     | main:49 - POST /stream/UgM1RTch8Rw/played → 200 (11.5ms)
+2026-03-16 14:03:37 | WARNING  | routers.likes:32 - Like error: (sqlalchemy.dialects.postgresql.asyncpg.IntegrityError) <class 'asyncpg.exceptions.NotNullViolationError'>: null value in column "user_id" of relation "liked_tracks" violates not-null constraint
+DETAIL:  Failing row contains (4, null, UgM1RTch8Rw, 2026-03-16 08:33:37.432645+00).
+[SQL: INSERT INTO liked_tracks (user_id, video_id) VALUES ($1::UUID, $2::VARCHAR) RETURNING liked_tracks.id, liked_tracks.liked_at]
+[parameters: (None, 'UgM1RTch8Rw')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2026-03-16 14:03:37 | INFO     | main:49 - POST /likes/UgM1RTch8Rw → 200 (20.2ms)
+2026-03-16 14:04:09 | INFO     | routers.search:43 - Cache MISS for search: 'munj' — fetching from YouTube Music
+2026-03-16 14:04:09 | INFO     | services.search_service:43 - Searching YouTube Music: 'munj'
+2026-03-16 14:04:11 | INFO     | services.search_service:72 - Search returned 20 tracks for 'munj'
+2026-03-16 14:04:11 | INFO     | routers.search:60 - Cached 20 results for 'munj' (TTL: 30min)
+2026-03-16 14:04:11 | INFO     | main:49 - GET /search → 200 (1693.9ms)
+2026-03-16 14:04:11 | INFO     | routers.search:43 - Cache MISS for search: 'munjaane ' — fetching from YouTube Music
+2026-03-16 14:04:11 | INFO     | services.search_service:43 - Searching YouTube Music: 'munjaane'
+2026-03-16 14:04:12 | INFO     | services.search_service:72 - Search returned 20 tracks for 'munjaane'
+2026-03-16 14:04:12 | INFO     | routers.search:60 - Cached 20 results for 'munjaane ' (TTL: 30min)
+2026-03-16 14:04:12 | INFO     | main:49 - GET /search → 200 (670.7ms)
+2026-03-16 14:04:14 | INFO     | routers.stream:39 - Cache MISS for stream: oDyMLiIskPg — fetching
+2026-03-16 14:04:14 | INFO     | services.stream_service:34 - Extracting stream URL for video_id: oDyMLiIskPg
+2026-03-16 14:04:16 | INFO     | services.stream_service:59 - Got stream URL for oDyMLiIskPg | format: 251 - audio only (medium)
+2026-03-16 14:04:16 | INFO     | main:49 - GET /stream/oDyMLiIskPg → 200 (2092.9ms)
+2026-03-16 14:04:16 | INFO     | routers.stream:36 - Cache HIT for stream: oDyMLiIskPg
+2026-03-16 14:04:16 | INFO     | main:49 - GET /stream/oDyMLiIskPg/proxy → 200 (10.1ms)
+2026-03-16 14:04:19 | INFO     | routers.lyrics:113 - Fetching lyrics: Raghu Dixith — Munjane Manjalli
+2026-03-16 14:04:19 | INFO     | services.lyrics_service:47 - lrclib lookup: Raghu Dixith — Munjane Manjalli
+2026-03-16 14:04:20 | INFO     | services.lyrics_service:74 - lrclib: synced lyrics found (30 lines)
+2026-03-16 14:04:20 | INFO     | routers.lyrics:82 - Saved lyrics to Postgres: oDyMLiIskPg
+2026-03-16 14:04:20 | INFO     | main:49 - GET /lyrics/oDyMLiIskPg → 200 (724.6ms)
+2026-03-16 14:04:25 | WARNING  | routers.likes:32 - Like error: (sqlalchemy.dialects.postgresql.asyncpg.IntegrityError) <class 'asyncpg.exceptions.NotNullViolationError'>: null value in column "user_id" of relation "liked_tracks" violates not-null constraint
+DETAIL:  Failing row contains (5, null, oDyMLiIskPg, 2026-03-16 08:34:25.859818+00).
+[SQL: INSERT INTO liked_tracks (user_id, video_id) VALUES ($1::UUID, $2::VARCHAR) RETURNING liked_tracks.id, liked_tracks.liked_at]
+[parameters: (None, 'oDyMLiIskPg')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2026-03-16 14:04:25 | INFO     | main:49 - POST /likes/oDyMLiIskPg → 200 (7.9ms)
+2026-03-16 14:04:47 | INFO     | main:49 - POST /stream/oDyMLiIskPg/played → 200 (15.9ms)
+2026-03-16 14:08:22 | INFO     | routers.stream:36 - Cache HIT for stream: oDyMLiIskPg
+2026-03-16 14:08:22 | INFO     | main:49 - GET /stream/oDyMLiIskPg → 200 (6.0ms)
+2026-03-16 14:08:22 | INFO     | routers.stream:36 - Cache HIT for stream: oDyMLiIskPg
+2026-03-16 14:08:22 | INFO     | main:49 - GET /stream/oDyMLiIskPg/proxy → 200 (21.8ms)
+2026-03-16 14:08:24 | INFO     | routers.stream:36 - Cache HIT for stream: oDyMLiIskPg
+2026-03-16 14:08:24 | INFO     | main:49 - GET /stream/oDyMLiIskPg → 200 (3.8ms)
+2026-03-16 14:08:24 | INFO     | routers.stream:36 - Cache HIT for stream: oDyMLiIskPg
+2026-03-16 14:08:24 | INFO     | main:49 - GET /stream/oDyMLiIskPg/proxy → 200 (9.5ms)
+2026-03-16 14:08:55 | INFO     | main:49 - POST /stream/oDyMLiIskPg/played → 200 (22.8ms)

@@ -13,6 +13,7 @@ import { useLike } from '../hooks/useLike';
 import ProgressBar from '../components/ProgressBar';
 import LyricsView from '../components/LyricsView';
 import ProgressiveImage from '../components/ProgressiveImage';
+import AddToPlaylistSheet from '../components/AddToPlaylistSheet';
 
 const { width, height } = Dimensions.get('window');
 
@@ -74,6 +75,7 @@ export default function FullPlayer() {
   const lyricsSlide = useRef(new Animated.Value(height)).current;
   const { liked, toggleLike } = useLike(currentTrack);
   const [showLyrics, setShowLyrics] = useState(false);
+  const [showAddToPlaylist, setShowAddToPlaylist] = useState(false);
   const prevTrackId = useRef<string | null>(null);
 
   useEffect(() => {
@@ -127,7 +129,7 @@ export default function FullPlayer() {
           <Text style={[styles.headerLabel, { color: palette.accent }]}>NOW PLAYING</Text>
           {currentTrack.album && <Text style={styles.headerAlbum} numberOfLines={1}>{currentTrack.album}</Text>}
         </View>
-        <TouchableOpacity style={styles.moreBtn}>
+        <TouchableOpacity style={styles.moreBtn} onPress={() => setShowAddToPlaylist(true)}>
           <Text style={styles.moreIcon}>⋮</Text>
         </TouchableOpacity>
       </View>
@@ -229,6 +231,12 @@ export default function FullPlayer() {
           </View>
           <LyricsView videoId={currentTrack.video_id} artist={currentTrack.artist} title={currentTrack.title} accentColor={palette.accent} />
         </Animated.View>
+      )}
+      {showAddToPlaylist && currentTrack && (
+        <AddToPlaylistSheet
+          track={currentTrack}
+          onClose={() => setShowAddToPlaylist(false)}
+        />
       )}
     </Animated.View>
   );

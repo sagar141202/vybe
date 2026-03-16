@@ -5,37 +5,64 @@ import { useState } from 'react';
 import SearchBar from '../../components/SearchBar';
 import SearchResultsList from '../../components/SearchResultsList';
 import BrowseCategories from '../../components/BrowseCategories';
+import AddToPlaylistSheet from '../../components/AddToPlaylistSheet';
 import { useSearch } from '../../hooks/useSearch';
 import { usePlayTrack } from '../../hooks/usePlayTrack';
 import type { Track } from '../../components/TrackListItem';
 
 export default function SearchScreen() {
   const [query, setQuery] = useState('');
+  const [selectedTrack, setSelectedTrack] = useState<Track | null>(null);
   const { data: tracks = [], isLoading } = useSearch(query);
   const { playTrack } = usePlayTrack();
+
+  const handleMorePress = (track: Track) => {
+    setSelectedTrack(track);
+  };
 
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
       <LinearGradient colors={['#FAFBFF', '#F0F4FF', '#F8FAFF']} style={StyleSheet.absoluteFillObject} />
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll} keyboardShouldPersistTaps="handled">
+
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scroll}
+        keyboardShouldPersistTaps="always"
+      >
         <View style={styles.header}>
           <Text style={styles.title}>Search</Text>
           <Text style={styles.sub}>Find any song, artist or album</Text>
         </View>
+
         <SearchBar value={query} onChangeText={setQuery} placeholder="Songs, artists, albums..." />
+
         {query.length === 0 && <BrowseCategories onCategoryPress={setQuery} />}
+
         {query.length === 1 && (
-          <View style={styles.hintBox}><Text style={styles.hintText}>Keep typing...</Text></View>
+          <View style={styles.hintBox}>
+            <Text style={styles.hintText}>Keep typing...</Text>
+          </View>
         )}
+
         {query.length >= 2 && (
           <SearchResultsList
-            tracks={tracks} isLoading={isLoading} query={query}
+            tracks={tracks}
+            isLoading={isLoading}
+            query={query}
             onTrackPress={(track: Track) => playTrack(track, tracks)}
+            onMorePress={handleMorePress}
             onClearSearch={() => setQuery('')}
           />
         )}
       </ScrollView>
+
+      {selectedTrack && (
+        <AddToPlaylistSheet
+          track={selectedTrack}
+          onClose={() => setSelectedTrack(null)}
+        />
+      )}
     </View>
   );
 }

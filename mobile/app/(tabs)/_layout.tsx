@@ -43,7 +43,8 @@ export default function TabLayout() {
         <Tabs.Screen name="library" options={{ title: 'Library', tabBarIcon: ({ focused }) => <TabIcon name={focused ? 'library' : 'library-outline'} focused={focused} /> }} />
         <Tabs.Screen name="profile" options={{ title: 'Profile', tabBarIcon: ({ focused }) => <TabIcon name={focused ? 'person' : 'person-outline'} focused={focused} /> }} />
       </Tabs>
-      <MiniPlayer onPress={() => console.log('Open full player')} />
+      {/* MiniPlayer above tab bar — bottom: 80 to clear tab bar */}
+      <MiniPlayer onPress={() => {}} />
     </View>
   );
 }
