@@ -1,6 +1,9 @@
 import { View, Text, TouchableOpacity, Image, StyleSheet, Animated } from 'react-native';
 import { useRef } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
+import { useEffect, useState } from 'react';
+import { isDownloaded } from '../hooks/useDownload';
 
 export interface Track {
   video_id: string;
@@ -34,6 +37,11 @@ export default function TrackListItem({
   onMorePress?: () => void;
 }) {
   const scaleAnim = useRef(new Animated.Value(1)).current;
+  const [downloaded, setDownloaded] = useState(false);
+
+  useEffect(() => {
+    isDownloaded(track.video_id).then(setDownloaded);
+  }, [track.video_id]);
 
   return (
     <Animated.View style={[styles.wrapper, { transform: [{ scale: scaleAnim }] }]}>
@@ -85,7 +93,12 @@ export default function TrackListItem({
         </View>
 
         {/* Duration */}
-        <Text style={styles.duration}>{formatDuration(track.duration_ms)}</Text>
+        <View style={styles.rightSection}>
+          {downloaded && (
+            <Ionicons name="arrow-down-circle" size={14} color="#86EFAC" style={styles.downloadedIcon} />
+          )}
+          <Text style={styles.duration}>{formatDuration(track.duration_ms)}</Text>
+        </View>
 
         {/* 3-dot button — INSIDE TouchableOpacity but stops propagation */}
         <TouchableOpacity
@@ -140,6 +153,8 @@ const styles = StyleSheet.create({
   title: { fontSize: 15, fontWeight: '700', color: '#1E1B4B' },
   titleActive: { color: '#7C3AED' },
   artist: { fontSize: 12, color: '#6B7280' },
+  rightSection: { alignItems: 'flex-end', gap: 2 },
+  downloadedIcon: { marginBottom: 1 },
   duration: {
     fontSize: 12, color: '#9CA3AF',
     fontWeight: '500', minWidth: 36, textAlign: 'right',
