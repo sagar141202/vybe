@@ -6,35 +6,24 @@ import { useUIStore } from '../stores/uiStore';
 import { getStreamUrl, logPlay } from '../lib/api';
 import { isDownloaded, getLocalPath } from './useDownload';
 import {
-  crossfadeTo,
-  setCurrentSound,
-  getCurrentSound,
-  startCrossfadeMonitor,
-  stopCrossfadeMonitor,
+  getCurrentSound, setCurrentSound,
+  fadeOutCurrent, fadeInNew, stopAll,
 } from '../services/crossfadeService';
 
-async function _getPlayUrl(track: { video_id: string }): Promise<string | null> {
-  // Check local download first
-  const localAvailable = await isDownloaded(track.video_id);
-  if (localAvailable) {
-    console.log('Playing from local file:', track.video_id);
-    return getLocalPath(track.video_id);
-  }
-  // Stream from backend
+async function _getPlayUrl(videoId: string): Promise<string | null> {
+  const local = await isDownloaded(videoId);
+  if (local) return getLocalPath(videoId);
   try {
-    const streamData = await getStreamUrl(track.video_id);
-    if (!streamData?.stream_url && !streamData?.proxy_url) return null;
-    return streamData.proxy_url || streamData.stream_url;
-  } catch {
-    return null;
-  }
+    const s = await getStreamUrl(videoId);
+    return s?.proxy_url || s?.stream_url || null;
+  } catch { return null; }
 }
 
-async function _playTrack(track: any, useCrossfade = false) {
+async function _playTrack(track: any) {
   try {
-    const playUrl = await _getPlayUrl(track);
+    const playUrl = await _getPlayUrl(track.video_id);
     if (!playUrl) {
-      console.warn('No play URL for:', track.title);
+      console.warn('No URL for:', track.title);
       usePlayerStore.getState().setIsPlaying(false);
       return;
     }
@@ -45,12 +34,21 @@ async function _playTrack(track: any, useCrossfade = false) {
     await Audio.setAudioModeAsync({
       staysActiveInBackground: true,
       playsInSilentModeIOS: true,
-      shouldDuckAndroid: true,
+      shouldDuckAndroid: false,
       playThroughEarpieceAndroid: false,
     });
 
-    const onStatusUpdate = (status: any) => {
-      if (status.isLoaded) {
+    const hasCurrent = !!getCurrentSound();
+
+    // Start fading out current sound in background
+    const fadeOutPromise = hasCurrent ? fadeOutCurrent() : Promise.resolve();
+
+    // Load next sound (not playing yet)
+    const { sound: newSound } = await Audio.Sound.createAsync(
+      { uri: playUrl },
+      { shouldPlay: false, volume: 0, progressUpdateIntervalMillis: 500 },
+      (status: any) => {
+        if (!status.isLoaded) return;
         usePlayerStore.getState().setPosition(status.positionMillis ?? 0);
         usePlayerStore.getState().setDuration(status.durationMillis ?? 0);
 
@@ -62,55 +60,25 @@ async function _playTrack(track: any, useCrossfade = false) {
             thumbnail_url: track.thumbnail_url,
           });
         }
-
         if (status.didJustFinish) {
-          stopCrossfadeMonitor();
           usePlayerStore.getState().nextTrack();
         }
-
-        // Start crossfade monitor when duration is known
-        if (status.durationMillis && status.durationMillis > 6000) {
-          const sound = getCurrentSound();
-          if (sound) {
-            startCrossfadeMonitor(
-              sound,
-              status.durationMillis,
-              () => usePlayerStore.getState().nextTrack(),
-            );
-          }
-        }
       }
-    };
+    );
 
-    let sound: Audio.Sound | null = null;
+    setCurrentSound(newSound);
 
-    if (useCrossfade && getCurrentSound()) {
-      // Crossfade from current to next
-      sound = await crossfadeTo(playUrl, onStatusUpdate, () => {});
-    }
+    // Fade in new sound while old fades out
+    await Promise.all([
+      fadeOutPromise,
+      fadeInNew(newSound),
+    ]);
 
-    if (!sound) {
-      // Normal play (first track or crossfade failed)
-      const existing = getCurrentSound();
-      if (existing) {
-        stopCrossfadeMonitor();
-        try { await existing.stopAsync(); await existing.unloadAsync(); } catch (_) {}
-      }
-
-      const { sound: newSound } = await Audio.Sound.createAsync(
-        { uri: playUrl },
-        { shouldPlay: true, progressUpdateIntervalMillis: 1000 },
-        onStatusUpdate,
-      );
-      sound = newSound;
-      setCurrentSound(newSound);
-    }
-
-    (global as any)._soundInstance = sound;
     usePlayerStore.getState().setIsPlaying(true);
+    console.log('Playing:', track.title);
 
   } catch (e: any) {
-    console.error('_playTrack error:', e?.message || e);
+    console.error('_playTrack error:', e?.message);
     usePlayerStore.getState().setIsPlaying(false);
   }
 }
@@ -130,9 +98,7 @@ export function usePlayTrack() {
       setCurrentTrack(track);
       setIsPlaying(false);
       if (queue) setQueue(queue, queue.findIndex((t: any) => t.video_id === track.video_id));
-      // Use crossfade if there's already a track playing
-      const useCrossfade = !!getCurrentSound();
-      await _playTrack(track, useCrossfade);
+      await _playTrack(track);
       addToRecent(track);
     } catch (e: any) {
       console.error('playTrack error:', e?.message);
@@ -144,12 +110,10 @@ export function usePlayTrack() {
 
   const togglePlayPause = useCallback(async () => {
     const { isPlaying, setIsPlaying } = usePlayerStore.getState();
-    const sound = getCurrentSound() || (global as any)._soundInstance;
+    const sound = getCurrentSound();
     if (sound) {
       if (isPlaying) { await sound.pauseAsync(); setIsPlaying(false); }
       else { await sound.playAsync(); setIsPlaying(true); }
-    } else {
-      setIsPlaying(!isPlaying);
     }
   }, []);
 
@@ -157,7 +121,7 @@ export function usePlayTrack() {
 }
 
 export async function seekToPosition(positionMs: number) {
-  const sound = getCurrentSound() || (global as any)._soundInstance;
+  const sound = getCurrentSound();
   if (sound) {
     await sound.setPositionAsync(positionMs);
     usePlayerStore.getState().setPosition(positionMs);
