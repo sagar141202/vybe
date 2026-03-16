@@ -2325,3 +2325,130 @@ DETAIL:  Failing row contains (7, null, 4smEofP_5Q4, 2026-03-16 10:23:30.969966+
 2026-03-16 21:08:46 | INFO     | main:72 - POST /discord/update → 200 (6.3ms)
 2026-03-16 21:08:46 | INFO     | routers.stream:122 - Logged play: 4smEofP_5Q4
 2026-03-16 21:08:46 | INFO     | main:72 - POST /stream/4smEofP_5Q4/played → 200 (24.6ms)
+2026-03-16 21:10:00 | INFO     | routers.search:43 - Cache MISS for search: 'sa' — fetching from YouTube Music
+2026-03-16 21:10:00 | INFO     | services.search_service:43 - Searching YouTube Music: 'sa'
+2026-03-16 21:10:03 | INFO     | services.search_service:72 - Search returned 20 tracks for 'sa'
+2026-03-16 21:10:03 | INFO     | routers.search:60 - Cached 20 results for 'sa' (TTL: 30min)
+2026-03-16 21:10:04 | INFO     | main:72 - GET /search → 200 (3410.4ms)
+2026-03-16 21:10:04 | INFO     | routers.search:43 - Cache MISS for search: 'saiy' — fetching from YouTube Music
+2026-03-16 21:10:04 | INFO     | services.search_service:43 - Searching YouTube Music: 'saiy'
+2026-03-16 21:10:04 | INFO     | services.search_service:72 - Search returned 20 tracks for 'saiy'
+2026-03-16 21:10:04 | INFO     | routers.search:43 - Cache MISS for search: 'sai' — fetching from YouTube Music
+2026-03-16 21:10:04 | INFO     | services.search_service:43 - Searching YouTube Music: 'sai'
+2026-03-16 21:10:05 | INFO     | services.search_service:72 - Search returned 20 tracks for 'sai'
+2026-03-16 21:10:05 | INFO     | routers.search:43 - Cache MISS for search: 'saiyaara ' — fetching from YouTube Music
+2026-03-16 21:10:05 | INFO     | services.search_service:43 - Searching YouTube Music: 'saiyaara'
+2026-03-16 21:10:06 | INFO     | services.search_service:72 - Search returned 20 tracks for 'saiyaara'
+2026-03-16 21:10:06 | INFO     | routers.search:60 - Cached 20 results for 'saiy' (TTL: 30min)
+2026-03-16 21:10:06 | INFO     | routers.search:60 - Cached 20 results for 'sai' (TTL: 30min)
+2026-03-16 21:10:06 | INFO     | main:72 - GET /search → 200 (2675.8ms)
+2026-03-16 21:10:06 | INFO     | main:72 - GET /search → 200 (2676.5ms)
+2026-03-16 21:10:06 | INFO     | routers.search:60 - Cached 20 results for 'saiyaara ' (TTL: 30min)
+2026-03-16 21:10:06 | INFO     | main:72 - GET /search → 200 (2677.1ms)
+2026-03-16 21:10:10 | INFO     | routers.stream:38 - Cache MISS for stream: ge4M2dVBgTw — fetching
+2026-03-16 21:10:10 | INFO     | services.stream_service:34 - Extracting stream URL for video_id: ge4M2dVBgTw
+2026-03-16 21:10:12 | INFO     | services.stream_service:59 - Got stream URL for ge4M2dVBgTw | format: 251 - audio only (medium)
+2026-03-16 21:10:12 | INFO     | main:72 - GET /stream/ge4M2dVBgTw → 200 (2901.1ms)
+2026-03-16 21:10:13 | INFO     | main:72 - POST /discord/update → 200 (1.0ms)
+2026-03-16 21:10:13 | INFO     | routers.stream:122 - Logged play: 4smEofP_5Q4
+2026-03-16 21:10:13 | INFO     | main:72 - POST /stream/4smEofP_5Q4/played → 200 (24.7ms)
+2026-03-16 21:11:06 | INFO     | main:72 - GET /trending → 307 (1.3ms)
+2026-03-16 21:11:06 | INFO     | services.recommendation_service:31 - Computing user vector from 33 plays
+2026-03-16 21:11:06 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.2033 Key=C#
+2026-03-16 21:11:06 | INFO     | services.recommendation_service:31 - Computing user vector from 33 plays
+2026-03-16 21:11:06 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.2033 Key=C#
+2026-03-16 21:11:06 | INFO     | routers.trending:60 - Trending cache HIT (20 tracks)
+2026-03-16 21:11:06 | INFO     | main:72 - GET /recommendations/similar → 200 (42.3ms)
+2026-03-16 21:11:06 | INFO     | main:72 - GET /trending/ → 200 (9.4ms)
+2026-03-16 21:11:06 | INFO     | main:72 - GET /recommendations/cached → 200 (39.3ms)
+2026-03-16 21:11:12 | INFO     | routers.search:39 - Cache HIT for search: 'sai'
+2026-03-16 21:11:12 | INFO     | main:72 - GET /search → 200 (26.8ms)
+2026-03-16 21:11:13 | INFO     | routers.search:39 - Cache HIT for search: 'saiyaara '
+2026-03-16 21:11:13 | INFO     | main:72 - GET /search → 200 (3.0ms)
+2026-03-16 21:11:14 | INFO     | routers.stream:36 - Cache HIT for stream: ge4M2dVBgTw
+2026-03-16 21:11:14 | INFO     | main:72 - GET /stream/ge4M2dVBgTw → 200 (2.2ms)
+2026-03-16 21:12:16 | INFO     | services.background_jobs:82 - Background worker task created
+2026-03-16 21:12:16 | INFO     | services.scheduler:96 - Scheduler started — nightly rebuild at 2:00 AM, warmup in 30s
+2026-03-16 21:12:16 | INFO     | main:64 - SoundFree API started
+2026-03-16 21:12:16 | INFO     | services.background_jobs:13 - Background job worker started
+2026-03-16 21:12:17 | INFO     | main:72 - POST /discord/update → 200 (9.0ms)
+2026-03-16 21:12:17 | INFO     | routers.stream:117 - Inserted track: Saiyaara (Movie: Saiyaara)
+2026-03-16 21:12:17 | INFO     | routers.stream:122 - Logged play: ge4M2dVBgTw
+2026-03-16 21:12:17 | INFO     | main:72 - POST /stream/ge4M2dVBgTw/played → 200 (160.9ms)
+2026-03-16 21:12:46 | INFO     | services.scheduler:27 - Nightly recommendation rebuild starting...
+2026-03-16 21:12:46 | INFO     | services.annoy_service:40 - Building index from 5 tracks
+2026-03-16 21:12:46 | INFO     | services.annoy_service:74 - Index built: 5 tracks → /tmp/soundfree_index/tracks_vectors.npy
+2026-03-16 21:12:46 | INFO     | services.scheduler:34 - Index rebuilt: {'status': 'ok', 'count': 5, 'path': '/tmp/soundfree_index/tracks_vectors.npy'}
+2026-03-16 21:12:46 | INFO     | services.recommendation_service:31 - Computing user vector from 33 plays
+2026-03-16 21:12:46 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.2033 Key=C#
+2026-03-16 21:12:46 | INFO     | services.recommendation_service:31 - Computing user vector from 33 plays
+2026-03-16 21:12:46 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.2033 Key=C#
+2026-03-16 21:12:46 | INFO     | services.recommendation_service:144 - Top recommendation: Track vaSRih9T (score=0.5432)
+2026-03-16 21:12:46 | ERROR    | services.scheduler:58 - Recommendation rebuild failed: cache_set() got an unexpected keyword argument 'ttl'
+2026-03-16 21:12:55 | INFO     | routers.stream:38 - Cache MISS for stream: DRZHVrSmcWU — fetching
+2026-03-16 21:12:55 | INFO     | services.stream_service:34 - Extracting stream URL for video_id: DRZHVrSmcWU
+2026-03-16 21:12:57 | INFO     | services.stream_service:59 - Got stream URL for DRZHVrSmcWU | format: 251 - audio only (medium)
+2026-03-16 21:12:57 | INFO     | main:72 - GET /stream/DRZHVrSmcWU → 200 (2721.1ms)
+2026-03-16 21:12:58 | INFO     | main:72 - GET /trending → 307 (0.4ms)
+2026-03-16 21:12:58 | INFO     | services.recommendation_service:31 - Computing user vector from 33 plays
+2026-03-16 21:12:58 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.2033 Key=C#
+2026-03-16 21:12:58 | INFO     | routers.trending:60 - Trending cache HIT (20 tracks)
+2026-03-16 21:12:58 | INFO     | main:72 - GET /trending/ → 200 (4.3ms)
+2026-03-16 21:12:58 | INFO     | main:72 - GET /recommendations/cached → 200 (46.5ms)
+2026-03-16 21:12:58 | INFO     | services.recommendation_service:31 - Computing user vector from 33 plays
+2026-03-16 21:12:58 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.2033 Key=C#
+2026-03-16 21:12:58 | INFO     | main:72 - GET /recommendations/similar → 200 (37.8ms)
+2026-03-16 21:12:58 | INFO     | main:72 - POST /discord/update → 200 (1.8ms)
+2026-03-16 21:12:58 | INFO     | routers.stream:122 - Logged play: ge4M2dVBgTw
+2026-03-16 21:12:58 | INFO     | main:72 - POST /stream/ge4M2dVBgTw/played → 200 (9.0ms)
+2026-03-16 21:13:14 | INFO     | services.background_jobs:82 - Background worker task created
+2026-03-16 21:13:15 | INFO     | services.scheduler:96 - Scheduler started — nightly rebuild at 2:00 AM, warmup in 30s
+2026-03-16 21:13:15 | INFO     | main:64 - SoundFree API started
+2026-03-16 21:13:15 | INFO     | services.background_jobs:13 - Background job worker started
+2026-03-16 21:13:45 | INFO     | services.scheduler:27 - Nightly recommendation rebuild starting...
+2026-03-16 21:13:45 | INFO     | services.annoy_service:40 - Building index from 5 tracks
+2026-03-16 21:13:45 | INFO     | services.annoy_service:74 - Index built: 5 tracks → /tmp/soundfree_index/tracks_vectors.npy
+2026-03-16 21:13:45 | INFO     | services.scheduler:34 - Index rebuilt: {'status': 'ok', 'count': 5, 'path': '/tmp/soundfree_index/tracks_vectors.npy'}
+2026-03-16 21:13:45 | INFO     | services.recommendation_service:31 - Computing user vector from 33 plays
+2026-03-16 21:13:45 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.2033 Key=C#
+2026-03-16 21:13:45 | INFO     | services.recommendation_service:31 - Computing user vector from 33 plays
+2026-03-16 21:13:45 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.2033 Key=C#
+2026-03-16 21:13:45 | INFO     | services.recommendation_service:144 - Top recommendation: Track vaSRih9T (score=0.5432)
+2026-03-16 21:13:45 | ERROR    | services.scheduler:58 - Recommendation rebuild failed: cache_set() got an unexpected keyword argument 'ttl'
+2026-03-16 21:13:55 | INFO     | services.background_jobs:82 - Background worker task created
+2026-03-16 21:13:55 | INFO     | services.scheduler:96 - Scheduler started — nightly rebuild at 2:00 AM, warmup in 30s
+2026-03-16 21:13:55 | INFO     | main:64 - SoundFree API started
+2026-03-16 21:13:55 | INFO     | services.background_jobs:13 - Background job worker started
+2026-03-16 21:14:00 | INFO     | main:72 - GET /trending → 307 (0.7ms)
+2026-03-16 21:14:00 | INFO     | routers.trending:60 - Trending cache HIT (20 tracks)
+2026-03-16 21:14:00 | INFO     | main:72 - GET /trending/ → 200 (39.0ms)
+2026-03-16 21:14:01 | INFO     | services.recommendation_service:31 - Computing user vector from 33 plays
+2026-03-16 21:14:01 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.2033 Key=C#
+2026-03-16 21:14:01 | INFO     | services.recommendation_service:31 - Computing user vector from 33 plays
+2026-03-16 21:14:01 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.2033 Key=C#
+2026-03-16 21:14:01 | INFO     | main:72 - GET /recommendations/similar → 200 (199.5ms)
+2026-03-16 21:14:01 | INFO     | main:72 - GET /recommendations/ → 200 (108.0ms)
+2026-03-16 21:14:25 | INFO     | services.scheduler:27 - Nightly recommendation rebuild starting...
+2026-03-16 21:14:25 | INFO     | services.annoy_service:40 - Building index from 5 tracks
+2026-03-16 21:14:25 | INFO     | services.annoy_service:74 - Index built: 5 tracks → /tmp/soundfree_index/tracks_vectors.npy
+2026-03-16 21:14:25 | INFO     | services.scheduler:34 - Index rebuilt: {'status': 'ok', 'count': 5, 'path': '/tmp/soundfree_index/tracks_vectors.npy'}
+2026-03-16 21:14:25 | INFO     | services.recommendation_service:31 - Computing user vector from 33 plays
+2026-03-16 21:14:25 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.2033 Key=C#
+2026-03-16 21:14:25 | INFO     | services.recommendation_service:31 - Computing user vector from 33 plays
+2026-03-16 21:14:25 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.2033 Key=C#
+2026-03-16 21:14:25 | INFO     | services.recommendation_service:144 - Top recommendation: Track vaSRih9T (score=0.5432)
+2026-03-16 21:14:25 | ERROR    | services.scheduler:58 - Recommendation rebuild failed: cache_set() got an unexpected keyword argument 'ttl'
+2026-03-16 21:14:54 | INFO     | services.background_jobs:82 - Background worker task created
+2026-03-16 21:14:54 | INFO     | services.scheduler:96 - Scheduler started — nightly rebuild at 2:00 AM, warmup in 30s
+2026-03-16 21:14:54 | INFO     | main:64 - SoundFree API started
+2026-03-16 21:14:54 | INFO     | services.background_jobs:13 - Background job worker started
+2026-03-16 21:15:24 | INFO     | services.scheduler:27 - Nightly recommendation rebuild starting...
+2026-03-16 21:15:24 | INFO     | services.annoy_service:40 - Building index from 5 tracks
+2026-03-16 21:15:24 | INFO     | services.annoy_service:74 - Index built: 5 tracks → /tmp/soundfree_index/tracks_vectors.npy
+2026-03-16 21:15:24 | INFO     | services.scheduler:34 - Index rebuilt: {'status': 'ok', 'count': 5, 'path': '/tmp/soundfree_index/tracks_vectors.npy'}
+2026-03-16 21:15:24 | INFO     | services.recommendation_service:31 - Computing user vector from 33 plays
+2026-03-16 21:15:24 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.2033 Key=C#
+2026-03-16 21:15:24 | INFO     | services.recommendation_service:31 - Computing user vector from 33 plays
+2026-03-16 21:15:24 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.2033 Key=C#
+2026-03-16 21:15:24 | INFO     | services.recommendation_service:144 - Top recommendation: Track vaSRih9T (score=0.5432)
+2026-03-16 21:15:24 | ERROR    | services.scheduler:58 - Recommendation rebuild failed: cache_set() got an unexpected keyword argument 'ttl'

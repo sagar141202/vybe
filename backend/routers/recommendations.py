@@ -59,7 +59,7 @@ async def get_similar_tracks(limit: int = 20) -> list:
 
 
 @router.get("/")
-async def get_recommendations_feed(limit: int = 20) -> list:
+async def get_recommendations_feed(limit: int = 20, bpm_min: float = 0, bpm_max: float = 0) -> list:
     """
     Main recommendations endpoint.
     Returns tracks similar to user vector, filtered by recently played.
@@ -151,6 +151,16 @@ async def get_recommendations_feed(limit: int = 20) -> list:
             r["reason"] = "Sounds Similar"
         else:
             r["reason"] = "You Might Like"
+
+    # Apply BPM filter if specified (Gym Mode)
+    if bpm_min > 0 and bpm_max > 0:
+        results = [r for r in results if r.get("bpm") and bpm_min <= r["bpm"] <= bpm_max]
+        pass
+
+    # Apply BPM filter if specified (Gym Mode)
+    if bpm_min > 0 and bpm_max > 0:
+        results = [r for r in results if r.get("bpm") and bpm_min <= r["bpm"] <= bpm_max]
+        pass
 
     return results[:limit]
 

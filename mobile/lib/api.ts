@@ -48,9 +48,25 @@ export const getLikedTracks = async () => {
   return data;
 };
 
-export const getRecommendations = async (limit = 20) => {
-  const { data } = await api.get('/recommendations/cached', { params: { limit } });
-  return data;
+export const getRecommendations = async (limit = 20, bpmMin = 0, bpmMax = 0) => {
+  try {
+    // Check gym mode
+    const AsyncStorage = require('@react-native-async-storage/async-storage').default;
+    const gymData = await AsyncStorage.getItem('gym_mode');
+    let params: any = { limit };
+    if (gymData) {
+      const { enabled, minBpm, maxBpm } = JSON.parse(gymData);
+      if (enabled && minBpm && maxBpm) {
+        params.bpm_min = bpmMin || minBpm;
+        params.bpm_max = bpmMax || maxBpm;
+      }
+    }
+    const { data } = await api.get('/recommendations/', { params });
+    return data;
+  } catch {
+    const { data } = await api.get('/recommendations/cached', { params: { limit } });
+    return data;
+  }
 };
 
 export const getTrendingTracks = async (_query = '', limit = 10) => {

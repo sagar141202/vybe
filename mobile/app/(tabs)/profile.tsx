@@ -15,6 +15,7 @@ const SETTINGS = [
   { name: 'Downloads', value: 'Offline library', emoji: '⬇️', colors: ['#93C5FD', '#7DD3FC'] as [string,string], route: '/downloads' },
   { name: 'Daily Mix', value: 'AI playlist', emoji: '🤖', colors: ['#C4B5FD', '#A78BFA'] as [string,string], route: '/daily-mix' },
   { name: 'Discord RPC', value: 'Rich Presence', emoji: '🎮', colors: ['#A5B4FC', '#818CF8'] as [string,string], route: '/discord' },
+  { name: 'Gym Mode', value: 'BPM filter', emoji: '💪', colors: ['#FB923C', '#EA580C'] as [string,string], route: '/gym-mode' },
 ];
 
 export default function ProfileScreen() {
