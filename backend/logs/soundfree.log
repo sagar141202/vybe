@@ -1591,3 +1591,17 @@ DETAIL:  Failing row contains (2, null, bSnlKl_PoQU, 2026-03-16 09:34:52.949369+
 2026-03-16 15:07:01 | INFO     | services.background_jobs:82 - Background worker task created
 2026-03-16 15:07:01 | INFO     | main:49 - SoundFree API started
 2026-03-16 15:07:01 | INFO     | services.background_jobs:13 - Background job worker started
+2026-03-16 15:08:59 | INFO     | services.background_jobs:82 - Background worker task created
+2026-03-16 15:08:59 | INFO     | main:50 - SoundFree API started
+2026-03-16 15:08:59 | INFO     | services.background_jobs:13 - Background job worker started
+2026-03-16 15:09:05 | INFO     | services.recommendation_service:26 - Not enough plays for recommendation (1 plays with features)
+2026-03-16 15:09:05 | INFO     | main:58 - GET /recommendations/vector → 200 (106.3ms)
+2026-03-16 15:12:14 | INFO     | services.recommendation_service:29 - Computing user vector from 21 plays
+2026-03-16 15:12:14 | INFO     | services.recommendation_service:60 - User vector: BPM=140.7 Energy=0.1433 Key=A#
+2026-03-16 15:12:14 | INFO     | main:58 - GET /recommendations/vector → 200 (28.4ms)
+2026-03-16 15:33:16 | INFO     | services.background_jobs:82 - Background worker task created
+2026-03-16 15:33:16 | INFO     | main:50 - SoundFree API started
+2026-03-16 15:33:16 | INFO     | services.background_jobs:13 - Background job worker started
+2026-03-16 15:34:01 | INFO     | services.background_jobs:82 - Background worker task created
+2026-03-16 15:34:01 | INFO     | main:50 - SoundFree API started
+2026-03-16 15:34:01 | INFO     | services.background_jobs:13 - Background job worker started
