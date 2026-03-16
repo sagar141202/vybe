@@ -150,6 +150,22 @@ export default function HomeScreen() {
           </View>
         )}
 
+        {/* Daily Mix Card */}
+        <TouchableOpacity style={styles.dailyMixCard} onPress={() => router.push('/daily-mix')}>
+          <LinearGradient colors={['#C4B5FD', '#818CF8']} style={StyleSheet.absoluteFillObject} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} />
+          <View style={styles.dailyMixDeco} />
+          <View style={styles.dailyMixContent}>
+            <View>
+              <Text style={styles.dailyMixBadge}>✦ AI GENERATED</Text>
+              <Text style={styles.dailyMixTitle}>Your Daily Mix</Text>
+              <Text style={styles.dailyMixSub}>20 tracks picked just for you</Text>
+            </View>
+            <View style={styles.dailyMixBtn}>
+              <Ionicons name="play" size={20} color="#7C3AED" />
+            </View>
+          </View>
+        </TouchableOpacity>
+
         {/* Moods */}
         <View style={styles.moodsSection}>
           <SectionHeader title="🎭 Browse by Mood" />
@@ -326,6 +342,13 @@ const styles = StyleSheet.create({
   emptyEmoji: { fontSize: 56, marginBottom: 16 },
   emptyTitle: { fontSize: 20, fontWeight: '800', color: '#1E1B4B', marginBottom: 8 },
   emptySub: { fontSize: 14, color: '#6B7280', textAlign: 'center', lineHeight: 22, marginBottom: 24 },
+  dailyMixCard: { marginHorizontal: 24, marginBottom: 16, borderRadius: 24, overflow: 'hidden', height: 100, borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.9)' },
+  dailyMixDeco: { position: 'absolute', right: -30, top: -30, width: 140, height: 140, borderRadius: 70, backgroundColor: 'rgba(255,255,255,0.15)' },
+  dailyMixContent: { flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: 20 },
+  dailyMixBadge: { fontSize: 10, fontWeight: '800', color: 'rgba(255,255,255,0.8)', letterSpacing: 2, marginBottom: 4 },
+  dailyMixTitle: { fontSize: 20, fontWeight: '900', color: '#FFFFFF', letterSpacing: -0.5 },
+  dailyMixSub: { fontSize: 12, color: 'rgba(255,255,255,0.8)', marginTop: 2 },
+  dailyMixBtn: { width: 48, height: 48, borderRadius: 24, backgroundColor: 'rgba(255,255,255,0.9)', alignItems: 'center', justifyContent: 'center' },
   emptyBtn: { borderRadius: 30, overflow: 'hidden' },
   emptyBtnText: { fontSize: 14, fontWeight: '700', color: '#FFFFFF', paddingHorizontal: 28, paddingVertical: 13 },
 });
