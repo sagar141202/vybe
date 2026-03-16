@@ -62,7 +62,7 @@ export default function LibraryScreen() {
         {/* Top cards */}
         <View style={styles.cardsRow}>
           {/* Liked Songs */}
-          <TouchableOpacity style={styles.bigCard}>
+          <TouchableOpacity style={styles.bigCard} onPress={() => router.push("/liked")}>
             <LinearGradient colors={['#FBCFE8', '#F9A8D4']} style={StyleSheet.absoluteFillObject} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} />
             <View style={styles.cardOverlay} />
             <View style={styles.cardIconWrap}>
@@ -73,7 +73,7 @@ export default function LibraryScreen() {
           </TouchableOpacity>
 
           {/* Downloaded */}
-          <TouchableOpacity style={styles.bigCard}>
+          <TouchableOpacity style={styles.bigCard} onPress={() => router.push("/liked")}>
             <LinearGradient colors={['#86EFAC', '#6EE7B7']} style={StyleSheet.absoluteFillObject} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} />
             <View style={styles.cardOverlay} />
             <View style={styles.cardIconWrap}>
