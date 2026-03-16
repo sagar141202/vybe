@@ -2068,3 +2068,14 @@ DETAIL:  Failing row contains (7, null, 4smEofP_5Q4, 2026-03-16 10:23:30.969966+
 2026-03-16 16:30:07 | INFO     | main:61 - GET /recommendations/cached → 200 (30.0ms)
 2026-03-16 16:30:07 | INFO     | routers.trending:60 - Trending cache HIT (20 tracks)
 2026-03-16 16:30:07 | INFO     | main:61 - GET /trending/ → 200 (2.3ms)
+2026-03-16 16:33:01 | INFO     | main:61 - GET /trending → 307 (36.2ms)
+2026-03-16 16:33:01 | INFO     | services.recommendation_service:31 - Computing user vector from 24 plays
+2026-03-16 16:33:01 | INFO     | services.recommendation_service:62 - User vector: BPM=146.7 Energy=0.1542 Key=A#
+2026-03-16 16:33:01 | INFO     | main:61 - GET /recommendations/similar → 200 (53.9ms)
+2026-03-16 16:33:01 | INFO     | services.recommendation_service:31 - Computing user vector from 24 plays
+2026-03-16 16:33:01 | INFO     | services.recommendation_service:62 - User vector: BPM=146.7 Energy=0.1542 Key=A#
+2026-03-16 16:33:01 | INFO     | routers.trending:60 - Trending cache HIT (20 tracks)
+2026-03-16 16:33:01 | INFO     | main:61 - GET /trending/ → 200 (8.1ms)
+2026-03-16 16:33:01 | INFO     | main:61 - GET /recommendations/cached → 200 (107.2ms)
+2026-03-16 16:33:28 | INFO     | routers.stream:36 - Cache HIT for stream: A46Y2CLH4Bk
+2026-03-16 16:33:28 | INFO     | main:61 - GET /stream/A46Y2CLH4Bk → 200 (3.3ms)
