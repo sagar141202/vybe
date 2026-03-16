@@ -858,3 +858,17 @@ DETAIL:  Key (video_id)=(4smEofP_5Q4) is not present in table "tracks".
 2026-03-16 11:14:24 | INFO     | main:48 - GET /stream/uT_HXrrmHX8/proxy → 200 (6.0ms)
 2026-03-16 11:14:27 | INFO     | routers.lyrics:92 - Redis HIT for lyrics: uT_HXrrmHX8
 2026-03-16 11:14:27 | INFO     | main:48 - GET /lyrics/uT_HXrrmHX8 → 200 (12.2ms)
+2026-03-16 11:18:30 | INFO     | routers.stream:36 - Cache HIT for stream: 4smEofP_5Q4
+2026-03-16 11:18:30 | INFO     | main:48 - GET /stream/4smEofP_5Q4 → 200 (18.6ms)
+2026-03-16 11:18:30 | INFO     | routers.stream:36 - Cache HIT for stream: 4smEofP_5Q4
+2026-03-16 11:18:30 | INFO     | main:48 - GET /stream/4smEofP_5Q4/proxy → 200 (31.9ms)
+2026-03-16 11:22:17 | INFO     | routers.stream:36 - Cache HIT for stream: WwzbqTaSp7M
+2026-03-16 11:22:17 | INFO     | main:48 - GET /stream/WwzbqTaSp7M → 200 (6.1ms)
+2026-03-16 11:22:17 | INFO     | routers.stream:36 - Cache HIT for stream: WwzbqTaSp7M
+2026-03-16 11:22:17 | INFO     | main:48 - GET /stream/WwzbqTaSp7M/proxy → 200 (12.3ms)
+2026-03-16 11:26:00 | INFO     | routers.stream:36 - Cache HIT for stream: Wqu4MRQOgyo
+2026-03-16 11:26:00 | INFO     | main:48 - GET /stream/Wqu4MRQOgyo → 200 (5.0ms)
+2026-03-16 11:26:00 | INFO     | routers.stream:36 - Cache HIT for stream: Wqu4MRQOgyo
+2026-03-16 11:26:00 | INFO     | main:48 - GET /stream/Wqu4MRQOgyo/proxy → 200 (13.8ms)
+2026-03-16 11:26:37 | INFO     | routers.lyrics:98 - Redis HIT for lyrics: Wqu4MRQOgyo
+2026-03-16 11:26:37 | INFO     | main:48 - GET /lyrics/Wqu4MRQOgyo → 200 (6.7ms)
