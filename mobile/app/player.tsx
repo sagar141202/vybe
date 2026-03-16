@@ -153,7 +153,7 @@ export default function FullPlayer() {
         <View style={styles.trackInfoRow}>
           <View style={styles.trackInfoText}>
             <Text style={styles.trackTitle} numberOfLines={1}>{currentTrack.title}</Text>
-            <Text style={styles.trackArtist} numberOfLines={1}>{currentTrack.artist}</Text>
+            <TouchableOpacity onPress={() => router.push({ pathname: "/artist/[name]", params: { name: currentTrack.artist } })}><Text style={styles.trackArtist} numberOfLines={1}>{currentTrack.artist}</Text></TouchableOpacity>
           </View>
           <TouchableOpacity style={styles.likeBtn} onPress={toggleLike}>
             <Text style={styles.likeIcon}>{liked ? '❤️' : '🤍'}</Text>
