@@ -1788,3 +1788,20 @@ DETAIL:  Failing row contains (7, null, 4smEofP_5Q4, 2026-03-16 10:23:30.969966+
 2026-03-16 16:00:52 | INFO     | services.recommendation_service:62 - User vector: BPM=143.9 Energy=0.1521 Key=A#
 2026-03-16 16:00:52 | INFO     | services.recommendation_service:144 - Top recommendation: Bohemian Rhapsody (score=0.6627)
 2026-03-16 16:00:52 | ERROR    | services.scheduler:43 - Recommendation rebuild failed: cache_set() got an unexpected keyword argument 'ttl'
+2026-03-16 16:03:08 | INFO     | routers.stream:38 - Cache MISS for stream: tHVe1gTD1dg — fetching
+2026-03-16 16:03:08 | INFO     | services.stream_service:34 - Extracting stream URL for video_id: tHVe1gTD1dg
+2026-03-16 16:03:10 | INFO     | services.stream_service:59 - Got stream URL for tHVe1gTD1dg | format: 251 - audio only (medium)
+2026-03-16 16:03:10 | INFO     | main:60 - GET /stream/tHVe1gTD1dg → 200 (2754.3ms)
+2026-03-16 16:03:10 | INFO     | routers.stream:36 - Cache HIT for stream: tHVe1gTD1dg
+2026-03-16 16:03:11 | INFO     | main:60 - GET /stream/tHVe1gTD1dg/proxy → 200 (34.3ms)
+2026-03-16 16:04:23 | INFO     | routers.stream:117 - Inserted track: Sitaare - Top 6 Song [I-Popstar: Vol. 1] (feat. Rishabh Panchal, Rohit Raut & Radhika Bhide)
+2026-03-16 16:04:23 | INFO     | routers.stream:122 - Logged play: tHVe1gTD1dg
+2026-03-16 16:04:23 | INFO     | main:60 - POST /stream/tHVe1gTD1dg/played → 200 (52.1ms)
+2026-03-16 16:04:41 | INFO     | routers.search:43 - Cache MISS for search: 'top hits 2025' — fetching from YouTube Music
+2026-03-16 16:04:41 | INFO     | services.search_service:43 - Searching YouTube Music: 'top hits 2025'
+2026-03-16 16:04:42 | INFO     | services.search_service:72 - Search returned 20 tracks for 'top hits 2025'
+2026-03-16 16:04:42 | INFO     | routers.search:60 - Cached 20 results for 'top hits 2025' (TTL: 30min)
+2026-03-16 16:04:42 | INFO     | main:60 - GET /search → 200 (1614.3ms)
+2026-03-16 16:04:42 | INFO     | services.recommendation_service:31 - Computing user vector from 22 plays
+2026-03-16 16:04:42 | INFO     | services.recommendation_service:62 - User vector: BPM=143.9 Energy=0.1521 Key=A#
+2026-03-16 16:04:42 | INFO     | main:60 - GET /recommendations/cached → 200 (1635.0ms)
