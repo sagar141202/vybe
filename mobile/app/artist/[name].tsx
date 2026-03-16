@@ -141,7 +141,15 @@ export default function ArtistScreen() {
                 {[...new Map(tracks.filter(t => t.album).map(t => [t.album, t])).values()].slice(0, 8).map((track) => (
                   <TouchableOpacity key={track.video_id} style={styles.albumCard} onPress={() => {
                     const albumTracks = tracks.filter(t => t.album === track.album);
-                    playTrack(albumTracks[0], albumTracks);
+                    router.push({
+                      pathname: '/album/[name]',
+                      params: {
+                        name: track.album || 'Album',
+                        artist: name,
+                        thumbnail: track.thumbnail_url || '',
+                        tracks: JSON.stringify(albumTracks),
+                      }
+                    });
                   }}>
                     {track.thumbnail_url ? (
                       <Image source={{ uri: track.thumbnail_url }} style={styles.albumArt} resizeMode="cover" />

@@ -1266,3 +1266,9 @@ DETAIL:  Failing row contains (5, null, oDyMLiIskPg, 2026-03-16 08:34:25.859818+
 2026-03-16 14:24:54 | INFO     | main:49 - GET /stream/eQXlSrSYWhU → 200 (1.7ms)
 2026-03-16 14:24:54 | INFO     | routers.stream:36 - Cache HIT for stream: eQXlSrSYWhU
 2026-03-16 14:24:54 | INFO     | main:49 - GET /stream/eQXlSrSYWhU/proxy → 200 (13.9ms)
+2026-03-16 14:25:15 | INFO     | routers.search:39 - Cache HIT for search: 'Raghu Dixit'
+2026-03-16 14:25:15 | INFO     | main:49 - GET /search → 200 (3.2ms)
+2026-03-16 14:25:22 | INFO     | main:49 - POST /stream/x0pSWnCc44w/played → 200 (25.9ms)
+2026-03-16 14:26:56 | INFO     | main:49 - GET /health → 200 (2.4ms)
+2026-03-16 14:27:09 | INFO     | routers.search:39 - Cache HIT for search: 'Raghu Dixit'
+2026-03-16 14:27:09 | INFO     | main:49 - GET /search → 200 (5.7ms)
