@@ -2491,3 +2491,56 @@ DETAIL:  Failing row contains (8, null, DRZHVrSmcWU, 2026-03-16 15:55:24.194841+
 2026-03-16 21:33:01 | INFO     | main:74 - GET /search → 200 (2877.1ms)
 2026-03-16 21:33:01 | INFO     | main:74 - GET /search → 200 (2907.8ms)
 2026-03-16 21:33:01 | INFO     | services.vibe_service:71 - Building vibe index for 12 tracks...
+2026-03-16 21:33:16 | INFO     | services.vibe_service:14 - Loading sentence-transformers model...
+2026-03-16 21:35:09 | INFO     | services.background_jobs:82 - Background worker task created
+2026-03-16 21:35:09 | INFO     | services.scheduler:96 - Scheduler started — nightly rebuild at 2:00 AM, warmup in 30s
+2026-03-16 21:35:09 | INFO     | main:66 - SoundFree API started
+2026-03-16 21:35:09 | INFO     | services.background_jobs:13 - Background job worker started
+2026-03-16 21:35:21 | INFO     | main:74 - GET /trending → 307 (77.8ms)
+2026-03-16 21:35:21 | INFO     | routers.trending:60 - Trending cache HIT (20 tracks)
+2026-03-16 21:35:21 | INFO     | main:74 - GET /trending/ → 200 (7.4ms)
+2026-03-16 21:35:21 | INFO     | services.recommendation_service:31 - Computing user vector from 33 plays
+2026-03-16 21:35:21 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.2033 Key=C#
+2026-03-16 21:35:21 | INFO     | main:74 - GET /recommendations/similar → 200 (171.3ms)
+2026-03-16 21:35:21 | INFO     | services.recommendation_service:31 - Computing user vector from 33 plays
+2026-03-16 21:35:21 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.2033 Key=C#
+2026-03-16 21:35:21 | INFO     | main:74 - GET /recommendations/ → 200 (107.1ms)
+2026-03-16 21:35:25 | INFO     | services.vibe_service:95 - Vibe search: 'high energy workout pump up intense'
+2026-03-16 21:35:25 | INFO     | services.vibe_service:71 - Building vibe index for 12 tracks...
+2026-03-16 21:35:30 | INFO     | services.vibe_service:14 - Loading sentence-transformers model...
+2026-03-16 21:39:16 | INFO     | services.background_jobs:82 - Background worker task created
+2026-03-16 21:39:16 | INFO     | services.scheduler:96 - Scheduler started — nightly rebuild at 2:00 AM, warmup in 30s
+2026-03-16 21:39:16 | INFO     | main:66 - SoundFree API started
+2026-03-16 21:39:16 | INFO     | services.background_jobs:13 - Background job worker started
+2026-03-16 21:39:19 | INFO     | services.vibe_service:95 - Vibe search: 'high energy workout pump up intense'
+2026-03-16 21:39:19 | INFO     | services.vibe_service:71 - Building vibe index for 12 tracks...
+2026-03-16 21:39:22 | INFO     | services.vibe_service:14 - Loading sentence-transformers model...
+2026-03-16 21:39:34 | INFO     | services.vibe_service:95 - Vibe search: 'high energy workout pump up intense'
+2026-03-16 21:39:34 | INFO     | services.vibe_service:71 - Building vibe index for 12 tracks...
+2026-03-16 21:39:34 | INFO     | services.vibe_service:14 - Loading sentence-transformers model...
+2026-03-16 21:45:30 | INFO     | services.background_jobs:82 - Background worker task created
+2026-03-16 21:45:30 | INFO     | services.scheduler:96 - Scheduler started — nightly rebuild at 2:00 AM, warmup in 30s
+2026-03-16 21:45:30 | INFO     | main:66 - SoundFree API started
+2026-03-16 21:45:30 | INFO     | services.background_jobs:13 - Background job worker started
+2026-03-16 21:45:36 | INFO     | services.vibe_service:95 - Vibe search: 'sad emotional heartbreak melancholic'
+2026-03-16 21:45:36 | INFO     | services.vibe_service:71 - Building vibe index for 12 tracks...
+2026-03-16 21:45:39 | INFO     | services.vibe_service:14 - Loading sentence-transformers model...
+2026-03-16 21:48:57 | INFO     | services.vibe_service:16 - Model loaded
+2026-03-16 21:49:00 | INFO     | services.vibe_service:79 - Vibe index built: 12 tracks
+2026-03-16 21:49:00 | INFO     | services.search_service:43 - Searching YouTube Music: 'sad emotional heartbreak melancholic'
+2026-03-16 21:49:03 | INFO     | services.search_service:72 - Search returned 20 tracks for 'sad emotional heartbreak melancholic'
+2026-03-16 21:49:03 | INFO     | services.vibe_service:157 - Vibe search 'sad emotional heartbreak melancholic': 31 results
+2026-03-16 21:49:03 | INFO     | main:74 - POST /vibe/search → 200 (206731.8ms)
+2026-03-16 21:49:30 | INFO     | services.vibe_service:95 - Vibe search: 'sad emotional heartbreak melancholic'
+2026-03-16 21:49:30 | INFO     | services.search_service:43 - Searching YouTube Music: 'sad emotional heartbreak melancholic'
+2026-03-16 21:49:31 | INFO     | services.search_service:72 - Search returned 20 tracks for 'sad emotional heartbreak melancholic'
+2026-03-16 21:49:31 | INFO     | services.vibe_service:157 - Vibe search 'sad emotional heartbreak melancholic': 31 results
+2026-03-16 21:49:31 | INFO     | main:74 - POST /vibe/search → 200 (1072.7ms)
+2026-03-16 21:49:46 | INFO     | routers.stream:38 - Cache MISS for stream: FOA9iyxsW_A — fetching
+2026-03-16 21:49:46 | INFO     | services.stream_service:34 - Extracting stream URL for video_id: FOA9iyxsW_A
+2026-03-16 21:49:49 | INFO     | services.stream_service:59 - Got stream URL for FOA9iyxsW_A | format: 251 - audio only (medium)
+2026-03-16 21:49:49 | INFO     | main:74 - GET /stream/FOA9iyxsW_A → 200 (2502.1ms)
+2026-03-16 21:50:27 | INFO     | main:74 - POST /discord/update → 200 (4.4ms)
+2026-03-16 21:50:27 | INFO     | routers.stream:117 - Inserted track: AGAR TUM SAATH HO
+2026-03-16 21:50:27 | INFO     | routers.stream:122 - Logged play: FOA9iyxsW_A
+2026-03-16 21:50:27 | INFO     | main:74 - POST /stream/FOA9iyxsW_A/played → 200 (24.0ms)
