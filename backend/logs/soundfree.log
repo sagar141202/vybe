@@ -1674,3 +1674,65 @@ DETAIL:  Failing row contains (2, null, bSnlKl_PoQU, 2026-03-16 09:34:52.949369+
 2026-03-16 15:47:24 | INFO     | services.background_jobs:82 - Background worker task created
 2026-03-16 15:47:24 | INFO     | main:50 - SoundFree API started
 2026-03-16 15:47:24 | INFO     | services.background_jobs:13 - Background job worker started
+2026-03-16 15:50:45 | INFO     | routers.stream:36 - Cache HIT for stream: 4smEofP_5Q4
+2026-03-16 15:50:45 | INFO     | main:58 - GET /stream/4smEofP_5Q4 → 200 (161.7ms)
+2026-03-16 15:50:45 | INFO     | routers.stream:36 - Cache HIT for stream: 4smEofP_5Q4
+2026-03-16 15:50:45 | INFO     | main:58 - GET /stream/4smEofP_5Q4/proxy → 200 (111.6ms)
+2026-03-16 15:51:04 | INFO     | routers.download:43 - Downloading audio: 4smEofP_5Q4
+2026-03-16 15:51:08 | INFO     | routers.download:60 - Downloaded: /tmp/soundfree_downloads/4smEofP_5Q4.opus (4047KB)
+2026-03-16 15:51:08 | INFO     | main:58 - GET /download/4smEofP_5Q4 → 200 (4088.6ms)
+2026-03-16 15:51:16 | INFO     | routers.stream:117 - Inserted track: Sitaare - From "Ikkis" (Vocals Only)
+2026-03-16 15:51:16 | INFO     | routers.stream:122 - Logged play: 4smEofP_5Q4
+2026-03-16 15:51:16 | INFO     | main:58 - POST /stream/4smEofP_5Q4/played → 200 (204.4ms)
+2026-03-16 15:51:16 | INFO     | services.background_jobs:62 - Extracting features for 4smEofP_5Q4
+2026-03-16 15:51:16 | INFO     | services.audio_analysis_service:24 - Analyzing audio: /tmp/soundfree_downloads/4smEofP_5Q4.opus
+2026-03-16 15:51:28 | INFO     | services.audio_analysis_service:66 - Features: BPM=184.6 Key=C# Energy=0.2637
+2026-03-16 15:51:28 | INFO     | services.audio_analysis_service:106 - Stored features for 4smEofP_5Q4
+2026-03-16 15:51:28 | INFO     | services.background_jobs:65 - Features extracted for 4smEofP_5Q4: BPM=184.57
+2026-03-16 15:51:37 | INFO     | services.background_jobs:82 - Background worker task created
+2026-03-16 15:51:37 | INFO     | main:50 - SoundFree API started
+2026-03-16 15:51:37 | INFO     | services.background_jobs:13 - Background job worker started
+2026-03-16 15:52:31 | INFO     | services.recommendation_service:31 - Computing user vector from 22 plays
+2026-03-16 15:52:31 | INFO     | services.recommendation_service:62 - User vector: BPM=143.9 Energy=0.1521 Key=A#
+2026-03-16 15:52:31 | INFO     | main:58 - GET /recommendations/ → 200 (201.4ms)
+2026-03-16 15:52:40 | INFO     | services.recommendation_service:31 - Computing user vector from 22 plays
+2026-03-16 15:52:40 | INFO     | services.recommendation_service:62 - User vector: BPM=143.9 Energy=0.1521 Key=A#
+2026-03-16 15:52:40 | INFO     | main:58 - GET /recommendations/ → 200 (16.3ms)
+2026-03-16 15:53:30 | WARNING  | routers.likes:32 - Like error: (sqlalchemy.dialects.postgresql.asyncpg.IntegrityError) <class 'asyncpg.exceptions.NotNullViolationError'>: null value in column "user_id" of relation "liked_tracks" violates not-null constraint
+DETAIL:  Failing row contains (7, null, 4smEofP_5Q4, 2026-03-16 10:23:30.969966+00).
+[SQL: INSERT INTO liked_tracks (user_id, video_id) VALUES ($1::UUID, $2::VARCHAR) RETURNING liked_tracks.id, liked_tracks.liked_at]
+[parameters: (None, '4smEofP_5Q4')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2026-03-16 15:53:30 | INFO     | main:58 - POST /likes/4smEofP_5Q4 → 200 (26.9ms)
+2026-03-16 15:54:32 | INFO     | routers.stream:36 - Cache HIT for stream: WwzbqTaSp7M
+2026-03-16 15:54:32 | INFO     | main:58 - GET /stream/WwzbqTaSp7M → 200 (20.2ms)
+2026-03-16 15:54:32 | INFO     | routers.stream:36 - Cache HIT for stream: WwzbqTaSp7M
+2026-03-16 15:54:32 | INFO     | main:58 - GET /stream/WwzbqTaSp7M/proxy → 200 (41.1ms)
+2026-03-16 15:54:41 | INFO     | routers.stream:36 - Cache HIT for stream: Wqu4MRQOgyo
+2026-03-16 15:54:41 | INFO     | main:58 - GET /stream/Wqu4MRQOgyo → 200 (3.7ms)
+2026-03-16 15:54:41 | INFO     | routers.stream:36 - Cache HIT for stream: Wqu4MRQOgyo
+2026-03-16 15:54:41 | INFO     | main:58 - GET /stream/Wqu4MRQOgyo/proxy → 200 (10.8ms)
+2026-03-16 15:54:58 | INFO     | services.background_jobs:82 - Background worker task created
+2026-03-16 15:54:58 | INFO     | main:50 - SoundFree API started
+2026-03-16 15:54:58 | INFO     | services.background_jobs:13 - Background job worker started
+2026-03-16 15:55:03 | INFO     | services.recommendation_service:31 - Computing user vector from 22 plays
+2026-03-16 15:55:03 | INFO     | services.recommendation_service:62 - User vector: BPM=143.9 Energy=0.1521 Key=A#
+2026-03-16 15:55:03 | INFO     | main:58 - GET /recommendations/ → 200 (197.9ms)
+2026-03-16 15:55:12 | INFO     | routers.stream:117 - Inserted track: Dhun (Movie: Saiyaara)
+2026-03-16 15:55:12 | INFO     | routers.stream:122 - Logged play: Wqu4MRQOgyo
+2026-03-16 15:55:12 | INFO     | main:58 - POST /stream/Wqu4MRQOgyo/played → 200 (27.6ms)
+2026-03-16 15:55:38 | INFO     | services.background_jobs:82 - Background worker task created
+2026-03-16 15:55:38 | INFO     | main:50 - SoundFree API started
+2026-03-16 15:55:38 | INFO     | services.background_jobs:13 - Background job worker started
+2026-03-16 15:55:48 | INFO     | services.recommendation_service:31 - Computing user vector from 22 plays
+2026-03-16 15:55:48 | INFO     | services.recommendation_service:62 - User vector: BPM=143.9 Energy=0.1521 Key=A#
+2026-03-16 15:55:48 | INFO     | main:58 - GET /recommendations/ → 200 (863.1ms)
+2026-03-16 15:56:10 | INFO     | routers.stream:38 - Cache MISS for stream: xxG3XA4fCww — fetching
+2026-03-16 15:56:10 | INFO     | services.stream_service:34 - Extracting stream URL for video_id: xxG3XA4fCww
+2026-03-16 15:56:12 | INFO     | services.stream_service:59 - Got stream URL for xxG3XA4fCww | format: 251 - audio only (medium)
+2026-03-16 15:56:12 | INFO     | main:58 - GET /stream/xxG3XA4fCww → 200 (2151.1ms)
+2026-03-16 15:56:13 | INFO     | routers.stream:36 - Cache HIT for stream: xxG3XA4fCww
+2026-03-16 15:56:13 | INFO     | main:58 - GET /stream/xxG3XA4fCww/proxy → 200 (31.9ms)
+2026-03-16 15:56:25 | INFO     | services.background_jobs:82 - Background worker task created
+2026-03-16 15:56:25 | INFO     | main:50 - SoundFree API started
+2026-03-16 15:56:25 | INFO     | services.background_jobs:13 - Background job worker started
