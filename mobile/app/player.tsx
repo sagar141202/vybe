@@ -13,6 +13,7 @@ import { useLike } from '../hooks/useLike';
 import ProgressBar from '../components/ProgressBar';
 import LyricsView from '../components/LyricsView';
 import ProgressiveImage from '../components/ProgressiveImage';
+import AnimatedCanvas from '../components/AnimatedCanvas';
 import AddToPlaylistSheet from '../components/AddToPlaylistSheet';
 import DownloadButton from '../components/DownloadButton';
 
@@ -119,8 +120,12 @@ export default function FullPlayer() {
 
   return (
     <Animated.View style={[styles.container, { transform: [{ translateY: slideAnim }] }]}>
-      <StatusBar style="dark" />
-      <BlurredBackground imageUrl={currentTrack.thumbnail_url} />
+      <StatusBar style="light" />
+      <AnimatedCanvas
+        thumbnailUrl={currentTrack.thumbnail_url}
+        isPlaying={isPlaying}
+        colors={palette.bg}
+      />
 
       {/* Header */}
       <View style={styles.header}>
@@ -262,26 +267,26 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
   bgImage: { position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, width, height },
   header: { flexDirection: 'row', alignItems: 'center', paddingTop: 56, paddingHorizontal: 24, paddingBottom: 8 },
-  backBtn: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center', overflow: 'hidden', borderWidth: 1.5 },
-  backIcon: { fontSize: 20 },
+  backBtn: { width: 42, height: 42, borderRadius: 21, alignItems: 'center', justifyContent: 'center', overflow: 'hidden', borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.25)' },
+  backIcon: { fontSize: 20, color: '#FFFFFF' },
   headerCenter: { flex: 1, alignItems: 'center' },
-  headerLabel: { fontSize: 11, fontWeight: '800', letterSpacing: 2 },
-  headerAlbum: { fontSize: 12, color: '#6B7280', marginTop: 2, maxWidth: 200 },
+  headerLabel: { fontSize: 11, fontWeight: '800', letterSpacing: 2, color: 'rgba(255,255,255,0.8)' },
+  headerAlbum: { fontSize: 12, color: 'rgba(255,255,255,0.6)', marginTop: 2, maxWidth: 200 },
   moreBtn: { width: 42, height: 42, alignItems: 'center', justifyContent: 'center' },
-  moreIcon: { fontSize: 24, color: '#6B7280' },
+  moreIcon: { fontSize: 24, color: 'rgba(255,255,255,0.8)' },
   artWrap: { alignItems: 'center', paddingVertical: 16 },
   artShadow: { position: 'absolute', top: 12, left: 12, right: 12, bottom: -8, borderRadius: 28 },
   trackInfo: { paddingHorizontal: 28, marginBottom: 8 },
   trackInfoRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   trackInfoText: { flex: 1 },
-  trackTitle: { fontSize: 24, fontWeight: '900', color: '#1E1B4B', letterSpacing: -0.5, marginBottom: 4 },
-  trackArtist: { fontSize: 16, color: '#6B7280', fontWeight: '500' },
+  trackTitle: { fontSize: 24, fontWeight: '900', color: '#FFFFFF', letterSpacing: -0.5, marginBottom: 4 },
+  trackArtist: { fontSize: 16, color: 'rgba(255,255,255,0.7)', fontWeight: '500' },
   likeBtn: { width: 44, height: 44, alignItems: 'center', justifyContent: 'center' },
   likeIcon: { fontSize: 26 },
   controls: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 28, marginBottom: 24 },
   controlBtn: { width: 48, height: 48, alignItems: 'center', justifyContent: 'center' },
   controlIcon: { fontSize: 22, color: '#9CA3AF' },
-  controlIconLg: { fontSize: 28, color: '#1E1B4B' },
+  controlIconLg: { fontSize: 28, color: '#FFFFFF' },
   playBtn: { borderRadius: 40, overflow: 'hidden' },
   playGrad: { width: 72, height: 72, borderRadius: 36, alignItems: 'center', justifyContent: 'center' },
   playIcon: { fontSize: 28, color: '#FFFFFF' },
@@ -289,7 +294,7 @@ const styles = StyleSheet.create({
   actionBtn: { alignItems: 'center', gap: 6 },
   actionIconWrap: { width: 48, height: 48, borderRadius: 16, alignItems: 'center', justifyContent: 'center', overflow: 'hidden', borderWidth: 1.5, borderColor: 'rgba(167,139,250,0.2)' },
   actionIcon: { fontSize: 20 },
-  actionLabel: { fontSize: 11, color: '#6B7280', fontWeight: '600' },
+  actionLabel: { fontSize: 11, color: 'rgba(255,255,255,0.7)', fontWeight: '600' },
   lyricsOverlay: { position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, borderTopLeftRadius: 32, borderTopRightRadius: 32, overflow: 'hidden' },
   lyricsHeader: { paddingTop: 12, paddingHorizontal: 24, paddingBottom: 8 },
   lyricsPill: { width: 40, height: 4, borderRadius: 2, alignSelf: 'center', marginBottom: 16 },

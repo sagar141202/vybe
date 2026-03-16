@@ -2544,3 +2544,23 @@ DETAIL:  Failing row contains (8, null, DRZHVrSmcWU, 2026-03-16 15:55:24.194841+
 2026-03-16 21:50:27 | INFO     | routers.stream:117 - Inserted track: AGAR TUM SAATH HO
 2026-03-16 21:50:27 | INFO     | routers.stream:122 - Logged play: FOA9iyxsW_A
 2026-03-16 21:50:27 | INFO     | main:74 - POST /stream/FOA9iyxsW_A/played → 200 (24.0ms)
+2026-03-16 21:54:03 | INFO     | main:74 - GET /trending → 307 (6.4ms)
+2026-03-16 21:54:03 | INFO     | routers.trending:60 - Trending cache HIT (20 tracks)
+2026-03-16 21:54:03 | INFO     | main:74 - GET /trending/ → 200 (2.9ms)
+2026-03-16 21:54:03 | INFO     | services.recommendation_service:31 - Computing user vector from 33 plays
+2026-03-16 21:54:03 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.2033 Key=C#
+2026-03-16 21:54:03 | INFO     | services.recommendation_service:31 - Computing user vector from 33 plays
+2026-03-16 21:54:03 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.2033 Key=C#
+2026-03-16 21:54:03 | INFO     | main:74 - GET /recommendations/similar → 200 (39.5ms)
+2026-03-16 21:54:03 | INFO     | main:74 - GET /recommendations/ → 200 (40.4ms)
+2026-03-16 21:54:09 | INFO     | routers.stream:36 - Cache HIT for stream: FOA9iyxsW_A
+2026-03-16 21:54:09 | INFO     | main:74 - GET /stream/FOA9iyxsW_A → 200 (1.6ms)
+2026-03-16 21:54:49 | WARNING  | routers.likes:32 - Like error: (sqlalchemy.dialects.postgresql.asyncpg.IntegrityError) <class 'asyncpg.exceptions.NotNullViolationError'>: null value in column "user_id" of relation "liked_tracks" violates not-null constraint
+DETAIL:  Failing row contains (9, null, FOA9iyxsW_A, 2026-03-16 16:24:49.34407+00).
+[SQL: INSERT INTO liked_tracks (user_id, video_id) VALUES ($1::UUID, $2::VARCHAR) RETURNING liked_tracks.id, liked_tracks.liked_at]
+[parameters: (None, 'FOA9iyxsW_A')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2026-03-16 21:54:49 | INFO     | main:74 - POST /likes/FOA9iyxsW_A → 200 (27.8ms)
+2026-03-16 21:55:10 | INFO     | main:74 - POST /discord/update → 200 (7.4ms)
+2026-03-16 21:55:10 | INFO     | routers.stream:122 - Logged play: FOA9iyxsW_A
+2026-03-16 21:55:10 | INFO     | main:74 - POST /stream/FOA9iyxsW_A/played → 200 (32.4ms)
