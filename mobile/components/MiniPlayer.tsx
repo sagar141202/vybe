@@ -1,7 +1,5 @@
-import {
-  View, Text, TouchableOpacity, Image,
-  StyleSheet, Animated, PanResponder
-} from 'react-native';
+import { Image,View, Text, TouchableOpacity,
+  StyleSheet, Animated, PanResponder } from 'react-native';
 import { useRef, useEffect } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import PlayPauseButton from './PlayPauseButton';

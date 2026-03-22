@@ -1,7 +1,5 @@
-import {
-  View, Text, StyleSheet, ScrollView,
-  TouchableOpacity, Image, Dimensions
-} from 'react-native';
+import { Image,View, Text, StyleSheet, ScrollView,
+  TouchableOpacity, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
 import { useState, useEffect } from 'react';

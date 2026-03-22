@@ -1,5 +1,6 @@
 import { View, StyleSheet, Animated } from 'react-native';
 import { useState, useRef, useEffect } from 'react';
+import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { getArtUri } from '../services/artCache';
 
@@ -20,6 +21,8 @@ function getHighResUrl(url: string | null): string | null {
     .replace('w226-h226-l90-rj', 'w576-h576-l90-rj');
 }
 
+const BLURHASH = '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
+
 export default function ProgressiveImage({
   videoId,
   thumbnailUrl,
@@ -28,29 +31,15 @@ export default function ProgressiveImage({
   fallbackColors = ['#C4B5FD', '#A78BFA'],
   fallbackEmoji = '🎵',
 }: ProgressiveImageProps) {
-  const [fullResLoaded, setFullResLoaded] = useState(false);
   const [resolvedUrl, setResolvedUrl] = useState<string | null>(null);
-  const thumbOpacity = useRef(new Animated.Value(1)).current;
-  const fullOpacity = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    // Check local art cache first
     if (videoId && thumbnailUrl) {
-      getArtUri(videoId, getHighResUrl(thumbnailUrl)).then(uri => {
-        setResolvedUrl(uri);
-      });
+      getArtUri(videoId, getHighResUrl(thumbnailUrl)).then(uri => setResolvedUrl(uri));
     } else {
       setResolvedUrl(getHighResUrl(thumbnailUrl));
     }
   }, [videoId, thumbnailUrl]);
-
-  const handleFullResLoad = () => {
-    setFullResLoaded(true);
-    Animated.parallel([
-      Animated.timing(fullOpacity, { toValue: 1, duration: 400, useNativeDriver: true }),
-      Animated.timing(thumbOpacity, { toValue: 0, duration: 400, useNativeDriver: true }),
-    ]).start();
-  };
 
   if (!thumbnailUrl && !resolvedUrl) {
     return (
@@ -66,26 +55,14 @@ export default function ProgressiveImage({
   }
 
   return (
-    <View style={[style, { borderRadius, overflow: 'hidden' }]}>
-      {/* Thumbnail first */}
-      {thumbnailUrl && (
-        <Animated.Image
-          source={{ uri: thumbnailUrl }}
-          style={[StyleSheet.absoluteFillObject, { opacity: thumbOpacity }]}
-          resizeMode="cover"
-        />
-      )}
-
-      {/* High-res / local cache */}
-      {resolvedUrl && (
-        <Animated.Image
-          source={{ uri: resolvedUrl }}
-          style={[StyleSheet.absoluteFillObject, { opacity: fullOpacity }]}
-          resizeMode="cover"
-          onLoad={handleFullResLoad}
-          onError={() => {}}
-        />
-      )}
-    </View>
+    <Image
+      source={{ uri: resolvedUrl || thumbnailUrl || undefined }}
+      placeholder={thumbnailUrl ? { uri: thumbnailUrl } : BLURHASH}
+      style={[style, { borderRadius }]}
+      contentFit="cover"
+      transition={400}
+      cachePolicy="memory-disk"
+      recyclingKey={videoId || thumbnailUrl || undefined}
+    />
   );
 }

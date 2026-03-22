@@ -2942,3 +2942,21 @@ DETAIL:  Failing row contains (11, null, Wqu4MRQOgyo, 2026-03-22 14:09:14.699525
 2026-03-22 19:58:28 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
 2026-03-22 19:58:28 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
 2026-03-22 19:58:28 | INFO     | main:76 - GET /recommendations/ → 200 (19.6ms)
+2026-03-22 20:05:21 | INFO     | main:76 - GET /trending → 307 (11.8ms)
+2026-03-22 20:05:21 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-03-22 20:05:21 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-03-22 20:05:21 | INFO     | main:76 - GET /recommendations/similar → 200 (29.1ms)
+2026-03-22 20:05:21 | INFO     | routers.trending:60 - Trending cache HIT (20 tracks)
+2026-03-22 20:05:21 | INFO     | main:76 - GET /trending/ → 200 (3.8ms)
+2026-03-22 20:05:22 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-03-22 20:05:22 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-03-22 20:05:22 | INFO     | main:76 - GET /recommendations/ → 200 (42.0ms)
+2026-03-22 20:07:30 | INFO     | main:76 - GET /trending → 307 (7.6ms)
+2026-03-22 20:07:30 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-03-22 20:07:30 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-03-22 20:07:30 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-03-22 20:07:30 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-03-22 20:07:30 | INFO     | main:76 - GET /recommendations/similar → 200 (25.7ms)
+2026-03-22 20:07:30 | INFO     | routers.trending:60 - Trending cache HIT (20 tracks)
+2026-03-22 20:07:30 | INFO     | main:76 - GET /trending/ → 200 (3.0ms)
+2026-03-22 20:07:30 | INFO     | main:76 - GET /recommendations/ → 200 (30.4ms)

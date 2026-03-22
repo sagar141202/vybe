@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, StyleSheet, Animated } from 'react-native';
+import { Image,View, Text, TouchableOpacity, StyleSheet, Animated } from 'react-native';
 import { useRef } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
