@@ -12,6 +12,7 @@ import { usePlayTrack } from '../hooks/usePlayTrack';
 import TrackListItem from '../components/TrackListItem';
 import { usePlayerStore } from '../stores/playerStore';
 import { Ionicons } from '@expo/vector-icons';
+import EmptyState from '../components/EmptyState';
 
 const { width } = Dimensions.get('window');
 

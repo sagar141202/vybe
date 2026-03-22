@@ -10,6 +10,7 @@ import { api } from '../lib/api';
 import { usePlayTrack } from '../hooks/usePlayTrack';
 import { usePlayerStore } from '../stores/playerStore';
 import { Ionicons } from '@expo/vector-icons';
+import EmptyState from '../components/EmptyState';
 
 const { width } = Dimensions.get('window');
 

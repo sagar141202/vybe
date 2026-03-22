@@ -10,6 +10,7 @@ import { usePlayTrack } from '../hooks/usePlayTrack';
 import { usePlayerStore } from '../stores/playerStore';
 import { getRecommendations } from '../lib/api';
 import { Ionicons } from '@expo/vector-icons';
+import EmptyState from '../components/EmptyState';
 import type { Track } from '../components/TrackListItem';
 
 const { width, height } = Dimensions.get('window');
@@ -135,11 +136,13 @@ export default function DailyMixScreen() {
           {loading ? (
             <Text style={styles.loadingText}>Building your mix...</Text>
           ) : tracks.length === 0 ? (
-            <View style={styles.emptyWrap}>
-              <Text style={styles.emptyEmoji}>🎵</Text>
-              <Text style={styles.emptyTitle}>Play more music first</Text>
-              <Text style={styles.emptySub}>Your Daily Mix will appear after you've listened to a few tracks</Text>
-            </View>
+            <EmptyState
+              emoji="🤖"
+              title="Daily Mix not ready"
+              subtitle="Play more music to generate your personalised Daily Mix"
+              actionLabel="Start Listening"
+              onAction={() => router.push('/(tabs)/search')}
+            />
           ) : (
             tracks.map((track, i) => {
               const isPlaying = currentTrack?.video_id === track.video_id;

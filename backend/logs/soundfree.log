@@ -2780,3 +2780,59 @@ DETAIL:  Failing row contains (9, null, FOA9iyxsW_A, 2026-03-16 16:24:49.34407+0
 2026-03-22 19:19:33 | INFO     | services.scheduler:96 - Scheduler started — nightly rebuild at 2:00 AM, warmup in 30s
 2026-03-22 19:19:33 | INFO     | main:68 - SoundFree API started
 2026-03-22 19:19:33 | INFO     | services.background_jobs:13 - Background job worker started
+2026-03-22 19:20:03 | INFO     | services.scheduler:27 - Nightly recommendation rebuild starting...
+2026-03-22 19:20:03 | INFO     | services.annoy_service:40 - Building index from 6 tracks
+2026-03-22 19:20:03 | INFO     | services.annoy_service:74 - Index built: 6 tracks → /tmp/soundfree_index/tracks_vectors.npy
+2026-03-22 19:20:03 | INFO     | services.scheduler:34 - Index rebuilt: {'status': 'ok', 'count': 6, 'path': '/tmp/soundfree_index/tracks_vectors.npy'}
+2026-03-22 19:20:03 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-03-22 19:20:03 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-03-22 19:20:03 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-03-22 19:20:03 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-03-22 19:20:03 | INFO     | services.recommendation_service:144 - Top recommendation: Track vaSRih9T (score=0.4951)
+2026-03-22 19:20:03 | ERROR    | services.scheduler:58 - Recommendation rebuild failed: cache_set() got an unexpected keyword argument 'ttl'
+2026-03-22 19:20:03 | INFO     | routers.collab:52 - WS connected: room=D22HHU client=2828ib08hh name=Listener
+2026-03-22 19:20:03 | INFO     | routers.collab:57 - Room created: D22HHU by 2828ib08hh
+2026-03-22 19:20:07 | INFO     | routers.collab:208 - Room D22HHU closed
+2026-03-22 19:20:07 | INFO     | routers.collab:220 - WS disconnected: room=D22HHU client=2828ib08hh
+2026-03-22 19:20:09 | INFO     | routers.collab:52 - WS connected: room=6MESCB client=2828ib08hh name=Listener
+2026-03-22 19:20:09 | INFO     | routers.collab:57 - Room created: 6MESCB by 2828ib08hh
+2026-03-22 19:20:17 | INFO     | routers.collab:208 - Room 6MESCB closed
+2026-03-22 19:20:17 | INFO     | routers.collab:220 - WS disconnected: room=6MESCB client=2828ib08hh
+2026-03-22 19:20:24 | INFO     | routers.collab:52 - WS connected: room=6MESCB client=2828ib08hh name=Listener
+2026-03-22 19:20:24 | INFO     | routers.collab:57 - Room created: 6MESCB by 2828ib08hh
+2026-03-22 19:20:28 | INFO     | routers.collab:208 - Room 6MESCB closed
+2026-03-22 19:20:28 | INFO     | routers.collab:220 - WS disconnected: room=6MESCB client=2828ib08hh
+2026-03-22 19:24:51 | INFO     | routers.stream:38 - Cache MISS for stream: mBXi3fYbgx4 — fetching
+2026-03-22 19:24:51 | INFO     | services.stream_service:34 - Extracting stream URL for video_id: mBXi3fYbgx4
+2026-03-22 19:24:55 | INFO     | services.stream_service:59 - Got stream URL for mBXi3fYbgx4 | format: 251 - audio only (medium)
+2026-03-22 19:24:55 | INFO     | main:76 - GET /stream/mBXi3fYbgx4 → 200 (3949.3ms)
+2026-03-22 19:24:57 | INFO     | routers.stream:122 - Logged play: Wqu4MRQOgyo
+2026-03-22 19:24:57 | INFO     | main:76 - POST /discord/update → 200 (5.6ms)
+2026-03-22 19:24:57 | INFO     | main:76 - POST /stream/Wqu4MRQOgyo/played → 200 (36.1ms)
+2026-03-22 19:26:07 | INFO     | routers.stream:38 - Cache MISS for stream: YmIaKmfhrb0 — fetching
+2026-03-22 19:26:07 | INFO     | services.stream_service:34 - Extracting stream URL for video_id: YmIaKmfhrb0
+2026-03-22 19:26:09 | INFO     | services.stream_service:59 - Got stream URL for YmIaKmfhrb0 | format: 251 - audio only (medium)
+2026-03-22 19:26:09 | INFO     | main:76 - GET /stream/YmIaKmfhrb0 → 200 (2234.5ms)
+2026-03-22 19:26:10 | INFO     | main:76 - POST /discord/update → 200 (1.8ms)
+2026-03-22 19:26:10 | INFO     | routers.stream:117 - Inserted track: Shri Ram Jai Ram - Dhun
+2026-03-22 19:26:10 | INFO     | routers.stream:122 - Logged play: mBXi3fYbgx4
+2026-03-22 19:26:10 | INFO     | main:76 - POST /stream/mBXi3fYbgx4/played → 200 (25.7ms)
+2026-03-22 19:26:11 | INFO     | routers.stream:38 - Cache MISS for stream: XX_OcWCM_K8 — fetching
+2026-03-22 19:26:11 | INFO     | services.stream_service:34 - Extracting stream URL for video_id: XX_OcWCM_K8
+2026-03-22 19:26:12 | INFO     | routers.stream:38 - Cache MISS for stream: oGvlhx2ThEc — fetching
+2026-03-22 19:26:12 | INFO     | services.stream_service:34 - Extracting stream URL for video_id: oGvlhx2ThEc
+2026-03-22 19:26:13 | INFO     | services.stream_service:59 - Got stream URL for XX_OcWCM_K8 | format: 251 - audio only (medium)
+2026-03-22 19:26:13 | INFO     | main:76 - GET /stream/XX_OcWCM_K8 → 200 (2090.0ms)
+2026-03-22 19:26:17 | INFO     | services.stream_service:59 - Got stream URL for oGvlhx2ThEc | format: 251 - audio only (medium)
+2026-03-22 19:26:17 | INFO     | main:76 - GET /stream/oGvlhx2ThEc → 200 (4629.3ms)
+2026-03-22 19:26:30 | INFO     | main:76 - GET /trending → 307 (1.4ms)
+2026-03-22 19:26:30 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-03-22 19:26:30 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-03-22 19:26:30 | INFO     | main:76 - GET /recommendations/similar → 200 (34.6ms)
+2026-03-22 19:26:30 | INFO     | routers.trending:60 - Trending cache HIT (20 tracks)
+2026-03-22 19:26:30 | INFO     | main:76 - GET /trending/ → 200 (7.6ms)
+2026-03-22 19:26:30 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-03-22 19:26:30 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-03-22 19:26:30 | INFO     | main:76 - GET /recommendations/ → 200 (27.6ms)
+2026-03-22 19:27:12 | INFO     | routers.stream:36 - Cache HIT for stream: Wqu4MRQOgyo
+2026-03-22 19:27:12 | INFO     | main:76 - GET /stream/Wqu4MRQOgyo → 200 (6.5ms)

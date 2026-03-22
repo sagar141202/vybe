@@ -9,6 +9,7 @@ import { router } from 'expo-router';
 import { usePlayerStore } from '../stores/playerStore';
 import { usePlayTrack } from '../hooks/usePlayTrack';
 import { Ionicons } from '@expo/vector-icons';
+import EmptyState from '../components/EmptyState';
 import type { Track } from '../components/TrackListItem';
 
 const { width, height } = Dimensions.get('window');
@@ -306,11 +307,13 @@ export default function QueueScreen() {
         )}
 
         {queue.length === 0 && (
-          <View style={styles.emptyWrap}>
-            <Text style={styles.emptyEmoji}>🎵</Text>
-            <Text style={styles.emptyTitle}>Queue is empty</Text>
-            <Text style={styles.emptySub}>Search for tracks to add to your queue</Text>
-          </View>
+          <EmptyState
+            emoji="📋"
+            title="Queue is empty"
+            subtitle="Play some music to see your queue here"
+            actionLabel="Search Music"
+            onAction={() => router.push('/(tabs)/search')}
+          />
         )}
 
         <View style={{ height: 120 }} />

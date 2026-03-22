@@ -1,35 +1,43 @@
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-export default function EmptyState({ emoji = '🎵', title, subtitle, actionLabel, onAction }: {
-  emoji?: string; title: string; subtitle?: string; actionLabel?: string; onAction?: () => void;
-}) {
+interface EmptyStateProps {
+  emoji: string;
+  title: string;
+  subtitle: string;
+  actionLabel?: string;
+  onAction?: () => void;
+  colors?: [string, string];
+}
+
+export default function EmptyState({
+  emoji, title, subtitle, actionLabel, onAction,
+  colors = ['rgba(167,139,250,0.1)', 'rgba(125,211,252,0.05)'],
+}: EmptyStateProps) {
   return (
-    <View style={styles.container}>
-      <View style={styles.emojiWrap}>
-        <LinearGradient colors={['rgba(167,139,250,0.2)','rgba(125,211,252,0.1)']} style={StyleSheet.absoluteFillObject} />
+    <View style={styles.wrap}>
+      <View style={styles.card}>
+        <LinearGradient colors={colors} style={StyleSheet.absoluteFillObject} />
         <Text style={styles.emoji}>{emoji}</Text>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.subtitle}>{subtitle}</Text>
+        {actionLabel && onAction && (
+          <TouchableOpacity style={styles.btn} onPress={onAction}>
+            <LinearGradient colors={['#C4B5FD', '#A78BFA']} style={StyleSheet.absoluteFillObject} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} />
+            <Text style={styles.btnText}>{actionLabel}</Text>
+          </TouchableOpacity>
+        )}
       </View>
-      <Text style={styles.title}>{title}</Text>
-      {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
-      {actionLabel && onAction && (
-        <TouchableOpacity style={styles.actionBtn} onPress={onAction}>
-          <LinearGradient colors={['#C4B5FD','#A78BFA']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.actionGrad}>
-            <Text style={styles.actionText}>{actionLabel}</Text>
-          </LinearGradient>
-        </TouchableOpacity>
-      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { alignItems: 'center', paddingTop: 48, paddingHorizontal: 32 },
-  emojiWrap: { width: 80, height: 80, borderRadius: 40, alignItems: 'center', justifyContent: 'center', overflow: 'hidden', marginBottom: 20, borderWidth: 1.5, borderColor: 'rgba(167,139,250,0.3)' },
-  emoji: { fontSize: 36 },
-  title: { fontSize: 18, fontWeight: '800', color: '#1E1B4B', textAlign: 'center', marginBottom: 8 },
-  subtitle: { fontSize: 14, color: '#6B7280', textAlign: 'center', lineHeight: 20, marginBottom: 24 },
-  actionBtn: { borderRadius: 30, overflow: 'hidden' },
-  actionGrad: { paddingHorizontal: 24, paddingVertical: 12, borderRadius: 30 },
-  actionText: { fontSize: 14, fontWeight: '700', color: '#FFFFFF', letterSpacing: 0.3 },
+  wrap: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 32 },
+  card: { width: '100%', padding: 40, borderRadius: 28, overflow: 'hidden', alignItems: 'center', borderWidth: 1.5, borderColor: 'rgba(167,139,250,0.15)', gap: 10 },
+  emoji: { fontSize: 56, marginBottom: 6 },
+  title: { fontSize: 20, fontWeight: '800', color: '#1E1B4B', textAlign: 'center' },
+  subtitle: { fontSize: 14, color: '#6B7280', textAlign: 'center', lineHeight: 22 },
+  btn: { marginTop: 8, paddingHorizontal: 28, paddingVertical: 13, borderRadius: 30, overflow: 'hidden' },
+  btnText: { fontSize: 14, fontWeight: '700', color: '#FFFFFF' },
 });
