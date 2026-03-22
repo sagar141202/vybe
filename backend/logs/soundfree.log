@@ -2863,3 +2863,19 @@ DETAIL:  Failing row contains (9, null, FOA9iyxsW_A, 2026-03-16 16:24:49.34407+0
 2026-03-22 19:38:58 | INFO     | routers.trending:60 - Trending cache HIT (20 tracks)
 2026-03-22 19:38:58 | INFO     | main:76 - GET /trending/ → 200 (3.0ms)
 2026-03-22 19:38:58 | INFO     | main:76 - GET /recommendations/ → 200 (34.0ms)
+2026-03-22 19:39:08 | INFO     | routers.stream:36 - Cache HIT for stream: Wqu4MRQOgyo
+2026-03-22 19:39:08 | INFO     | main:76 - GET /stream/Wqu4MRQOgyo → 200 (4.2ms)
+2026-03-22 19:39:11 | WARNING  | routers.likes:32 - Like error: (sqlalchemy.dialects.postgresql.asyncpg.IntegrityError) <class 'asyncpg.exceptions.NotNullViolationError'>: null value in column "user_id" of relation "liked_tracks" violates not-null constraint
+DETAIL:  Failing row contains (10, null, Wqu4MRQOgyo, 2026-03-22 14:09:11.538314+00).
+[SQL: INSERT INTO liked_tracks (user_id, video_id) VALUES ($1::UUID, $2::VARCHAR) RETURNING liked_tracks.id, liked_tracks.liked_at]
+[parameters: (None, 'Wqu4MRQOgyo')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2026-03-22 19:39:11 | INFO     | main:76 - POST /likes/Wqu4MRQOgyo → 200 (24.8ms)
+2026-03-22 19:39:13 | INFO     | routers.likes:43 - Unliked: Wqu4MRQOgyo
+2026-03-22 19:39:13 | INFO     | main:76 - DELETE /likes/Wqu4MRQOgyo → 200 (13.5ms)
+2026-03-22 19:39:14 | WARNING  | routers.likes:32 - Like error: (sqlalchemy.dialects.postgresql.asyncpg.IntegrityError) <class 'asyncpg.exceptions.NotNullViolationError'>: null value in column "user_id" of relation "liked_tracks" violates not-null constraint
+DETAIL:  Failing row contains (11, null, Wqu4MRQOgyo, 2026-03-22 14:09:14.699525+00).
+[SQL: INSERT INTO liked_tracks (user_id, video_id) VALUES ($1::UUID, $2::VARCHAR) RETURNING liked_tracks.id, liked_tracks.liked_at]
+[parameters: (None, 'Wqu4MRQOgyo')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2026-03-22 19:39:14 | INFO     | main:76 - POST /likes/Wqu4MRQOgyo → 200 (17.8ms)
