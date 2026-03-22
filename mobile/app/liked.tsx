@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { router } from 'expo-router';
 import { FlashList } from '@shopify/flash-list';
 import { useLibraryStore } from '../stores/libraryStore';
