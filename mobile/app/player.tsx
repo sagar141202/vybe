@@ -88,7 +88,7 @@ export default function FullPlayer() {
 
   useEffect(() => {
     Animated.spring(artScale, {
-      toValue: isPlaying ? 1.0 : 0.92,
+      toValue: isPlaying ? 1.0 : 0.88,
       useNativeDriver: true, tension: 60, friction: 10,
     }).start();
   }, [isPlaying]);
@@ -97,8 +97,8 @@ export default function FullPlayer() {
     if (!currentTrack) return;
     if (prevTrackId.current && prevTrackId.current !== currentTrack.video_id) {
       Animated.sequence([
-        Animated.timing(artOpacity, { toValue: 0, duration: 150, useNativeDriver: true }),
-        Animated.timing(artOpacity, { toValue: 1, duration: 200, useNativeDriver: true }),
+        Animated.timing(artOpacity, { toValue: 0, duration: 200, useNativeDriver: true }),
+        Animated.timing(artOpacity, { toValue: 1, duration: 350, useNativeDriver: true }),
       ]).start();
     }
     prevTrackId.current = currentTrack.video_id;
