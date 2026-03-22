@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import { useRef, useEffect, useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
+import { memo } from 'react';
 import { getLyrics } from '../lib/api';
 import { getReducedMotion } from '../hooks/useReducedMotion';
 import { usePlayerStore } from '../stores/playerStore';
@@ -18,6 +19,31 @@ interface LyricsViewProps {
   title: string;
   accentColor?: string;
 }
+
+
+const LyricsLine = memo(({ line, isActive, isPast, scale, accentColor, onPress }: {
+  line: { time_ms: number; text: string };
+  isActive: boolean;
+  isPast: boolean;
+  scale: Animated.Value;
+  accentColor: string;
+  onPress: () => void;
+}) => (
+  <TouchableOpacity onPress={onPress} activeOpacity={0.7}>
+    <Animated.View style={[styles.lineWrap,
+      isActive && { borderColor: accentColor + '50', borderWidth: 1 },
+      { transform: [{ scale }] }
+    ]}>
+      {isActive && <View style={[styles.activeDot, { backgroundColor: accentColor }]} />}
+      <Text style={[styles.lineText,
+        isPast && { color: accentColor + '80' },
+        isActive && { color: '#1E1B4B', fontWeight: '800', fontSize: 18 }
+      ]}>
+        {line.text}
+      </Text>
+    </Animated.View>
+  </TouchableOpacity>
+));
 
 export default function LyricsView({ videoId, artist, title, accentColor = '#7C3AED' }: LyricsViewProps) {
   const position = usePlayerStore(s => s.position);

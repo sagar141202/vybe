@@ -1,4 +1,5 @@
 import { TouchableOpacity, View, StyleSheet, Animated } from 'react-native';
+import { memo } from 'react';
 import { useRef, useEffect } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
@@ -10,7 +11,7 @@ interface DownloadButtonProps {
   size?: number;
 }
 
-export default function DownloadButton({ track, size = 28 }: DownloadButtonProps) {
+function DownloadButton({ track, size = 28 }: DownloadButtonProps) {
   const { status, progress, download, remove } = useDownloadState(track.video_id);
   const progressAnim = useRef(new Animated.Value(0)).current;
   const spinAnim = useRef(new Animated.Value(0)).current;
@@ -96,4 +97,8 @@ export default function DownloadButton({ track, size = 28 }: DownloadButtonProps
 const styles = StyleSheet.create({
   btn: { padding: 4, minWidth: 44, minHeight: 44, alignItems: 'center', justifyContent: 'center' },
   doneBg: { alignItems: 'center', justifyContent: 'center' },
+});
+
+export default memo(DownloadButton, (prev, next) => {
+  return prev.track.video_id === next.track.video_id;
 });

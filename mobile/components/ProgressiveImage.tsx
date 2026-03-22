@@ -1,4 +1,5 @@
 import { View, StyleSheet, Animated } from 'react-native';
+import { memo } from 'react';
 import { useState, useRef, useEffect } from 'react';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -23,7 +24,7 @@ function getHighResUrl(url: string | null): string | null {
 
 const BLURHASH = '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
 
-export default function ProgressiveImage({
+function ProgressiveImage({
   videoId,
   thumbnailUrl,
   style,
@@ -66,3 +67,7 @@ export default function ProgressiveImage({
     />
   );
 }
+
+export default memo(ProgressiveImage, (prev, next) => {
+  return prev.videoId === next.videoId && prev.thumbnailUrl === next.thumbnailUrl;
+});

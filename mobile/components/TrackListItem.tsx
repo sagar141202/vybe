@@ -28,7 +28,7 @@ function formatDuration(ms: number | null): string {
   return `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, '0')}`;
 }
 
-export default function TrackListItem({
+function TrackListItem({
   track, index = 0, isPlaying = false, onPress, onMorePress
 }: {
   track: Track;
@@ -171,4 +171,10 @@ const styles = StyleSheet.create({
     gap: 3,
   },
   dot: { width: 3.5, height: 3.5, borderRadius: 2, backgroundColor: '#A78BFA' },
+});
+
+export default memo(TrackListItem, (prev, next) => {
+  return prev.track.video_id === next.track.video_id &&
+    prev.isPlaying === next.isPlaying &&
+    prev.index === next.index;
 });

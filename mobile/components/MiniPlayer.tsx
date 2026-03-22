@@ -1,6 +1,6 @@
 import { Image,View, Text, TouchableOpacity,
   StyleSheet, Animated, PanResponder } from 'react-native';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, memo } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import PlayPauseButton from './PlayPauseButton';
 import { router } from 'expo-router';
@@ -13,7 +13,7 @@ const THUMB_COLORS = [
   ['#FBCFE8','#F9A8D4'],
 ];
 
-export default function MiniPlayer({ onPress }: { onPress?: () => void }) {
+function MiniPlayer({ onPress }: { onPress?: () => void }) {
   const currentTrack = usePlayerStore(s => s.currentTrack);
   const isPlaying = usePlayerStore(s => s.isPlaying);
   const position = usePlayerStore(s => s.position);
@@ -120,3 +120,5 @@ const styles = StyleSheet.create({
   nextBtn: { width: 44, height: 44, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(167,139,250,0.12)', borderRadius: 22, borderWidth: 1, borderColor: 'rgba(167,139,250,0.2)' },
   nextIcon: { fontSize: 14 },
 });
+
+export default memo(MiniPlayer);
