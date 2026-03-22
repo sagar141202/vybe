@@ -3,6 +3,7 @@ import {
 } from 'react-native';
 import { useRef, useEffect } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
 const { width, height } = Dimensions.get('window');
 
@@ -13,6 +14,7 @@ interface AnimatedCanvasProps {
 }
 
 export default function AnimatedCanvas({ thumbnailUrl, isPlaying, colors }: AnimatedCanvasProps) {
+  const reducedMotion = useReducedMotion();
   // Multiple animated layers for depth
   const scale1 = useRef(new Animated.Value(1)).current;
   const scale2 = useRef(new Animated.Value(1.1)).current;
@@ -31,7 +33,7 @@ export default function AnimatedCanvas({ thumbnailUrl, isPlaying, colors }: Anim
   const anim3 = useRef<Animated.CompositeAnimation | null>(null);
 
   useEffect(() => {
-    if (isPlaying) {
+    if (isPlaying && !reducedMotion) {
       // Layer 1 — slow zoom and drift
       anim1.current = Animated.loop(
         Animated.sequence([

@@ -2,6 +2,7 @@ import { TouchableOpacity, Animated, StyleSheet } from 'react-native';
 import { useRef, useEffect } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
+import { getReducedMotion } from '../hooks/useReducedMotion';
 
 interface PlayPauseButtonProps {
   isPlaying: boolean;
@@ -21,6 +22,7 @@ export default function PlayPauseButton({
   useEffect(() => {
     if (prevPlaying.current === isPlaying) return;
     prevPlaying.current = isPlaying;
+    if (getReducedMotion()) return;
 
     // Morph animation sequence
     Animated.sequence([
@@ -67,6 +69,7 @@ export default function PlayPauseButton({
   }, [isPlaying]);
 
   const handlePress = () => {
+    if (!getReducedMotion()) {
     // Tap feedback
     Animated.sequence([
       Animated.spring(scaleAnim, {
@@ -82,6 +85,7 @@ export default function PlayPauseButton({
         friction: 7,
       }),
     ]).start();
+    }
     onPress();
   };
 

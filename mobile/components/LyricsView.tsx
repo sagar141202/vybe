@@ -5,6 +5,7 @@ import {
 import { useRef, useEffect, useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { getLyrics } from '../lib/api';
+import { getReducedMotion } from '../hooks/useReducedMotion';
 import { usePlayerStore } from '../stores/playerStore';
 
 const { height } = Dimensions.get('window');

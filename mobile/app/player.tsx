@@ -9,6 +9,7 @@ import { router } from 'expo-router';
 import { usePlayerStore } from '../stores/playerStore';
 import { usePlayTrack, seekToPosition } from '../hooks/usePlayTrack';
 import { useAccentColor } from '../hooks/useAccentColor';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 import { useLike } from '../hooks/useLike';
 import ProgressBar from '../components/ProgressBar';
 import LyricsView from '../components/LyricsView';
@@ -73,6 +74,7 @@ export default function FullPlayer() {
   const toggleRadio = usePlayerStore(s => s.toggleRadio);
   const { togglePlayPause } = usePlayTrack();
   const { getPalette } = useAccentColor();
+  const reducedMotion = useReducedMotion();
 
   const artScale = useRef(new Animated.Value(0.92)).current;
   const slideAnim = useRef(new Animated.Value(height)).current;
@@ -88,10 +90,14 @@ export default function FullPlayer() {
   }, []);
 
   useEffect(() => {
+    if (!reducedMotion) {
     Animated.spring(artScale, {
       toValue: isPlaying ? 1.0 : 0.88,
       useNativeDriver: true, tension: 60, friction: 10,
     }).start();
+    } else {
+      artScale.setValue(1);
+    }
   }, [isPlaying]);
 
   useEffect(() => {
