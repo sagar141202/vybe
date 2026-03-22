@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden', borderWidth: 1.5,
     borderColor: 'rgba(125,211,252,0.4)',
   },
-  headerTitle: { flex: 1, textAlign: 'center', fontSize: 17, fontWeight: '800', color: '#1E1B4B' },
+  headerTitle: { flex: 1, textAlign: 'center', fontSize: 17, fontFamily: 'Outfit_900Black', fontWeight: '800', color: '#1E1B4B' },
   hero: { alignItems: 'center', paddingVertical: 24, paddingHorizontal: 24 },
   heroArt: {
     width: 140, height: 140, borderRadius: 28,
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(255,255,255,0.9)',
   },
   heroEmoji: { fontSize: 60 },
-  heroTitle: { fontSize: 28, fontWeight: '900', color: '#1E1B4B', marginBottom: 4 },
+  heroTitle: { fontSize: 28, fontFamily: 'Outfit_900Black', fontWeight: '900', color: '#1E1B4B', marginBottom: 4 },
   heroCount: { fontSize: 14, color: '#6B7280', marginBottom: 20 },
   playAllBtn: {
     flexDirection: 'row', alignItems: 'center', gap: 8,
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     borderRadius: 30, overflow: 'hidden',
     borderWidth: 1.5, borderColor: 'rgba(125,211,252,0.6)',
   },
-  playAllText: { fontSize: 14, fontWeight: '700', color: '#1D4ED8' },
+  playAllText: { fontSize: 14, fontFamily: 'PlusJakartaSans_700Bold', fontWeight: '700', color: '#1D4ED8' },
   list: { paddingTop: 8 },
   emptyWrap: { flex: 1, padding: 24, justifyContent: 'center' },
   emptyCard: {
@@ -156,11 +156,11 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(125,211,252,0.2)',
   },
   emptyEmoji: { fontSize: 56, marginBottom: 16 },
-  emptyTitle: { fontSize: 20, fontWeight: '800', color: '#1E1B4B', marginBottom: 8 },
+  emptyTitle: { fontSize: 20, fontFamily: 'Outfit_900Black', fontWeight: '800', color: '#1E1B4B', marginBottom: 8 },
   emptySub: { fontSize: 14, color: '#6B7280', textAlign: 'center', lineHeight: 22, marginBottom: 24 },
   discoverBtn: {
     paddingHorizontal: 28, paddingVertical: 13,
     borderRadius: 30, overflow: 'hidden',
   },
-  discoverText: { fontSize: 14, fontWeight: '700', color: '#1D4ED8' },
+  discoverText: { fontSize: 14, fontFamily: 'PlusJakartaSans_700Bold', fontWeight: '700', color: '#1D4ED8' },
 });

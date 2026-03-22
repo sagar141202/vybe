@@ -8,6 +8,7 @@ import { useLibraryStore } from '../../stores/libraryStore';
 import { usePlayerStore } from '../../stores/playerStore';
 import { usePlayTrack } from '../../hooks/usePlayTrack';
 import { getRecommendations, getTrendingTracks, getSimilarTracks } from '../../lib/api';
+import { useThemeStore } from '../../stores/themeStore';
 import { HomeScreenSkeleton } from '../../components/Skeleton';
 import type { Track } from '../../components/TrackListItem';
 import { Ionicons } from '@expo/vector-icons';
@@ -86,6 +87,7 @@ function SectionHeader({ title, onSeeAll }: { title: string; onSeeAll?: () => vo
 }
 
 export default function HomeScreen() {
+  const theme = useThemeStore(s => s.theme);
   const recentlyPlayed = useLibraryStore(s => s.recentlyPlayed);
   const likedTracks = useLibraryStore(s => s.likedTracks);
   const currentTrack = usePlayerStore(s => s.currentTrack);
@@ -106,7 +108,7 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
-      <LinearGradient colors={['#FAFBFF', '#F0F4FF', '#F8FAFF']} style={StyleSheet.absoluteFillObject} />
+      <LinearGradient colors={[theme.gradientStart, theme.gradientEnd, theme.bg3]} style={StyleSheet.absoluteFillObject} />
 
       {initialLoading && <HomeScreenSkeleton />}
       {!initialLoading && <>{/* content */}</>}
@@ -338,62 +340,62 @@ const styles = StyleSheet.create({
   blob2: { position: 'absolute', top: 200, left: -80, width: 240, height: 240, borderRadius: 120 },
   scroll: { paddingBottom: 20 },
   header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingTop: 64, paddingHorizontal: 24, marginBottom: 24 },
-  greeting: { fontSize: 28, fontWeight: '900', color: '#1E1B4B', letterSpacing: -0.5 },
-  subGreeting: { fontSize: 14, color: '#6B7280', marginTop: 4 },
+  greeting: { fontSize: 28, fontFamily: 'Outfit_900Black', fontWeight: '900', letterSpacing: -1, color: theme.text, letterSpacing: -0.5 },
+  subGreeting: { fontSize: 14, color: theme.textSecondary, marginTop: 4 },
   searchBtn: { width: 46, height: 46, borderRadius: 23, alignItems: 'center', justifyContent: 'center', overflow: 'hidden', borderWidth: 1.5, borderColor: 'rgba(167,139,250,0.3)' },
   jumpBackCard: { marginHorizontal: 24, marginBottom: 24, borderRadius: 20, overflow: 'hidden', borderWidth: 1.5, borderColor: 'rgba(167,139,250,0.25)' },
   jumpBackBorder: { position: 'absolute', inset: 0, borderRadius: 20, borderWidth: 1, borderColor: 'rgba(255,255,255,0.8)' },
   jumpBackContent: { flexDirection: 'row', alignItems: 'center', padding: 14, gap: 14 },
   jumpBackThumb: { width: 56, height: 56, borderRadius: 14, alignItems: 'center', justifyContent: 'center', overflow: 'hidden' },
   jumpBackInfo: { flex: 1 },
-  jumpBackLabel: { fontSize: 11, color: '#A78BFA', fontWeight: '700', letterSpacing: 1, marginBottom: 3 },
-  jumpBackTitle: { fontSize: 15, fontWeight: '800', color: '#1E1B4B', marginBottom: 2 },
-  jumpBackArtist: { fontSize: 12, color: '#6B7280' },
+  jumpBackLabel: { fontSize: 11, color: '#A78BFA', fontFamily: 'PlusJakartaSans_700Bold', fontWeight: '700', letterSpacing: 1, marginBottom: 3 },
+  jumpBackTitle: { fontSize: 15, fontFamily: 'Outfit_900Black', fontWeight: '800', letterSpacing: -0.5, color: theme.text, marginBottom: 2 },
+  jumpBackArtist: { fontSize: 12, color: theme.textSecondary },
   moodsSection: { marginBottom: 8 },
   moodsScroll: { paddingLeft: 24, paddingRight: 12, gap: 10 },
   moodChip: { paddingHorizontal: 16, paddingVertical: 12, borderRadius: 20, overflow: 'hidden', alignItems: 'center', gap: 4, minWidth: 80, borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.9)' },
   moodEmoji: { fontSize: 20 },
-  moodLabel: { fontSize: 12, fontWeight: '700', color: '#1E1B4B' },
+  moodLabel: { fontSize: 12, fontFamily: 'PlusJakartaSans_700Bold', fontWeight: '700', color: theme.text },
   section: { marginBottom: 8 },
   sectionHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 24, paddingVertical: 12 },
-  sectionTitle: { fontSize: 18, fontWeight: '800', color: '#1E1B4B' },
-  seeAll: { fontSize: 13, color: '#A78BFA', fontWeight: '600' },
+  sectionTitle: { fontSize: 18, fontFamily: 'Outfit_900Black', fontWeight: '800', letterSpacing: -0.5, color: theme.text },
+  seeAll: { fontSize: 13, color: '#A78BFA', fontFamily: 'PlusJakartaSans_700Bold', fontWeight: '600' },
   horizontalScroll: { paddingLeft: 24, paddingRight: 12, gap: 14 },
   trackCard: { width: CARD_W },
   trackCardThumb: { width: CARD_W, height: CARD_W, borderRadius: 18, overflow: 'hidden', marginBottom: 10, position: 'relative', borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.9)' },
   trackCardImg: { width: CARD_W, height: CARD_W, borderRadius: 18, alignItems: 'center', justifyContent: 'center' },
   trackCardPlay: { position: 'absolute', bottom: 8, right: 8, width: 30, height: 30, borderRadius: 15, backgroundColor: 'rgba(0,0,0,0.35)', alignItems: 'center', justifyContent: 'center' },
-  trackCardTitle: { fontSize: 13, fontWeight: '700', color: '#1E1B4B', lineHeight: 18, marginBottom: 2 },
-  trackCardArtist: { fontSize: 11, color: '#6B7280' },
+  trackCardTitle: { fontSize: 13, fontFamily: 'PlusJakartaSans_700Bold', fontWeight: '700', color: theme.text, lineHeight: 18, marginBottom: 2 },
+  trackCardArtist: { fontSize: 11, color: theme.textSecondary },
   reasonBadge: { marginTop: 4, backgroundColor: 'rgba(167,139,250,0.15)', paddingHorizontal: 8, paddingVertical: 3, borderRadius: 8, alignSelf: 'flex-start' },
-  reasonText: { fontSize: 10, color: '#7C3AED', fontWeight: '700' },
+  reasonText: { fontSize: 10, color: '#7C3AED', fontFamily: 'PlusJakartaSans_700Bold', fontWeight: '700' },
   trendingList: { paddingHorizontal: 16, gap: 6 },
   trendingRow: { flexDirection: 'row', alignItems: 'center', gap: 12, padding: 12, borderRadius: 18, overflow: 'hidden', borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.9)' },
   trendingRank: { width: 28, height: 28, borderRadius: 8, backgroundColor: 'rgba(167,139,250,0.15)', alignItems: 'center', justifyContent: 'center' },
-  trendingRankText: { fontSize: 13, fontWeight: '900', color: '#7C3AED' },
+  trendingRankText: { fontSize: 13, fontFamily: 'Outfit_900Black', fontWeight: '900', letterSpacing: -1, color: '#7C3AED' },
   trendingThumb: { width: 44, height: 44, borderRadius: 10, alignItems: 'center', justifyContent: 'center' },
   trendingInfo: { flex: 1 },
-  trendingTitle: { fontSize: 14, fontWeight: '700', color: '#1E1B4B', marginBottom: 2 },
-  trendingArtist: { fontSize: 12, color: '#6B7280' },
+  trendingTitle: { fontSize: 14, fontFamily: 'PlusJakartaSans_700Bold', fontWeight: '700', color: theme.text, marginBottom: 2 },
+  trendingArtist: { fontSize: 12, color: theme.textSecondary },
   emptyWrap: { paddingHorizontal: 24, marginTop: 20 },
   emptyCard: { padding: 40, borderRadius: 28, overflow: 'hidden', alignItems: 'center', borderWidth: 1.5, borderColor: 'rgba(167,139,250,0.15)' },
   emptyEmoji: { fontSize: 56, marginBottom: 16 },
-  emptyTitle: { fontSize: 20, fontWeight: '800', color: '#1E1B4B', marginBottom: 8 },
-  emptySub: { fontSize: 14, color: '#6B7280', textAlign: 'center', lineHeight: 22, marginBottom: 24 },
+  emptyTitle: { fontSize: 20, fontFamily: 'Outfit_900Black', fontWeight: '800', letterSpacing: -0.5, color: theme.text, marginBottom: 8 },
+  emptySub: { fontSize: 14, color: theme.textSecondary, textAlign: 'center', lineHeight: 22, marginBottom: 24 },
   vibeCard: { marginHorizontal: 24, marginBottom: 12, borderRadius: 24, overflow: 'hidden', height: 90, borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.9)' },
   vibeDeco: { position: 'absolute', left: -20, bottom: -20, width: 100, height: 100, borderRadius: 50, backgroundColor: 'rgba(255,255,255,0.12)' },
   vibeContent: { flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: 18 },
-  vibeBadge: { fontSize: 9, fontWeight: '800', color: 'rgba(255,255,255,0.8)', letterSpacing: 2, marginBottom: 3 },
-  vibeTitle: { fontSize: 18, fontWeight: '900', color: '#FFFFFF', letterSpacing: -0.3 },
+  vibeBadge: { fontSize: 9, fontFamily: 'Outfit_900Black', fontWeight: '800', letterSpacing: -0.5, color: 'rgba(255,255,255,0.8)', letterSpacing: 2, marginBottom: 3 },
+  vibeTitle: { fontSize: 18, fontFamily: 'Outfit_900Black', fontWeight: '900', letterSpacing: -1, color: '#FFFFFF', letterSpacing: -0.3 },
   vibeSub: { fontSize: 11, color: 'rgba(255,255,255,0.8)', marginTop: 1 },
   vibeEmoji: { fontSize: 32 },
   dailyMixCard: { marginHorizontal: 24, marginBottom: 16, borderRadius: 24, overflow: 'hidden', height: 100, borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.9)' },
   dailyMixDeco: { position: 'absolute', right: -30, top: -30, width: 140, height: 140, borderRadius: 70, backgroundColor: 'rgba(255,255,255,0.15)' },
   dailyMixContent: { flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: 20 },
-  dailyMixBadge: { fontSize: 10, fontWeight: '800', color: 'rgba(255,255,255,0.8)', letterSpacing: 2, marginBottom: 4 },
-  dailyMixTitle: { fontSize: 20, fontWeight: '900', color: '#FFFFFF', letterSpacing: -0.5 },
+  dailyMixBadge: { fontSize: 10, fontFamily: 'Outfit_900Black', fontWeight: '800', letterSpacing: -0.5, color: 'rgba(255,255,255,0.8)', letterSpacing: 2, marginBottom: 4 },
+  dailyMixTitle: { fontSize: 20, fontFamily: 'Outfit_900Black', fontWeight: '900', letterSpacing: -1, color: '#FFFFFF', letterSpacing: -0.5 },
   dailyMixSub: { fontSize: 12, color: 'rgba(255,255,255,0.8)', marginTop: 2 },
-  dailyMixBtn: { width: 48, height: 48, borderRadius: 24, backgroundColor: 'rgba(255,255,255,0.9)', alignItems: 'center', justifyContent: 'center' },
+  dailyMixBtn: { width: 48, height: 48, borderRadius: 24, backgroundColor: theme.card, alignItems: 'center', justifyContent: 'center' },
   emptyBtn: { borderRadius: 30, overflow: 'hidden' },
-  emptyBtnText: { fontSize: 14, fontWeight: '700', color: '#FFFFFF', paddingHorizontal: 28, paddingVertical: 13 },
+  emptyBtnText: { fontSize: 14, fontFamily: 'PlusJakartaSans_700Bold', fontWeight: '700', color: '#FFFFFF', paddingHorizontal: 28, paddingVertical: 13 },
 });

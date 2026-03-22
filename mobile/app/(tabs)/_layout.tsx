@@ -1,4 +1,5 @@
 import { Tabs } from 'expo-router';
+import { useThemeStore } from '../../stores/themeStore';
 import { View, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
@@ -19,22 +20,23 @@ function TabIcon({ name, focused }: { name: any; focused: boolean }) {
 }
 
 export default function TabLayout() {
+  const theme = useThemeStore(s => s.theme);
   return (
     <View style={{ flex: 1 }}>
       <Tabs
         screenOptions={{
           headerShown: false,
           tabBarStyle: {
-            position: 'absolute',
-            backgroundColor: 'rgba(250,251,255,0.95)',
-            borderTopColor: 'rgba(167,139,250,0.2)',
-            borderTopWidth: 1,
-            height: 72,
-            paddingBottom: 12,
-            paddingTop: 8,
-          },
-          tabBarActiveTintColor: '#7C3AED',
-          tabBarInactiveTintColor: '#9CA3AF',
+          backgroundColor: theme.tabBar,
+          borderTopColor: theme.tabBarBorder,
+          borderTopWidth: 1,
+          height: 80,
+          paddingBottom: 20,
+          paddingTop: 10,
+          elevation: 20,
+        },
+          tabBarActiveTintColor: theme.accent,
+          tabBarInactiveTintColor: theme.textTertiary,
           tabBarLabelStyle: { fontSize: 11, fontWeight: '700', letterSpacing: 0.3 },
         }}
       >

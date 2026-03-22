@@ -2,6 +2,8 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-nati
 import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
 import { router } from 'expo-router';
+import { useThemeStore } from '../../stores/themeStore';
+import { Switch } from 'react-native';
 import { useLibraryStore } from '../../stores/libraryStore';
 import { usePlaylistStore } from '../../stores/playlistStore';
 import { getDownloadCount } from '../../services/localDb';
@@ -21,6 +23,7 @@ const SETTINGS = [
 ];
 
 export default function ProfileScreen() {
+  const { isDark, toggleTheme, theme } = useThemeStore();
   const likedTracks = useLibraryStore(s => s.likedTracks);
   const playlists = usePlaylistStore(s => s.playlists);
   const [downloadCount, setDownloadCount] = useState(0);
@@ -32,7 +35,7 @@ export default function ProfileScreen() {
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
-      <LinearGradient colors={['#FAFBFF', '#F0F4FF', '#F8FAFF']} style={StyleSheet.absoluteFillObject} />
+      <LinearGradient colors={[theme.gradientStart, theme.gradientEnd, theme.bg3]} style={StyleSheet.absoluteFillObject} />
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
 
         {/* Header */}
@@ -67,6 +70,21 @@ export default function ProfileScreen() {
 
         {/* Settings */}
         <Text style={styles.section}>Settings ⚙️</Text>
+        <View style={[styles.darkModeRow, { backgroundColor: theme.card, borderColor: theme.cardBorder }]}>
+          <LinearGradient colors={isDark ? ['#A78BFA', '#7C3AED'] : ['#C4B5FD', '#A78BFA']} style={styles.darkModeIcon}>
+            <Text style={{ fontSize: 20 }}>{isDark ? '��' : '☀️'}</Text>
+          </LinearGradient>
+          <View style={{ flex: 1 }}>
+            <Text style={[styles.settingName, { color: theme.text }]}>Dark Mode</Text>
+            <Text style={[styles.settingValue, { color: theme.textSecondary }]}>{isDark ? 'Dark theme active' : 'Light theme active'}</Text>
+          </View>
+          <Switch
+            value={isDark}
+            onValueChange={toggleTheme}
+            trackColor={{ false: '#E5E7EB', true: '#A78BFA' }}
+            thumbColor={isDark ? '#7C3AED' : '#FFFFFF'}
+          />
+        </View>
         <View style={styles.settingsList}>
           {SETTINGS.map((s, i) => (
             <TouchableOpacity
@@ -106,24 +124,25 @@ const styles = StyleSheet.create({
   scroll: { paddingBottom: 20 },
   header: { alignItems: 'center', paddingTop: 64, paddingBottom: 28, gap: 8 },
   avatarWrap: { width: 90, height: 90, borderRadius: 45, overflow: 'hidden', alignItems: 'center', justifyContent: 'center', borderWidth: 3, borderColor: 'rgba(255,255,255,0.9)', marginBottom: 4 },
-  avatarText: { fontSize: 36, fontWeight: '900', color: '#FFFFFF' },
-  name: { fontSize: 26, fontWeight: '900', color: '#1E1B4B', letterSpacing: -0.5 },
+  avatarText: { fontSize: 36, fontFamily: 'Outfit_900Black', fontWeight: '900', letterSpacing: -1, color: '#FFFFFF' },
+  name: { fontSize: 26, fontFamily: 'Outfit_900Black', fontWeight: '900', letterSpacing: -1, color: '#1E1B4B' },
   sub: { fontSize: 13, color: '#6B7280' },
   proTag: { paddingHorizontal: 16, paddingVertical: 6, borderRadius: 20, overflow: 'hidden', marginTop: 4 },
-  proText: { fontSize: 11, fontWeight: '800', color: '#FFFFFF', letterSpacing: 1.5 },
+  proText: { fontSize: 11, fontFamily: 'PlusJakartaSans_700Bold', fontWeight: '800', letterSpacing: 1.5, color: '#FFFFFF' },
   statsRow: { flexDirection: 'row', paddingHorizontal: 24, gap: 12, marginBottom: 28 },
   statCard: { flex: 1, padding: 16, borderRadius: 20, overflow: 'hidden', alignItems: 'center', gap: 6, borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.9)' },
   statDot: { width: 32, height: 4, borderRadius: 2 },
-  statVal: { fontSize: 22, fontWeight: '900', color: '#1E1B4B' },
-  statLbl: { fontSize: 11, color: '#6B7280', fontWeight: '600' },
-  section: { fontSize: 18, fontWeight: '800', color: '#1E1B4B', paddingHorizontal: 24, marginBottom: 12 },
+  statVal: { fontSize: 22, fontFamily: 'Outfit_900Black', fontWeight: '900', letterSpacing: -1, color: '#1E1B4B' },
+  statLbl: { fontSize: 11, color: '#6B7280', fontFamily: 'PlusJakartaSans_700Bold', fontWeight: '600' },
+  section: { fontSize: 18, fontFamily: 'Outfit_900Black', fontWeight: '800', letterSpacing: -0.5, color: '#1E1B4B', paddingHorizontal: 24, marginBottom: 12 },
+  darkModeRow: { flexDirection: 'row', alignItems: 'center', marginHorizontal: 24, padding: 16, borderRadius: 20, borderWidth: 1.5, marginBottom: 12, gap: 14 },
   settingsList: { marginHorizontal: 24, borderRadius: 20, overflow: 'hidden', borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.9)', marginBottom: 24 },
   settingRow: { flexDirection: 'row', alignItems: 'center', padding: 16, gap: 14, overflow: 'hidden', borderBottomWidth: 1, borderBottomColor: 'rgba(167,139,250,0.1)' },
   settingIcon: { width: 42, height: 42, borderRadius: 12, alignItems: 'center', justifyContent: 'center' },
   settingInfo: { flex: 1 },
-  settingName: { fontSize: 15, fontWeight: '700', color: '#1E1B4B', marginBottom: 2 },
+  settingName: { fontSize: 15, fontFamily: 'PlusJakartaSans_700Bold', fontWeight: '700', color: '#1E1B4B', marginBottom: 2 },
   settingValue: { fontSize: 12, color: '#6B7280' },
   appInfo: { marginHorizontal: 24, padding: 20, borderRadius: 20, overflow: 'hidden', alignItems: 'center', gap: 6, borderWidth: 1.5, borderColor: 'rgba(167,139,250,0.12)' },
-  appInfoTitle: { fontSize: 16, fontWeight: '900', color: '#7C3AED' },
+  appInfoTitle: { fontSize: 16, fontFamily: 'Outfit_900Black', fontWeight: '900', letterSpacing: -1, color: '#7C3AED' },
   appInfoSub: { fontSize: 12, color: '#9CA3AF', textAlign: 'center' },
 });

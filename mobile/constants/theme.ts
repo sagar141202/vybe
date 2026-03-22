@@ -1,0 +1,41 @@
+export const LightTheme = {
+  bg: '#FAFBFF',
+  bg2: '#F0F4FF',
+  bg3: '#F8FAFF',
+  card: 'rgba(255,255,255,0.9)',
+  cardBorder: 'rgba(255,255,255,0.9)',
+  text: '#1E1B4B',
+  textSecondary: '#6B7280',
+  textTertiary: '#9CA3AF',
+  accent: '#A78BFA',
+  accentDark: '#7C3AED',
+  accentLight: '#C4B5FD',
+  tabBar: 'rgba(255,255,255,0.95)',
+  tabBarBorder: 'rgba(167,139,250,0.2)',
+  miniPlayer: 'rgba(255,255,255,0.95)',
+  gradientStart: '#FAFBFF',
+  gradientEnd: '#F0F4FF',
+  isDark: false,
+};
+
+export const DarkTheme = {
+  bg: '#0A0A0F',
+  bg2: '#111118',
+  bg3: '#16161F',
+  card: 'rgba(255,255,255,0.06)',
+  cardBorder: 'rgba(255,255,255,0.1)',
+  text: '#F0EEFF',
+  textSecondary: '#A0A0B8',
+  textTertiary: '#6B6B80',
+  accent: '#A78BFA',
+  accentDark: '#7C3AED',
+  accentLight: '#C4B5FD',
+  tabBar: 'rgba(10,10,15,0.97)',
+  tabBarBorder: 'rgba(167,139,250,0.15)',
+  miniPlayer: 'rgba(16,16,25,0.97)',
+  gradientStart: '#0A0A0F',
+  gradientEnd: '#111118',
+  isDark: true,
+};
+
+export type Theme = typeof LightTheme;
