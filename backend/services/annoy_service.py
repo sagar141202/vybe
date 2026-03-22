@@ -14,7 +14,7 @@ from sqlalchemy import select
 from database import AsyncSessionLocal
 from models import Track
 
-INDEX_DIR = Path("/tmp/soundfree_index")
+INDEX_DIR = Path("/tmp/vybe_index")
 INDEX_DIR.mkdir(exist_ok=True)
 META_PATH = str(INDEX_DIR / "tracks_meta.json")
 VECTORS_PATH = str(INDEX_DIR / "tracks_vectors.npy")

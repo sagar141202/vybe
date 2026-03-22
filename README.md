@@ -1,4 +1,4 @@
-# SoundFree
+# Vybe
 
 A personal, self-hosted music streaming app for Android. Stream any song from YouTube instantly — album art, synced lyrics, AI recommendations, offline downloads — at ₹0 forever.
 

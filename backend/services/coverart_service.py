@@ -3,7 +3,7 @@ from loguru import logger
 
 CAA_BASE = "https://coverartarchive.org"
 HEADERS = {
-    "User-Agent": "SoundFree/1.0.0 (personal music app)",
+    "User-Agent": "Vybe/1.0.0 (personal music app)",
 }
 
 

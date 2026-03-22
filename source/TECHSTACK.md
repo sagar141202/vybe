@@ -1,4 +1,4 @@
-# SoundFree — Tech Stack Document
+# Vybe — Tech Stack Document
 
 **Version:** 1.0.0
 **Status:** Active
@@ -8,7 +8,7 @@
 
 ## 1. Architecture Overview
 
-SoundFree uses a **client-server architecture** with a Python FastAPI backend acting as a smart proxy and intelligence layer, and a React Native (Expo) Android app as the frontend. Audio is never stored on the server — the backend fetches a direct YouTube CDN stream URL and hands it to the phone to play directly. This keeps server costs zero and latency minimal.
+Vybe uses a **client-server architecture** with a Python FastAPI backend acting as a smart proxy and intelligence layer, and a React Native (Expo) Android app as the frontend. Audio is never stored on the server — the backend fetches a direct YouTube CDN stream URL and hands it to the phone to play directly. This keeps server costs zero and latency minimal.
 
 ```
 [Android App]  ←→  [FastAPI Backend]  ←→  [YouTube CDN]
@@ -279,13 +279,13 @@ useSettingsStore   // EQ settings, crossfade duration, sleep timer
 
 **Offline storage structure:**
 ```
-/storage/soundfree/
+/storage/vybe/
   /audio/
     {video_id}.webm       ← downloaded audio file
     {video_id}.m4a        ← fallback format
   /art/
     {video_id}_thumb.jpg  ← album art cached locally
-  soundfree.db            ← SQLite: offline metadata
+  vybe.db            ← SQLite: offline metadata
 ```
 
 ### 3.6 Networking
@@ -363,8 +363,8 @@ services:
   postgres:
     image: postgres:16-alpine
     environment:
-      POSTGRES_DB: soundfree
-      POSTGRES_USER: soundfree
+      POSTGRES_DB: vybe
+      POSTGRES_USER: vybe
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - pgdata:/var/lib/postgresql/data
@@ -392,7 +392,7 @@ volumes:
 
 ```bash
 # Backend .env
-DATABASE_URL=postgresql+asyncpg://user:pass@host:5432/soundfree
+DATABASE_URL=postgresql+asyncpg://user:pass@host:5432/vybe
 REDIS_URL=redis://localhost:6379
 LASTFM_API_KEY=your_lastfm_key
 GENIUS_ACCESS_TOKEN=your_genius_token

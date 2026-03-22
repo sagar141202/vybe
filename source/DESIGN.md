@@ -1,4 +1,4 @@
-# SoundFree — Design Document
+# Vybe — Design Document
 
 **Version:** 1.0.0
 **Status:** Active
@@ -8,7 +8,7 @@
 
 ## 1. Design Philosophy
 
-SoundFree's design is built on one principle: **music is the product, not the UI**.
+Vybe's design is built on one principle: **music is the product, not the UI**.
 
 Every design decision should fade into the background and let the album art, lyrics, and music take centre stage. The interface should feel like holding a physical record — warm, tactile, and alive. Not a dashboard. Not an app. A listening experience.
 
@@ -283,13 +283,13 @@ This is the hero UI. It must be exceptional.
 
 **Search → Play:**
 ```
-Home → tap Search tab → type song name → tap track result → 
+Home → tap Search tab → type song name → tap track result →
 Mini player appears → tap mini player → Full Player opens
 ```
 
 **Download for offline:**
 ```
-Full Player → tap Download button → progress indicator → 
+Full Player → tap Download button → progress indicator →
 "Downloaded" badge appears on track → available in Library > Downloaded
 ```
 
@@ -307,7 +307,7 @@ Lines scroll automatically in sync → tap anywhere to dismiss
 
 ### 5.2 Figma Reference
 (Link your Figma file here once you create mockups)
-`https://figma.com/file/[your-file-id]/SoundFree`
+`https://figma.com/file/[your-file-id]/Vybe`
 
 ### 5.3 Screen Inventory
 
@@ -368,7 +368,7 @@ Every list screen must have a thoughtful empty state — not just "No items foun
 | No internet | Bottom snackbar: "No connection — playing from offline library" |
 | Stream failed | Snackbar: "Couldn't load track. Trying next in queue..." → auto-skip |
 | Lyrics not found | Lyrics panel shows: "Lyrics unavailable for this track" |
-| Backend offline | Full screen: "Can't reach SoundFree server. Check that your backend is running." |
+| Backend offline | Full screen: "Can't reach Vybe server. Check that your backend is running." |
 | Download failed | Toast: "Download failed. Check storage space." |
 
 ---

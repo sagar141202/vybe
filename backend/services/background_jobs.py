@@ -36,7 +36,7 @@ async def _run_feature_extraction(video_id: str):
     from services.audio_analysis_service import analyze_and_store
 
     # Check if audio file exists
-    download_dir = Path("/tmp/soundfree_downloads")
+    download_dir = Path("/tmp/vybe_downloads")
     audio_path = None
 
     for ext in ["opus", "webm", "m4a", "mp3"]:

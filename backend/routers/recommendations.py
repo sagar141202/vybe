@@ -126,7 +126,7 @@ async def get_recommendations_feed(limit: int = 20, bpm_min: float = 0, bpm_max:
     # Rebuild index if needed
     from pathlib import Path
 
-    if not Path("/tmp/soundfree_index/tracks_vectors.npy").exists():
+    if not Path("/tmp/vybe_index/tracks_vectors.npy").exists():
         await build_index()
 
     # Query similar tracks

@@ -115,7 +115,7 @@ export default function DiscordScreen() {
               <Text style={{ fontSize: 24 }}>🎵</Text>
             </View>
             <View style={styles.previewInfo}>
-              <Text style={styles.previewApp}>SoundFree</Text>
+              <Text style={styles.previewApp}>Vybe</Text>
               <Text style={styles.previewTitle}>Bohemian Rhapsody</Text>
               <Text style={styles.previewArtist}>by Queen · A Night At The Opera</Text>
               <Text style={styles.previewTime}>2:14 remaining</Text>
@@ -170,7 +170,7 @@ export default function DiscordScreen() {
           <Text style={styles.infoTitle}>Setup Steps</Text>
           <Text style={styles.infoText}>
             1. Go to discord.com/developers/applications{'\n'}
-            2. Create a new application named "SoundFree"{'\n'}
+            2. Create a new application named "Vybe"{'\n'}
             3. Copy the Application ID (Client ID){'\n'}
             4. Paste it above and tap Save{'\n'}
             5. Make sure Discord is running on your PC{'\n'}

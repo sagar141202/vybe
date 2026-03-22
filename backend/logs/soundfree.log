@@ -3070,3 +3070,13 @@ DETAIL:  Failing row contains (11, null, Wqu4MRQOgyo, 2026-03-22 14:09:14.699525
 2026-03-22 23:01:04 | INFO     | services.scheduler:96 - Scheduler started — nightly rebuild at 2:00 AM, warmup in 30s
 2026-03-22 23:01:04 | INFO     | main:89 - SoundFree API started
 2026-03-22 23:01:04 | INFO     | services.background_jobs:13 - Background job worker started
+2026-03-22 23:01:34 | INFO     | services.scheduler:27 - Nightly recommendation rebuild starting...
+2026-03-22 23:01:34 | INFO     | services.annoy_service:40 - Building index from 6 tracks
+2026-03-22 23:01:34 | INFO     | services.annoy_service:74 - Index built: 6 tracks → /tmp/soundfree_index/tracks_vectors.npy
+2026-03-22 23:01:34 | INFO     | services.scheduler:34 - Index rebuilt: {'status': 'ok', 'count': 6, 'path': '/tmp/soundfree_index/tracks_vectors.npy'}
+2026-03-22 23:01:34 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-03-22 23:01:34 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-03-22 23:01:34 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-03-22 23:01:34 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-03-22 23:01:34 | INFO     | services.recommendation_service:144 - Top recommendation: Track vaSRih9T (score=0.4951)
+2026-03-22 23:01:34 | ERROR    | services.scheduler:58 - Recommendation rebuild failed: cache_set() got an unexpected keyword argument 'ttl'

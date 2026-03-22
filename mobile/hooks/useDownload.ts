@@ -6,7 +6,7 @@ import { cacheArt, deleteArt } from '../services/artCache';
 import type { Track } from '../components/TrackListItem';
 
 const API_URL = process.env.EXPO_PUBLIC_API_URL || 'http://10.53.24.112:8000';
-const DOWNLOAD_DIR = `${FileSystem.documentDirectory}soundfree/audio/`;
+const DOWNLOAD_DIR = `${FileSystem.documentDirectory}vybe/audio/`;
 
 export interface DownloadState {
   progress: number;

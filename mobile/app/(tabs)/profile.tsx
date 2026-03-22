@@ -42,7 +42,7 @@ export default function ProfileScreen() {
             <Text style={styles.avatarText}>S</Text>
           </View>
           <Text style={styles.name}>Sagar</Text>
-          <Text style={styles.sub}>Personal · SoundFree v1.0.0</Text>
+          <Text style={styles.sub}>Personal · Vybe v1.0.0</Text>
           <View style={styles.proTag}>
             <LinearGradient colors={['#C4B5FD', '#93C5FD']} style={StyleSheet.absoluteFillObject} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} />
             <Text style={styles.proText}>✦ FREE FOREVER · NO ADS</Text>
@@ -90,9 +90,9 @@ export default function ProfileScreen() {
         {/* App info */}
         <View style={styles.appInfo}>
           <LinearGradient colors={['rgba(167,139,250,0.08)', 'rgba(125,211,252,0.04)']} style={StyleSheet.absoluteFillObject} />
-          <Text style={styles.appInfoTitle}>SoundFree</Text>
+          <Text style={styles.appInfoTitle}>Vybe</Text>
           <Text style={styles.appInfoSub}>v1.0.0 · Self-hosted · Zero ads · Zero cost</Text>
-          <Text style={styles.appInfoSub}>Built with ❤️ using FastAPI + Expo</Text>
+          <Text style={styles.appInfoSub}>Built with ❤️ · Self-hosted · Free forever</Text>
         </View>
 
         <View style={{ height: 160 }} />

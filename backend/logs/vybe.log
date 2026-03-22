@@ -1,0 +1,9 @@
+2026-03-22 23:16:28 | INFO     | services.background_jobs:82 - Background worker task created
+2026-03-22 23:16:28 | INFO     | services.scheduler:96 - Scheduler started — nightly rebuild at 2:00 AM, warmup in 30s
+2026-03-22 23:16:28 | INFO     | main:89 - Vybe API started
+2026-03-22 23:16:28 | INFO     | services.background_jobs:13 - Background job worker started
+2026-03-22 23:16:28 | INFO     | main:97 - GET /trending → 307 (86.4ms)
+2026-03-22 23:16:28 | INFO     | routers.trending:60 - Trending cache HIT (20 tracks)
+2026-03-22 23:16:28 | INFO     | main:97 - GET /trending/ → 200 (40.9ms)
+2026-03-22 23:16:58 | INFO     | services.scheduler:27 - Nightly recommendation rebuild starting...
+2026-03-22 23:16:58 | ERROR    | services.scheduler:58 - Recommendation rebuild failed: password authentication failed for user "vybe"

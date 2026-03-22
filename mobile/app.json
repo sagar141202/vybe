@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "SoundFree",
-    "slug": "soundfree",
+    "name": "Vybe",
+    "slug": "vybe",
     "version": "1.0.0",
     "orientation": "portrait",
-    "scheme": "soundfree",
+    "scheme": "vybe",
     "userInterfaceStyle": "light",
     "android": {
-      "package": "com.soundfree.app",
+      "package": "com.sagarmaddi.vybe",
       "adaptiveIcon": {
         "backgroundColor": "#FAFBFF"
       },

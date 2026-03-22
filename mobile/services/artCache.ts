@@ -1,6 +1,6 @@
 import * as FileSystem from 'expo-file-system';
 
-const ART_DIR = `${FileSystem.documentDirectory}soundfree/art/`;
+const ART_DIR = `${FileSystem.documentDirectory}vybe/art/`;
 
 export async function ensureArtDir() {
   const info = await FileSystem.getInfoAsync(ART_DIR);

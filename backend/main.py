@@ -50,7 +50,7 @@ def _init_sentry() -> None:
 _init_sentry()
 
 app = FastAPI(
-    title="SoundFree API",
+    title="Vybe API",
     version="1.0.0",
     description="Personal music streaming backend",
     docs_url="/docs",
@@ -86,7 +86,7 @@ app.include_router(vibe.router, prefix="/vibe", tags=["vibe"])
 async def startup_event():
     await start_worker()
     await start_scheduler()
-    logger.info("SoundFree API started")
+    logger.info("Vybe API started")
 
 
 @app.middleware("http")
@@ -102,7 +102,7 @@ async def log_requests(request: Request, call_next):
 
 @app.get("/")
 async def root() -> dict:
-    return {"status": "ok", "app": "SoundFree", "version": settings.app_version}
+    return {"status": "ok", "app": "Vybe", "version": settings.app_version}
 
 
 @app.get("/health")

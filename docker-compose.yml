@@ -10,7 +10,7 @@ services:
     env_file:
       - .env
     environment:
-      DATABASE_URL: postgresql+asyncpg://soundfree:${POSTGRES_PASSWORD:-devpassword}@postgres:5432/soundfree
+      DATABASE_URL: postgresql+asyncpg://vybe:${POSTGRES_PASSWORD:-devpassword}@postgres:5432/vybe
       REDIS_URL: redis://redis:6379
     depends_on:
       postgres:
@@ -26,15 +26,15 @@ services:
   postgres:
     image: postgres:16-alpine
     environment:
-      POSTGRES_DB: soundfree
-      POSTGRES_USER: soundfree
+      POSTGRES_DB: vybe
+      POSTGRES_USER: vybe
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-devpassword}
     ports:
       - "5433:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U soundfree -d soundfree"]
+      test: ["CMD-SHELL", "pg_isready -U vybe -d vybe"]
       interval: 10s
       timeout: 5s
       retries: 5

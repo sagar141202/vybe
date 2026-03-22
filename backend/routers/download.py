@@ -7,7 +7,7 @@ from loguru import logger
 
 router = APIRouter()
 
-DOWNLOAD_DIR = Path("/tmp/soundfree_downloads")
+DOWNLOAD_DIR = Path("/tmp/vybe_downloads")
 DOWNLOAD_DIR.mkdir(exist_ok=True)
 
 

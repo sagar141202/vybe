@@ -84,13 +84,13 @@ async def update_presence(
         await _rpc.update(
             details=details[:128],
             state=state[:128],
-            large_image="soundfree_logo",
-            large_text="SoundFree — Self-hosted Music",
+            large_image="vybe_logo",
+            large_text="Vybe — Self-hosted Music",
             small_image="playing" if is_playing else "paused",
             small_text="Playing" if is_playing else "Paused",
             end=end_time,
             buttons=[
-                {"label": "🎵 SoundFree", "url": "https://github.com/sagar141202/soundfree"},
+                {"label": "🎵 Vybe", "url": "https://github.com/sagar141202/vybe"},
             ],
         )
         logger.info(f"Discord RPC updated: {title} by {artist}")

@@ -4,7 +4,7 @@ let db: SQLite.SQLiteDatabase | null = null;
 
 export async function getDb(): Promise<SQLite.SQLiteDatabase> {
   if (!db) {
-    db = await SQLite.openDatabaseAsync('soundfree.db');
+    db = await SQLite.openDatabaseAsync('vybe.db');
     await initSchema();
   }
   return db;

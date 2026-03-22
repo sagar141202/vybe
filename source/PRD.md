@@ -1,4 +1,4 @@
-# SoundFree — Product Requirements Document
+# Vybe — Product Requirements Document
 
 **Version:** 1.0.0
 **Status:** Active
@@ -9,7 +9,7 @@
 
 ## 1. Elevator Pitch
 
-**SoundFree** is a personal, self-hosted music streaming app for Android that streams any song from YouTube instantly — with album art, time-synced lyrics, AI recommendations, and offline downloads — at zero cost and with zero ads, forever.
+**Vybe** is a personal, self-hosted music streaming app for Android that streams any song from YouTube instantly — with album art, time-synced lyrics, AI recommendations, and offline downloads — at zero cost and with zero ads, forever.
 
 ---
 
@@ -25,7 +25,7 @@ Spotify Premium costs ₹119/month. YouTube Music Premium costs ₹99/month. App
 - **No background playback** with lock screen controls
 - **No crossfade, equalizer, or sleep timer**
 
-SoundFree solves every single one of these gaps. It is built for personal use only, runs on a home server or free cloud tier, and gives a premium experience that rivals or exceeds paid services.
+Vybe solves every single one of these gaps. It is built for personal use only, runs on a home server or free cloud tier, and gives a premium experience that rivals or exceeds paid services.
 
 ---
 

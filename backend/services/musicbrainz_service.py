@@ -6,7 +6,7 @@ from loguru import logger
 
 MUSICBRAINZ_BASE = "https://musicbrainz.org/ws/2"
 HEADERS = {
-    "User-Agent": "SoundFree/1.0.0 (personal music app)",
+    "User-Agent": "Vybe/1.0.0 (personal music app)",
     "Accept": "application/json",
 }
 

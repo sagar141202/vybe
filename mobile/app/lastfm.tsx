@@ -60,7 +60,7 @@ export default function LastfmScreen() {
       const token = tokenData.token;
 
       // Step 2: Open browser for user auth
-      const authUrl = LASTFM_AUTH_URL(apiKey, 'soundfree://lastfm');
+      const authUrl = LASTFM_AUTH_URL(apiKey, 'vybe://lastfm');
       await Linking.openURL(`https://www.last.fm/api/auth/?api_key=${apiKey}&token=${token}`);
 
       setStatus('After authorizing in browser, tap "Complete Setup" below');

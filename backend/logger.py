@@ -12,7 +12,7 @@ def setup_logging() -> None:
         colorize=True,
     )
     logger.add(
-        "logs/soundfree.log",
+        "logs/vybe.log",
         format="{time:YYYY-MM-DD HH:mm:ss} | {level: <8} | {name}:{line} - {message}",
         level="INFO",
         rotation="10 MB",

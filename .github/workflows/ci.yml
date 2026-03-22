@@ -16,8 +16,8 @@ jobs:
       postgres:
         image: postgres:16-alpine
         env:
-          POSTGRES_DB: soundfree_test
-          POSTGRES_USER: soundfree
+          POSTGRES_DB: vybe_test
+          POSTGRES_USER: vybe
           POSTGRES_PASSWORD: testpassword
         ports:
           - 5432:5432
@@ -64,7 +64,7 @@ jobs:
 
       - name: Tests (pytest)
         env:
-          DATABASE_URL: postgresql+asyncpg://soundfree:testpassword@localhost:5432/soundfree_test
+          DATABASE_URL: postgresql+asyncpg://vybe:testpassword@localhost:5432/vybe_test
           REDIS_URL: redis://localhost:6379
           LASTFM_API_KEY: test_key
           GENIUS_ACCESS_TOKEN: test_token

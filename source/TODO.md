@@ -1,4 +1,4 @@
-# SoundFree — Master TODO
+# Vybe — Master TODO
 
 **Generated:** 2026-03-15
 **Method:** Analyzed PRD + DESIGN + TECHSTACK → prioritized by dependency order
@@ -21,7 +21,7 @@ Effort:  XS = <2h  S = 2-4h  M = 4-8h  L = 1-2d  XL = 2-3d
 
 | ID | Task | Effort | Acceptance Criteria |
 |----|------|--------|---------------------|
-| T-000 | Create GitHub repo `soundfree` | XS | Repo exists, `main` branch, MIT LICENSE, .gitignore for Python + Node |
+| T-000 | Create GitHub repo `vybe` | XS | Repo exists, `main` branch, MIT LICENSE, .gitignore for Python + Node |
 | T-001 | Create monorepo folder structure | XS | `backend/` `mobile/` `docs/` `source/` `docker/` exist |
 | T-002 | Commit `source/PRD.md` | XS | File committed, no placeholder text |
 | T-003 | Commit `source/DESIGN.md` | XS | File committed, all sections filled |
@@ -165,7 +165,7 @@ Effort:  XS = <2h  S = 2-4h  M = 4-8h  L = 1-2d  XL = 2-3d
 | ID | Task | Effort | Acceptance Criteria |
 |----|------|--------|---------------------|
 | T-075 | Add `GET /download/{video_id}` backend endpoint | M | Uses yt-dlp `--extract-audio` to produce a downloadable audio file URL (or serves the file directly) |
-| T-076 | Implement download manager (mobile) | XL | Tap download → progress bar → file saved to `/storage/soundfree/audio/{video_id}.webm` |
+| T-076 | Implement download manager (mobile) | XL | Tap download → progress bar → file saved to `/storage/vybe/audio/{video_id}.webm` |
 | T-077 | Save track metadata to SQLite on download | M | Title, artist, album, duration, art URL saved to local DB; available offline |
 | T-078 | Cache album art locally on download | M | Art image saved to device, served from local path when offline |
 | T-079 | Play offline track without internet | L | If device has no internet and track is downloaded, plays from local file — no errors |
@@ -259,7 +259,7 @@ Effort:  XS = <2h  S = 2-4h  M = 4-8h  L = 1-2d  XL = 2-3d
 | B-005 | Wear OS companion | Basic playback controls |
 | B-006 | Import Spotify playlists | Exportify CSV → match tracks via search |
 | B-007 | Podcast support | RSS + yt-dlp for video podcasts |
-| B-008 | Voice control | "Hey SoundFree, play something chill" |
+| B-008 | Voice control | "Hey Vybe, play something chill" |
 | B-009 | Multi-user / family accounts | JWT auth + per-user history |
 | B-010 | Desktop app (Electron) | Wrap web player |
 
