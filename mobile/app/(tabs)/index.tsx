@@ -10,6 +10,7 @@ import { useLibraryStore } from '../../stores/libraryStore';
 import { usePlayerStore } from '../../stores/playerStore';
 import { usePlayTrack } from '../../hooks/usePlayTrack';
 import { getRecommendations, getTrendingTracks, getSimilarTracks } from '../../lib/api';
+import { HomeScreenSkeleton } from '../../components/Skeleton';
 import type { Track } from '../../components/TrackListItem';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -94,11 +95,13 @@ export default function HomeScreen() {
   const [recommendations, setRecommendations] = useState<any[]>([]);
   const [trending, setTrending] = useState<Track[]>([]);
   const [similarTracks, setSimilarTracks] = useState<any[]>([]);
+  const [initialLoading, setInitialLoading] = useState(true);
   const greeting = getGreeting();
 
   useEffect(() => {
     getRecommendations(10).then(setRecommendations).catch(() => {});
     getTrendingTracks('', 10).then(d => { console.log('Trending:', d?.length, d?.[0]?.title); setTrending(d || []); }).catch(e => console.log('Trending err:', e?.message));
+    setInitialLoading(false);
     getSimilarTracks(10).then(d => { console.log('Similar tracks:', d?.length); setSimilarTracks(d || []); }).catch(e => console.log('Similar error:', e?.message));
   }, []);
 
@@ -106,6 +109,9 @@ export default function HomeScreen() {
     <View style={styles.container}>
       <StatusBar style="dark" />
       <LinearGradient colors={['#FAFBFF', '#F0F4FF', '#F8FAFF']} style={StyleSheet.absoluteFillObject} />
+
+      {initialLoading && <HomeScreenSkeleton />}
+      {!initialLoading && <>{/* content */}</>}
 
       {/* Animated blobs */}
       <View style={styles.blob1} pointerEvents="none">

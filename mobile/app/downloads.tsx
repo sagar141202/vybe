@@ -12,6 +12,7 @@ import { usePlayerStore } from '../stores/playerStore';
 import { deleteDownload } from '../hooks/useDownload';
 import { useNetworkStatus } from '../hooks/useNetworkStatus';
 import { Ionicons } from '@expo/vector-icons';
+import { TrackRowSkeleton } from '../components/Skeleton';
 
 function formatSize(bytes: number): string {
   if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)}KB`;

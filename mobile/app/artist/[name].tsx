@@ -9,6 +9,7 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { usePlayTrack } from '../../hooks/usePlayTrack';
 import { searchTracks } from '../../lib/api';
 import { Ionicons } from '@expo/vector-icons';
+import { TrackRowSkeleton, CardSkeleton } from '../../components/Skeleton';
 import type { Track } from '../../components/TrackListItem';
 
 const { width, height } = Dimensions.get('window');
@@ -107,7 +108,9 @@ export default function ArtistScreen() {
           {/* Top Tracks */}
           <Text style={styles.sectionTitle}>🎵 Top Tracks</Text>
           {loading ? (
-            <Text style={styles.loadingText}>Loading tracks...</Text>
+            <View style={{ gap: 8, paddingHorizontal: 0 }}>
+              {Array.from({ length: 5 }).map((_, i) => <TrackRowSkeleton key={i} index={i} />)}
+            </View>
           ) : topTracks.length === 0 ? (
             <Text style={styles.emptyText}>No tracks found for "{name}"</Text>
           ) : topTracks.map((track, i) => (

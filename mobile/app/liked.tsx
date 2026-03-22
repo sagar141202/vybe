@@ -13,10 +13,12 @@ import { useLike } from '../hooks/useLike';
 import TrackListItem from '../components/TrackListItem';
 import { usePlayerStore } from '../stores/playerStore';
 import { Ionicons } from '@expo/vector-icons';
+import { HeroSkeleton, TrackRowSkeleton } from '../components/Skeleton';
 
 const { width } = Dimensions.get('window');
 
 export default function LikedSongsScreen() {
+  const [loading, setLoading] = useState(true);
   const likedTracks = useLibraryStore(s => s.likedTracks);
   const currentTrack = usePlayerStore(s => s.currentTrack);
   const { playTrack } = usePlayTrack();
@@ -24,6 +26,7 @@ export default function LikedSongsScreen() {
   const opacityAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
+    setTimeout(() => setLoading(false), 400);
     Animated.parallel([
       Animated.spring(slideAnim, { toValue: 0, useNativeDriver: true, tension: 80, friction: 12 }),
       Animated.timing(opacityAnim, { toValue: 1, duration: 300, useNativeDriver: true }),

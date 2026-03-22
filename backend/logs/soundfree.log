@@ -2836,3 +2836,21 @@ DETAIL:  Failing row contains (9, null, FOA9iyxsW_A, 2026-03-16 16:24:49.34407+0
 2026-03-22 19:26:30 | INFO     | main:76 - GET /recommendations/ → 200 (27.6ms)
 2026-03-22 19:27:12 | INFO     | routers.stream:36 - Cache HIT for stream: Wqu4MRQOgyo
 2026-03-22 19:27:12 | INFO     | main:76 - GET /stream/Wqu4MRQOgyo → 200 (6.5ms)
+2026-03-22 19:30:34 | INFO     | main:76 - GET /trending → 307 (19.2ms)
+2026-03-22 19:30:34 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-03-22 19:30:34 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-03-22 19:30:34 | INFO     | main:76 - GET /recommendations/similar → 200 (62.2ms)
+2026-03-22 19:30:34 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-03-22 19:30:34 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-03-22 19:30:34 | INFO     | routers.trending:60 - Trending cache HIT (20 tracks)
+2026-03-22 19:30:34 | INFO     | main:76 - GET /trending/ → 200 (5.7ms)
+2026-03-22 19:30:34 | INFO     | main:76 - GET /recommendations/ → 200 (82.2ms)
+2026-03-22 19:31:15 | INFO     | main:76 - GET /trending → 307 (2.9ms)
+2026-03-22 19:31:15 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-03-22 19:31:15 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-03-22 19:31:15 | INFO     | routers.trending:60 - Trending cache HIT (20 tracks)
+2026-03-22 19:31:15 | INFO     | main:76 - GET /recommendations/similar → 200 (23.0ms)
+2026-03-22 19:31:15 | INFO     | main:76 - GET /trending/ → 200 (7.1ms)
+2026-03-22 19:31:16 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-03-22 19:31:16 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-03-22 19:31:16 | INFO     | main:76 - GET /recommendations/ → 200 (36.7ms)
