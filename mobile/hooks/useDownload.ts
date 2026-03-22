@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import * as FileSystem from 'expo-file-system';
 import { saveTrack, deleteTrack, getTrack } from '../services/localDb';
+import { toast } from '../services/toastService';
 import { cacheArt, deleteArt } from '../services/artCache';
 import type { Track } from '../components/TrackListItem';
 
@@ -93,6 +94,7 @@ export async function downloadTrack(track: Track): Promise<void> {
         file_size: fileSize,
       });
 
+      toast.success('Downloaded: ' + track.title);
       notify(videoId, { progress: 1, status: 'done', localUri: result.uri });
       console.log(`Downloaded & saved: ${track.title} (${Math.round(fileSize / 1024)}KB)`);
     } else {
@@ -101,6 +103,7 @@ export async function downloadTrack(track: Track): Promise<void> {
 
   } catch (e: any) {
     console.error('Download error:', e?.message);
+    toast.error('Download failed for: ' + track.title);
     notify(videoId, { progress: 0, status: 'error' });
     try {
       await FileSystem.deleteAsync(getLocalPath(videoId), { idempotent: true });
@@ -113,6 +116,7 @@ export async function deleteDownload(videoId: string): Promise<void> {
     await FileSystem.deleteAsync(getLocalPath(videoId), { idempotent: true });
     await deleteTrack(videoId);
     await deleteArt(videoId);
+    toast.info('Download removed');
     notify(videoId, { progress: 0, status: 'idle' });
     console.log(`Deleted download: ${videoId}`);
   } catch (e) {

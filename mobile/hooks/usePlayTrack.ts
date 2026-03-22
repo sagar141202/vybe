@@ -5,6 +5,7 @@ import { usePlayerStore } from '../stores/playerStore';
 import { useLibraryStore } from '../stores/libraryStore';
 import { useUIStore } from '../stores/uiStore';
 import { getStreamUrl, logPlay, updateDiscordPresence } from '../lib/api';
+import { toast } from '../services/toastService';
 import { getLastfmConfig, scrobbleTrack, updateNowPlaying } from '../services/lastfmService';
 import { isDownloaded, getLocalPath } from './useDownload';
 import {
@@ -26,7 +27,7 @@ async function _playTrack(track: any) {
   try {
     const playUrl = await _getPlayUrl(track.video_id);
     if (!playUrl) {
-      console.warn('No URL for:', track.title);
+      toast.error('Stream unavailable for: ' + track.title);
       usePlayerStore.getState().setIsPlaying(false);
       return;
     }
@@ -136,7 +137,7 @@ export function usePlayTrack() {
       await _playTrack(track);
       addToRecent(track);
     } catch (e: any) {
-      console.error('playTrack error:', e?.message);
+      toast.error('Playback failed — check your connection');
       setIsPlaying(false);
     } finally {
       setIsLoading(false);

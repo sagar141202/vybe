@@ -9,6 +9,7 @@ import { useLibraryStore } from '../stores/libraryStore';
 import { useSettingsStore } from '../stores/settingsStore';
 import { usePlaylistStore } from '../stores/playlistStore';
 import { useNetworkStatus } from '../hooks/useNetworkStatus';
+import ToastProvider from '../components/ToastProvider';
 
 function OfflineSnackbar() {
   const { isOffline } = useNetworkStatus();
@@ -57,6 +58,7 @@ export default function RootLayout() {
       <AppInit />
       <Stack screenOptions={{ headerShown: false }} />
       <OfflineSnackbar />
+      <ToastProvider />
     </QueryClientProvider>
   );
 }

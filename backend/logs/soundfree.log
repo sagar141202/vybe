@@ -2854,3 +2854,12 @@ DETAIL:  Failing row contains (9, null, FOA9iyxsW_A, 2026-03-16 16:24:49.34407+0
 2026-03-22 19:31:16 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
 2026-03-22 19:31:16 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
 2026-03-22 19:31:16 | INFO     | main:76 - GET /recommendations/ → 200 (36.7ms)
+2026-03-22 19:38:58 | INFO     | main:76 - GET /trending → 307 (11.7ms)
+2026-03-22 19:38:58 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-03-22 19:38:58 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-03-22 19:38:58 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-03-22 19:38:58 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-03-22 19:38:58 | INFO     | main:76 - GET /recommendations/similar → 200 (28.7ms)
+2026-03-22 19:38:58 | INFO     | routers.trending:60 - Trending cache HIT (20 tracks)
+2026-03-22 19:38:58 | INFO     | main:76 - GET /trending/ → 200 (3.0ms)
+2026-03-22 19:38:58 | INFO     | main:76 - GET /recommendations/ → 200 (34.0ms)

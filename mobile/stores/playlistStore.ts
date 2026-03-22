@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { toast } from '../services/toastService';
 import type { Track } from './playerStore';
 
 export interface Playlist {
@@ -53,6 +54,7 @@ export const usePlaylistStore = create<PlaylistState>((set, get) => ({
     };
     set(s => ({ playlists: [playlist, ...s.playlists] }));
     AsyncStorage.setItem('playlists', JSON.stringify(get().playlists));
+    toast.success('Playlist created: ' + name);
     return playlist;
   },
 
@@ -66,11 +68,15 @@ export const usePlaylistStore = create<PlaylistState>((set, get) => ({
   },
 
   deletePlaylist: (id) => {
+    const name = get().playlists.find(p => p.id === id)?.name || 'playlist';
+    toast.info('Deleted: ' + name);
     set(s => ({ playlists: s.playlists.filter(p => p.id !== id) }));
     AsyncStorage.setItem('playlists', JSON.stringify(get().playlists));
   },
 
   addTrackToPlaylist: (playlistId, track) => {
+    const pl = get().playlists.find(p => p.id === playlistId);
+    toast.success('Added to ' + (pl?.name || 'playlist'));
     set(s => ({
       playlists: s.playlists.map(p =>
         p.id === playlistId && !p.tracks.find(t => t.video_id === track.video_id)

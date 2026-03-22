@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { likeTrack, unlikeTrack } from '../lib/api';
+import { toast } from '../services/toastService';
 import type { Track } from './playerStore';
 
 interface LibraryState {
@@ -20,6 +21,7 @@ export const useLibraryStore = create<LibraryState>((set, get) => ({
   downloads: [],
 
   likeTrack: async (track) => {
+    toast.success('Added to Liked Songs');
     // Optimistic update
     set((s) => ({
       likedTracks: [track, ...s.likedTracks.filter(t => t.video_id !== track.video_id)],
@@ -29,6 +31,7 @@ export const useLibraryStore = create<LibraryState>((set, get) => ({
   },
 
   unlikeTrack: async (videoId) => {
+    toast.info('Removed from Liked Songs');
     // Optimistic update
     set((s) => ({ likedTracks: s.likedTracks.filter(t => t.video_id !== videoId) }));
     await AsyncStorage.setItem('liked_tracks', JSON.stringify(get().likedTracks));
