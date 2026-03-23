@@ -25,7 +25,7 @@ const THUMB_COLORS = [
 function TrackRow({ track, index, onPress }: any) {
   const colorIndex = track.video_id.charCodeAt(0) % THUMB_COLORS.length;
   return (
-    <TouchableOpacity style={styles.trackRow} onPress={onPress}>
+    <TouchableOpacity style={[styles.trackRow, { backgroundColor: theme.card, borderColor: theme.cardBorder }]} onPress={onPress}>
       <View style={styles.trackThumbWrap}>
         {track.thumbnail_url ? (
           <Image source={{ uri: track.thumbnail_url }} style={styles.trackThumb} resizeMode="cover" />
@@ -75,7 +75,7 @@ export default function LibraryScreen() {
 
         {/* Top cards */}
         <View style={styles.cardsRow}>
-          <TouchableOpacity style={styles.bigCard} onPress={() => router.push('/liked')}>
+          <TouchableOpacity style={[styles.bigCard, { borderColor: theme.isDark ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.9)' }]} onPress={() => router.push('/liked')}>
             <LinearGradient colors={['#FBCFE8', '#F9A8D4']} style={StyleSheet.absoluteFillObject} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} />
             <View style={styles.cardOverlay} />
             <Text style={styles.cardIconEmoji}>❤️</Text>
@@ -83,7 +83,7 @@ export default function LibraryScreen() {
             <Text style={[styles.cardCount, { color: theme.textSecondary }]}>{likedTracks.length} tracks</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.bigCard} onPress={() => router.push('/downloads')}>
+          <TouchableOpacity style={[styles.bigCard, { borderColor: theme.isDark ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.9)' }]} onPress={() => router.push('/downloads')}>
             <LinearGradient colors={['#86EFAC', '#6EE7B7']} style={StyleSheet.absoluteFillObject} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} />
             <View style={styles.cardOverlay} />
             <Text style={styles.cardIconEmoji}>⬇️</Text>
@@ -96,7 +96,7 @@ export default function LibraryScreen() {
         {SECTIONS.map((s, i) => (
           <TouchableOpacity
             key={i}
-            style={styles.sectionCard}
+            style={[styles.sectionCard, { backgroundColor: theme.card, borderColor: theme.cardBorder }]}
             onPress={() => s.route && router.push(s.route as any)}
             activeOpacity={s.route ? 0.7 : 1}
           >
@@ -193,12 +193,12 @@ const styles = StyleSheet.create({
   title: { fontSize: 36, fontFamily: 'Outfit_900Black', fontWeight: '900', letterSpacing: -1, color: '#1E1B4B', letterSpacing: -1 },
   sub: { fontSize: 14, color: '#6B7280', marginTop: 4 },
   cardsRow: { flexDirection: 'row', paddingHorizontal: 24, gap: 12, marginBottom: 12 },
-  bigCard: { flex: 1, height: 140, borderRadius: 22, overflow: 'hidden', justifyContent: 'flex-end', padding: 16, borderWidth: 1.5, borderColor: theme.cardBorder },
+  bigCard: { flex: 1, height: 140, borderRadius: 22, overflow: 'hidden', justifyContent: 'flex-end', padding: 16, borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.9)' },
   cardOverlay: { ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(255,255,255,0.1)' },
   cardIconEmoji: { fontSize: 28, marginBottom: 8 },
   cardTitle: { fontSize: 16, fontFamily: 'Outfit_900Black', fontWeight: '800', letterSpacing: -0.5, color: '#1E1B4B' },
   cardCount: { fontSize: 12, color: '#6B7280', marginTop: 2 },
-  sectionCard: { flexDirection: 'row', alignItems: 'center', marginHorizontal: 24, marginBottom: 8, padding: 16, borderRadius: 20, overflow: 'hidden', borderWidth: 1.5, borderColor: theme.cardBorder, gap: 14 },
+  sectionCard: { flexDirection: 'row', alignItems: 'center', marginHorizontal: 24, marginBottom: 8, padding: 16, borderRadius: 20, overflow: 'hidden', borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.9)', gap: 14 },
   sectionCardBorder: { position: 'absolute', inset: 0, borderRadius: 20, borderWidth: 1, borderColor: 'rgba(167,139,250,0.1)' },
   sectionIcon: { width: 46, height: 46, borderRadius: 13, alignItems: 'center', justifyContent: 'center' },
   sectionEmoji: { fontSize: 20 },
@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
   sectionTitle: { fontSize: 20, fontFamily: 'Outfit_900Black', fontWeight: '800', letterSpacing: -0.5, color: '#1E1B4B' },
   seeAll: { fontSize: 13, color: '#A78BFA', fontFamily: 'PlusJakartaSans_700Bold', fontWeight: '600' },
   trackList: { paddingHorizontal: 24, gap: 4 },
-  trackRow: { flexDirection: 'row', alignItems: 'center', gap: 12, padding: 10, borderRadius: 16, backgroundColor: theme.card, borderWidth: 1.5, borderColor: theme.cardBorder, marginBottom: 6 },
+  trackRow: { flexDirection: 'row', alignItems: 'center', gap: 12, padding: 10, borderRadius: 16, backgroundColor: 'rgba(255,255,255,0.85)', borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.9)', marginBottom: 6 },
   trackThumbWrap: { width: 46, height: 46, borderRadius: 10, overflow: 'hidden' },
   trackThumb: { width: 46, height: 46, borderRadius: 10, alignItems: 'center', justifyContent: 'center' },
   trackInfo: { flex: 1 },

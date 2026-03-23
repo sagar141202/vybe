@@ -15,8 +15,8 @@ export default function ThemedCard({ children, style, glow }: ThemedCardProps) {
     <View style={[
       styles.card,
       {
-        backgroundColor: theme.card,
-        borderColor: theme.cardBorder,
+        backgroundColor: 'rgba(255,255,255,0.85)',
+        borderColor: 'rgba(255,255,255,0.9)',
         shadowColor: glow ? theme.accentGlow : 'transparent',
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: glow ? 1 : 0,
