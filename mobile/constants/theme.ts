@@ -19,22 +19,35 @@ export const LightTheme = {
 };
 
 export const DarkTheme = {
-  bg: '#0A0A0F',
-  bg2: '#111118',
-  bg3: '#16161F',
-  card: 'rgba(255,255,255,0.06)',
-  cardBorder: 'rgba(255,255,255,0.1)',
-  text: '#F0EEFF',
-  textSecondary: '#A0A0B8',
-  textTertiary: '#6B6B80',
+  // Deep space base — not pure black, has subtle purple tint
+  bg: '#0D0D1A',
+  bg2: '#12122A',
+  bg3: '#0A0A15',
+  // Glass cards — frosted purple glass effect
+  card: 'rgba(167,139,250,0.08)',
+  cardBorder: 'rgba(167,139,250,0.18)',
+  cardBorder2: 'rgba(255,255,255,0.06)',
+  // Glass gradient for cards
+  cardGrad1: 'rgba(167,139,250,0.1)',
+  cardGrad2: 'rgba(125,211,252,0.05)',
+  text: '#EDE9FE',
+  textSecondary: '#A899CC',
+  textTertiary: '#6B5F8A',
   accent: '#A78BFA',
   accentDark: '#7C3AED',
   accentLight: '#C4B5FD',
-  tabBar: 'rgba(10,10,15,0.97)',
-  tabBarBorder: 'rgba(167,139,250,0.15)',
-  miniPlayer: 'rgba(16,16,25,0.97)',
-  gradientStart: '#0A0A0F',
-  gradientEnd: '#111118',
+  // Tab bar — deep glass
+  tabBar: 'rgba(13,13,26,0.92)',
+  tabBarBorder: 'rgba(167,139,250,0.2)',
+  // Mini player — glass
+  miniPlayer: 'rgba(18,18,42,0.95)',
+  // Background gradient — deep purple space
+  gradientStart: '#0D0D1A',
+  gradientMid: '#12122A',
+  gradientEnd: '#0A0A15',
+  // Blob colors for decorative elements
+  blob1: 'rgba(124,58,237,0.15)',
+  blob2: 'rgba(125,211,252,0.08)',
   isDark: true,
 };
 

@@ -1,6 +1,7 @@
 import { Image,View, Text, StyleSheet, ScrollView,
   TouchableOpacity, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useThemeStore } from '../../stores/themeStore';
 import { StatusBar } from 'expo-status-bar';
 import { router } from 'expo-router';
 import { useLibraryStore } from '../../stores/libraryStore';
@@ -43,6 +44,7 @@ function TrackRow({ track, index, onPress }: any) {
 }
 
 export default function LibraryScreen() {
+  const theme = useThemeStore(s => s.theme);
   const [downloadCount, setDownloadCount] = useState(0);
   const likedTracks = useLibraryStore(s => s.likedTracks);
   const recentlyPlayed = useLibraryStore(s => s.recentlyPlayed);
@@ -62,7 +64,7 @@ export default function LibraryScreen() {
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
-      <LinearGradient colors={['#FAFBFF', '#F0F4FF', '#F8FAFF']} style={StyleSheet.absoluteFillObject} />
+      <LinearGradient colors={theme.isDark ? [theme.gradientStart, theme.gradientMid, theme.gradientEnd] : ['#FAFBFF', '#F0F4FF', '#F8FAFF']} style={StyleSheet.absoluteFillObject} />
 
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
         <View style={styles.header}>

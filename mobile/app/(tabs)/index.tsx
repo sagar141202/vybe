@@ -108,7 +108,18 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
-      <LinearGradient colors={[theme.gradientStart, theme.gradientEnd, theme.bg3]} style={StyleSheet.absoluteFillObject} />
+      <LinearGradient
+        colors={theme.isDark
+          ? [theme.gradientStart, theme.gradientMid, theme.gradientEnd]
+          : ['#FAFBFF', '#F0F4FF', '#F8FAFF']}
+        style={StyleSheet.absoluteFillObject}
+      />
+      {theme.isDark && (
+        <>
+          <View style={{ position: 'absolute', top: -100, right: -80, width: 300, height: 300, borderRadius: 150, backgroundColor: theme.blob1 }} pointerEvents="none" />
+          <View style={{ position: 'absolute', top: 400, left: -100, width: 250, height: 250, borderRadius: 125, backgroundColor: theme.blob2 }} pointerEvents="none" />
+        </>
+      )}
 
       {initialLoading && <HomeScreenSkeleton />}
       {!initialLoading && <>{/* content */}</>}

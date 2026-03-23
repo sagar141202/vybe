@@ -74,8 +74,8 @@ function MiniPlayerInner({ onPress }: { onPress?: () => void }) {
           }
         </View>
         <View style={styles.info}>
-          <Text style={styles.title} numberOfLines={1}>{currentTrack.title}</Text>
-          <Text style={styles.artist} numberOfLines={1}>{currentTrack.artist}</Text>
+          <Text style={[styles.title, { color: theme.isDark ? theme.text : '#1E1B4B' }]} numberOfLines={1}>{currentTrack.title}</Text>
+          <Text style={[styles.artist, { color: theme.isDark ? theme.textSecondary : '#6B7280' }]} numberOfLines={1}>{currentTrack.artist}</Text>
         </View>
         <View style={styles.controls}>
           <PlayPauseButton

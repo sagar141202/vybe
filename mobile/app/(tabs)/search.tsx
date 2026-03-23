@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useThemeStore } from '../../stores/themeStore';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import SearchBar from '../../components/SearchBar';
@@ -11,6 +12,7 @@ import { usePlayTrack } from '../../hooks/usePlayTrack';
 import type { Track } from '../../components/TrackListItem';
 
 export default function SearchScreen() {
+  const theme = useThemeStore(s => s.theme);
   const [query, setQuery] = useState('');
   const [selectedTrack, setSelectedTrack] = useState<Track | null>(null);
   const { data: tracks = [], isLoading } = useSearch(query);
@@ -23,7 +25,7 @@ export default function SearchScreen() {
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
-      <LinearGradient colors={['#FAFBFF', '#F0F4FF', '#F8FAFF']} style={StyleSheet.absoluteFillObject} />
+      <LinearGradient colors={theme.isDark ? [theme.gradientStart, theme.gradientMid, theme.gradientEnd] : ['#FAFBFF', '#F0F4FF', '#F8FAFF']} style={StyleSheet.absoluteFillObject} />
 
       <ScrollView
         showsVerticalScrollIndicator={false}
