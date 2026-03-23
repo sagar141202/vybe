@@ -84,3 +84,9 @@
 2026-03-23 01:03:45 | INFO     | main:97 - GET /trending → 307 (12.7ms)
 2026-03-23 01:03:45 | INFO     | routers.trending:60 - Trending cache HIT (20 tracks)
 2026-03-23 01:03:45 | INFO     | main:97 - GET /trending/ → 200 (15.6ms)
+2026-03-23 12:48:19 | INFO     | main:97 - GET /trending → 307 (13.2ms)
+2026-03-23 12:48:19 | INFO     | routers.trending:62 - Fetching fresh trending tracks...
+2026-03-23 12:48:19 | INFO     | services.search_service:43 - Searching YouTube Music: 'top hindi songs 2025'
+2026-03-23 12:48:20 | INFO     | services.search_service:72 - Search returned 20 tracks for 'top hindi songs 2025'
+2026-03-23 12:48:20 | INFO     | routers.trending:50 - Fetched 20 trending tracks
+2026-03-23 12:48:20 | INFO     | main:97 - GET /trending/ → 200 (1074.7ms)
