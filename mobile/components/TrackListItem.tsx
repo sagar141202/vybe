@@ -1,6 +1,7 @@
 import { Image,View, Text, TouchableOpacity, StyleSheet, Animated } from 'react-native';
 import { useRef, memo } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useThemeStore } from '../stores/themeStore';
 import { Ionicons } from '@expo/vector-icons';
 import { useEffect, useState } from 'react';
 import { isDownloaded } from '../hooks/useDownload';
@@ -88,10 +89,10 @@ function TrackListItem({
 
         {/* Info */}
         <View style={styles.info}>
-          <Text style={[styles.title, isPlaying && styles.titleActive]} numberOfLines={1}>
+          <Text style={[styles.title, { color: theme.text }, isPlaying && styles.titleActive]} numberOfLines={1}>
             {track.title}
           </Text>
-          <Text style={styles.artist} numberOfLines={1}>
+          <Text style={[styles.artist, { color: theme.textSecondary }]} numberOfLines={1}>
             {track.artist}{track.album ? ` · ${track.album}` : ''}
           </Text>
         </View>

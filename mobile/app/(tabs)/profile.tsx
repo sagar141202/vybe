@@ -3,6 +3,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
 import { router } from 'expo-router';
 import { useThemeStore } from '../../stores/themeStore';
+import ThemeBackground from '../../components/ThemeBackground';
 import { Switch } from 'react-native';
 import { useLibraryStore } from '../../stores/libraryStore';
 import { usePlaylistStore } from '../../stores/playlistStore';
@@ -49,8 +50,8 @@ export default function ProfileScreen() {
             <LinearGradient colors={['#A78BFA', '#7DD3FC', '#86EFAC']} style={StyleSheet.absoluteFillObject} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} />
             <Text style={styles.avatarText}>S</Text>
           </View>
-          <Text style={[styles.name, theme.isDark && { color: theme.text }]}>Sagar</Text>
-          <Text style={[styles.sub, theme.isDark && { color: theme.textSecondary }]}>Personal · Vybe v1.0.0</Text>
+          <Text style={[styles.name, theme.isDark && { color: '#1E1B4B' }]}>Sagar</Text>
+          <Text style={[styles.sub, theme.isDark && { color: '#6B7280' }]}>Personal · Vybe v1.0.0</Text>
           <View style={styles.proTag}>
             <LinearGradient colors={['#C4B5FD', '#93C5FD']} style={StyleSheet.absoluteFillObject} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} />
             <Text style={styles.proText}>✦ FREE FOREVER · NO ADS</Text>
@@ -65,16 +66,16 @@ export default function ProfileScreen() {
             { v: String(playlists.length), l: 'Playlists', colors: ['#C4B5FD','#A78BFA'] as [string,string], route: '/playlists' },
           ].map((s, i) => (
             <TouchableOpacity key={i} style={styles.statCard} onPress={() => router.push(s.route as any)}>
-              <LinearGradient colors={['rgba(255,255,255,0.9)','rgba(255,255,255,0.6)']} style={StyleSheet.absoluteFillObject} />
+              <LinearGradient colors={theme.isDark ? [theme.card, 'rgba(255,255,255,0.02)'] : ['rgba(255,255,255,0.9)', 'rgba(255,255,255,0.6)']} style={StyleSheet.absoluteFillObject} />
               <LinearGradient colors={s.colors} style={styles.statDot} />
-              <Text style={styles.statVal}>{s.v}</Text>
-              <Text style={styles.statLbl}>{s.l}</Text>
+              <Text style={[styles.statVal, { color: theme.text }]}>{s.v}</Text>
+              <Text style={[styles.statLbl, { color: theme.textSecondary }]}>{s.l}</Text>
             </TouchableOpacity>
           ))}
         </View>
 
         {/* Settings */}
-        <Text style={styles.section}>Settings ⚙️</Text>
+        <Text style={[styles.section, { color: theme.text }]}>Settings ⚙️</Text>
         <View style={[styles.darkModeRow, { backgroundColor: theme.isDark ? theme.card : 'rgba(255,255,255,0.9)', borderColor: theme.isDark ? theme.cardBorder : 'rgba(255,255,255,0.9)' }]}>
           <LinearGradient colors={isDark ? ['#A78BFA', '#7C3AED'] : ['#C4B5FD', '#A78BFA']} style={styles.darkModeIcon}>
             <Text style={{ fontSize: 20 }}>{isDark ? '��' : '☀️'}</Text>
@@ -90,7 +91,7 @@ export default function ProfileScreen() {
             thumbColor={isDark ? '#7C3AED' : '#FFFFFF'}
           />
         </View>
-        <View style={[styles.settingsList, theme.isDark && { backgroundColor: 'rgba(167,139,250,0.06)', borderColor: 'rgba(167,139,250,0.15)' }]}>
+        <View style={[styles.settingsList, { backgroundColor: theme.card, borderColor: theme.cardBorder }]}>
           {SETTINGS.map((s, i) => (
             <TouchableOpacity
               key={i}
@@ -114,8 +115,8 @@ export default function ProfileScreen() {
         <View style={[styles.appInfo, theme.isDark && { backgroundColor: 'rgba(167,139,250,0.06)', borderColor: 'rgba(167,139,250,0.15)' }]}>
           <LinearGradient colors={['rgba(167,139,250,0.08)', 'rgba(125,211,252,0.04)']} style={StyleSheet.absoluteFillObject} />
           <Text style={[styles.appInfoTitle, theme.isDark && { color: theme.accentLight }]}>Vybe</Text>
-          <Text style={[styles.appInfoSub, theme.isDark && { color: theme.textSecondary }]}>v1.0.0 · Self-hosted · Zero ads · Zero cost</Text>
-          <Text style={[styles.appInfoSub, theme.isDark && { color: theme.textSecondary }]}>Built with ❤️ · Self-hosted · Free forever</Text>
+          <Text style={[styles.appInfoSub, theme.isDark && { color: '#6B7280' }]}>v1.0.0 · Self-hosted · Zero ads · Zero cost</Text>
+          <Text style={[styles.appInfoSub, theme.isDark && { color: '#6B7280' }]}>Built with ❤️ · Self-hosted · Free forever</Text>
         </View>
         <View style={{ height: 160 }} />
       </ScrollView>

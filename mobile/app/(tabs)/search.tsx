@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useThemeStore } from '../../stores/themeStore';
+import ThemeBackground from '../../components/ThemeBackground';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import SearchBar from '../../components/SearchBar';
@@ -33,8 +34,8 @@ export default function SearchScreen() {
         keyboardShouldPersistTaps="always"
       >
         <View style={styles.header}>
-          <Text style={styles.title}>Search</Text>
-          <Text style={styles.sub}>Find any song, artist or album</Text>
+          <Text style={[styles.title, { color: theme.text }]}>Search</Text>
+          <Text style={[styles.sub, { color: theme.textSecondary }]}>Find any song, artist or album</Text>
         </View>
 
         <SearchBar value={query} onChangeText={setQuery} placeholder="Songs, artists, albums..." />

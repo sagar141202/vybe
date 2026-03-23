@@ -49,7 +49,7 @@ function MiniPlayerInner({ onPress }: { onPress?: () => void }) {
       {...panResponder.panHandlers}
     >
       <LinearGradient
-        colors={['rgba(255,255,255,0.97)', 'rgba(240,244,255,0.97)']}
+        colors={theme.isDark ? ['rgba(15,15,26,0.98)', 'rgba(8,8,14,0.98)'] : ['rgba(255,255,255,0.98)', 'rgba(248,248,255,0.97)']}
         style={StyleSheet.absoluteFillObject}
       />
       <View style={styles.border} />

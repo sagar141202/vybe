@@ -25,8 +25,8 @@ export default function TabLayout() {
     <View style={{ flex: 1 }}>
       <Tabs
         screenOptions={{
-          headerShown: false,
-          tabBarStyle: {
+        headerShown: false,
+        tabBarStyle: {
           backgroundColor: theme.tabBar,
           borderTopColor: theme.tabBarBorder,
           borderTopWidth: 1,
@@ -34,11 +34,14 @@ export default function TabLayout() {
           paddingBottom: 20,
           paddingTop: 10,
           elevation: 20,
+          shadowColor: theme.isDark ? theme.accent : 'rgba(167,139,250,0.3)',
+          shadowOpacity: 0.15,
+          shadowRadius: 20,
         },
-          tabBarActiveTintColor: theme.accent,
-          tabBarInactiveTintColor: theme.textTertiary,
-          tabBarLabelStyle: { fontSize: 11, fontWeight: '700', letterSpacing: 0.3 },
-        }}
+        tabBarActiveTintColor: theme.tabBarActive,
+        tabBarInactiveTintColor: theme.tabBarInactive,
+        tabBarLabelStyle: { fontSize: 11, fontWeight: '600', marginTop: 2 },
+      }}
       >
         <Tabs.Screen name="index" options={{ title: 'Home', tabBarIcon: ({ focused }) => <TabIcon name={focused ? 'home' : 'home-outline'} focused={focused} /> }} />
         <Tabs.Screen name="search" options={{ title: 'Search', tabBarIcon: ({ focused }) => <TabIcon name={focused ? 'search' : 'search-outline'} focused={focused} /> }} />
