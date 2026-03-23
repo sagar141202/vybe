@@ -1,7 +1,5 @@
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useThemeStore } from '../../stores/themeStore';
-import ThemeBackground from '../../components/ThemeBackground';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import SearchBar from '../../components/SearchBar';
@@ -13,7 +11,6 @@ import { usePlayTrack } from '../../hooks/usePlayTrack';
 import type { Track } from '../../components/TrackListItem';
 
 export default function SearchScreen() {
-  const theme = useThemeStore(s => s.theme);
   const [query, setQuery] = useState('');
   const [selectedTrack, setSelectedTrack] = useState<Track | null>(null);
   const { data: tracks = [], isLoading } = useSearch(query);
@@ -26,7 +23,7 @@ export default function SearchScreen() {
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
-      <LinearGradient colors={theme.isDark ? [theme.gradientStart, theme.gradientMid, theme.gradientEnd] : ['#FAFBFF', '#F0F4FF', '#F8FAFF']} style={StyleSheet.absoluteFillObject} />
+      <LinearGradient colors={['#FAFBFF', '#F0F4FF', '#F8FAFF']} style={StyleSheet.absoluteFillObject} />
 
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -34,8 +31,8 @@ export default function SearchScreen() {
         keyboardShouldPersistTaps="always"
       >
         <View style={styles.header}>
-          <Text style={[styles.title, { color: theme.text }]}>Search</Text>
-          <Text style={[styles.sub, { color: theme.textSecondary }]}>Find any song, artist or album</Text>
+          <Text style={styles.title}>Search</Text>
+          <Text style={styles.sub}>Find any song, artist or album</Text>
         </View>
 
         <SearchBar value={query} onChangeText={setQuery} placeholder="Songs, artists, albums..." />
@@ -74,8 +71,8 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#FAFBFF' },
   scroll: { paddingBottom: 160 },
   header: { paddingTop: 64, paddingHorizontal: 24, marginBottom: 20 },
-  title: { fontSize: 36, fontFamily: 'Outfit_900Black', fontWeight: '900', letterSpacing: -1, color: '#1E1B4B', letterSpacing: -1 },
+  title: { fontSize: 36, fontWeight: '900', color: '#1E1B4B', letterSpacing: -1 },
   sub: { fontSize: 14, color: '#6B7280', marginTop: 4 },
   hintBox: { marginHorizontal: 24, marginTop: 32, padding: 24, borderRadius: 20, backgroundColor: 'rgba(167,139,250,0.1)', borderWidth: 1.5, borderColor: 'rgba(167,139,250,0.2)', alignItems: 'center' },
-  hintText: { fontSize: 16, color: '#7C3AED', fontFamily: 'PlusJakartaSans_700Bold', fontWeight: '600' },
+  hintText: { fontSize: 16, color: '#7C3AED', fontWeight: '600' },
 });

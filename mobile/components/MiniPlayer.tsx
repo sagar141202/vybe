@@ -2,7 +2,6 @@ import { Image,View, Text, TouchableOpacity,
   StyleSheet, Animated, PanResponder } from 'react-native';
 import { useRef, useEffect, memo } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useThemeStore } from '../stores/themeStore';
 import PlayPauseButton from './PlayPauseButton';
 import { router } from 'expo-router';
 import { usePlayerStore } from '../stores/playerStore';
@@ -14,9 +13,8 @@ const THUMB_COLORS = [
   ['#FBCFE8','#F9A8D4'],
 ];
 
-function MiniPlayerInner({ onPress }: { onPress?: () => void }) {
+function MiniPlayer({ onPress }: { onPress?: () => void }) {
   const currentTrack = usePlayerStore(s => s.currentTrack);
-  const theme = useThemeStore(s => s.theme);
   const isPlaying = usePlayerStore(s => s.isPlaying);
   const position = usePlayerStore(s => s.position);
   const duration = usePlayerStore(s => s.duration);
@@ -49,7 +47,7 @@ function MiniPlayerInner({ onPress }: { onPress?: () => void }) {
       {...panResponder.panHandlers}
     >
       <LinearGradient
-        colors={theme.isDark ? ['rgba(15,15,26,0.98)', 'rgba(8,8,14,0.98)'] : ['rgba(255,255,255,0.98)', 'rgba(248,248,255,0.97)']}
+        colors={['rgba(255,255,255,0.97)', 'rgba(240,244,255,0.97)']}
         style={StyleSheet.absoluteFillObject}
       />
       <View style={styles.border} />
@@ -74,8 +72,8 @@ function MiniPlayerInner({ onPress }: { onPress?: () => void }) {
           }
         </View>
         <View style={styles.info}>
-          <Text style={[styles.title, { color: theme.isDark ? theme.text : '#1E1B4B' }]} numberOfLines={1}>{currentTrack.title}</Text>
-          <Text style={[styles.artist, { color: theme.isDark ? theme.textSecondary : '#6B7280' }]} numberOfLines={1}>{currentTrack.artist}</Text>
+          <Text style={styles.title} numberOfLines={1}>{currentTrack.title}</Text>
+          <Text style={styles.artist} numberOfLines={1}>{currentTrack.artist}</Text>
         </View>
         <View style={styles.controls}>
           <PlayPauseButton
@@ -113,7 +111,7 @@ const styles = StyleSheet.create({
   thumbWrap: { width: 48, height: 48, borderRadius: 12, overflow: 'hidden' },
   thumb: { width: 48, height: 48, borderRadius: 12, alignItems: 'center', justifyContent: 'center' },
   info: { flex: 1 },
-  title: { fontSize: 14, fontFamily: 'PlusJakartaSans_700Bold', fontWeight: '700', color: '#1E1B4B', marginBottom: 2 },
+  title: { fontSize: 14, fontWeight: '700', color: '#1E1B4B', marginBottom: 2 },
   artist: { fontSize: 12, color: '#6B7280' },
   controls: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   playBtn: { borderRadius: 22, overflow: 'hidden' },
@@ -123,6 +121,4 @@ const styles = StyleSheet.create({
   nextIcon: { fontSize: 14 },
 });
 
-
-
-export default memo(MiniPlayerInner);
+export default memo(MiniPlayer);

@@ -1,7 +1,6 @@
 import { Image,View, Text, TouchableOpacity, StyleSheet, Animated } from 'react-native';
 import { useRef, memo } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useThemeStore } from '../stores/themeStore';
 import { Ionicons } from '@expo/vector-icons';
 import { useEffect, useState } from 'react';
 import { isDownloaded } from '../hooks/useDownload';
@@ -89,10 +88,10 @@ function TrackListItem({
 
         {/* Info */}
         <View style={styles.info}>
-          <Text style={[styles.title, { color: theme.text }, isPlaying && styles.titleActive]} numberOfLines={1}>
+          <Text style={[styles.title, isPlaying && styles.titleActive]} numberOfLines={1}>
             {track.title}
           </Text>
-          <Text style={[styles.artist, { color: theme.textSecondary }]} numberOfLines={1}>
+          <Text style={styles.artist} numberOfLines={1}>
             {track.artist}{track.album ? ` · ${track.album}` : ''}
           </Text>
         </View>
@@ -156,14 +155,14 @@ const styles = StyleSheet.create({
   },
   playingIcon: { fontSize: 14, color: '#FFFFFF' },
   info: { flex: 1, gap: 3 },
-  title: { fontSize: 15, fontFamily: 'PlusJakartaSans_700Bold', fontWeight: '700', color: '#1E1B4B' },
+  title: { fontSize: 15, fontWeight: '700', color: '#1E1B4B' },
   titleActive: { color: '#7C3AED' },
   artist: { fontSize: 12, color: '#6B7280' },
   rightSection: { alignItems: 'flex-end', gap: 2 },
   downloadedIcon: { marginBottom: 1 },
   duration: {
     fontSize: 12, color: '#9CA3AF',
-    fontFamily: 'PlusJakartaSans_500Medium', fontWeight: '500', minWidth: 36, textAlign: 'right',
+    fontWeight: '500', minWidth: 36, textAlign: 'right',
   },
   moreBtn: { marginLeft: 4, minWidth: 44, minHeight: 44, alignItems: 'center', justifyContent: 'center' },
   moreBtnGrad: {

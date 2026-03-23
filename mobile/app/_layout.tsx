@@ -1,7 +1,4 @@
 import { Stack } from 'expo-router';
-import { useFonts } from 'expo-font';
-import { Outfit_400Regular, Outfit_500Medium, Outfit_600SemiBold, Outfit_700Bold, Outfit_800ExtraBold, Outfit_900Black } from '@expo-google-fonts/outfit';
-import { PlusJakartaSans_400Regular, PlusJakartaSans_500Medium, PlusJakartaSans_600SemiBold, PlusJakartaSans_700Bold } from '@expo-google-fonts/plus-jakarta-sans';
 import { StatusBar } from 'expo-status-bar';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from '../lib/queryClient';
@@ -9,7 +6,6 @@ import { useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Animated } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useLibraryStore } from '../stores/libraryStore';
-import { useThemeStore } from '../stores/themeStore';
 import { useSettingsStore } from '../stores/settingsStore';
 import { usePlaylistStore } from '../stores/playlistStore';
 import { useNetworkStatus } from '../hooks/useNetworkStatus';
@@ -49,8 +45,7 @@ function OfflineSnackbar() {
 }
 
 function AppInit() {
-  const loadTheme = useThemeStore(s => s.loadTheme);
-  useEffect(() => { initSentry(); loadTheme(); }, []);
+  useEffect(() => { initSentry(); }, []);
   const loadLibrary = useLibraryStore(s => s.loadFromStorage);
   const loadSettings = useSettingsStore(s => s.loadFromStorage);
   const loadPlaylists = usePlaylistStore(s => s.loadFromStorage);
@@ -59,20 +54,6 @@ function AppInit() {
 }
 
 export default function RootLayout() {
-  const [fontsLoaded, fontError] = useFonts({
-    Outfit_400Regular,
-    Outfit_500Medium,
-    Outfit_600SemiBold,
-    Outfit_700Bold,
-    Outfit_800ExtraBold,
-    Outfit_900Black,
-    PlusJakartaSans_400Regular,
-    PlusJakartaSans_500Medium,
-    PlusJakartaSans_600SemiBold,
-    PlusJakartaSans_700Bold,
-  });
-
-  if (!fontsLoaded && !fontError) return null;
   return (
     <QueryClientProvider client={queryClient}>
       <StatusBar style="dark" />

@@ -8,8 +8,6 @@ import { useLibraryStore } from '../../stores/libraryStore';
 import { usePlayerStore } from '../../stores/playerStore';
 import { usePlayTrack } from '../../hooks/usePlayTrack';
 import { getRecommendations, getTrendingTracks, getSimilarTracks } from '../../lib/api';
-import { useThemeStore } from '../../stores/themeStore';
-import ThemeBackground from '../../components/ThemeBackground';
 import { HomeScreenSkeleton } from '../../components/Skeleton';
 import type { Track } from '../../components/TrackListItem';
 import { Ionicons } from '@expo/vector-icons';
@@ -43,7 +41,6 @@ function getGreeting() {
 function TrackCard({ track, index, onPress, showReason }: {
   track: any; index: number; onPress: () => void; showReason?: boolean;
 }) {
-  const theme = useThemeStore(s => s.theme);
   const COLORS = [
     ['#C4B5FD','#A78BFA'], ['#7DD3FC','#93C5FD'],
     ['#86EFAC','#6EE7B7'], ['#FDE68A','#FCA5A5'],
@@ -51,8 +48,8 @@ function TrackCard({ track, index, onPress, showReason }: {
   ];
   const colors = COLORS[index % COLORS.length] as [string, string];
   return (
-    <TouchableOpacity style={[styles.trackCard, { backgroundColor: 'rgba(255,255,255,0.85)', borderColor: 'rgba(255,255,255,0.9)' }]} onPress={onPress}>
-      <View style={[styles.trackCardThumb, { borderColor: theme.isDark ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.9)' }]}>
+    <TouchableOpacity style={styles.trackCard} onPress={onPress}>
+      <View style={styles.trackCardThumb}>
         {track.thumbnail_url ? (
           <Image source={{ uri: track.thumbnail_url }} style={styles.trackCardImg} resizeMode="cover" />
         ) : (
@@ -64,8 +61,8 @@ function TrackCard({ track, index, onPress, showReason }: {
           <Ionicons name="play" size={14} color="rgba(255,255,255,0.9)" />
         </View>
       </View>
-      <Text style={[styles.trackCardTitle, { color: theme.text }]} numberOfLines={2}>{track.title}</Text>
-      <Text style={[styles.trackCardArtist, { color: theme.textSecondary }]} numberOfLines={1}>{track.artist}</Text>
+      <Text style={styles.trackCardTitle} numberOfLines={2}>{track.title}</Text>
+      <Text style={styles.trackCardArtist} numberOfLines={1}>{track.artist}</Text>
       {showReason && track.reason && (
         <View style={styles.reasonBadge}>
           <Text style={styles.reasonText}>{track.reason}</Text>
@@ -76,10 +73,9 @@ function TrackCard({ track, index, onPress, showReason }: {
 }
 
 function SectionHeader({ title, onSeeAll }: { title: string; onSeeAll?: () => void }) {
-  const theme = useThemeStore(s => s.theme);
   return (
     <View style={styles.sectionHeader}>
-      <Text style={[styles.sectionTitle, { color: theme.text }]}>{title}</Text>
+      <Text style={styles.sectionTitle}>{title}</Text>
       {onSeeAll && (
         <TouchableOpacity onPress={onSeeAll}>
           <Text style={styles.seeAll}>See all →</Text>
@@ -90,7 +86,6 @@ function SectionHeader({ title, onSeeAll }: { title: string; onSeeAll?: () => vo
 }
 
 export default function HomeScreen() {
-  const theme = useThemeStore(s => s.theme);
   const recentlyPlayed = useLibraryStore(s => s.recentlyPlayed);
   const likedTracks = useLibraryStore(s => s.likedTracks);
   const currentTrack = usePlayerStore(s => s.currentTrack);
@@ -111,18 +106,7 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
-      <LinearGradient
-        colors={theme.isDark
-          ? [theme.gradientStart, theme.gradientMid, theme.gradientEnd]
-          : ['#FAFBFF', '#F0F4FF', '#F8FAFF']}
-        style={StyleSheet.absoluteFillObject}
-      />
-      {theme.isDark && (
-        <>
-          <View style={{ position: 'absolute', top: -100, right: -80, width: 300, height: 300, borderRadius: 150, backgroundColor: theme.blob1 }} pointerEvents="none" />
-          <View style={{ position: 'absolute', top: 400, left: -100, width: 250, height: 250, borderRadius: 125, backgroundColor: theme.blob2 }} pointerEvents="none" />
-        </>
-      )}
+      <LinearGradient colors={['#FAFBFF', '#F0F4FF', '#F8FAFF']} style={StyleSheet.absoluteFillObject} />
 
       {initialLoading && <HomeScreenSkeleton />}
       {!initialLoading && <>{/* content */}</>}
@@ -140,8 +124,8 @@ export default function HomeScreen() {
         {/* Header */}
         <View style={styles.header}>
           <View>
-            <Text style={[styles.greeting, { color: theme.text }]}>{greeting.emoji} {greeting.text}</Text>
-            <Text style={[styles.subGreeting, { color: theme.textSecondary }]}>What are you listening to today?</Text>
+            <Text style={styles.greeting}>{greeting.emoji} {greeting.text}</Text>
+            <Text style={styles.subGreeting}>What are you listening to today?</Text>
           </View>
           <TouchableOpacity style={styles.searchBtn} onPress={() => router.push('/(tabs)/search')}>
             <LinearGradient colors={['rgba(167,139,250,0.2)', 'rgba(125,211,252,0.1)']} style={StyleSheet.absoluteFillObject} />
@@ -164,8 +148,8 @@ export default function HomeScreen() {
               )}
               <View style={styles.jumpBackInfo}>
                 <Text style={styles.jumpBackLabel}>▶ Now Playing</Text>
-                <Text style={[styles.jumpBackTitle, { color: theme.text }]} numberOfLines={1}>{currentTrack.title}</Text>
-                <Text style={[styles.jumpBackArtist, { color: theme.textSecondary }]} numberOfLines={1}>{currentTrack.artist}</Text>
+                <Text style={styles.jumpBackTitle} numberOfLines={1}>{currentTrack.title}</Text>
+                <Text style={styles.jumpBackArtist} numberOfLines={1}>{currentTrack.artist}</Text>
               </View>
               <Ionicons name="chevron-forward" size={20} color="#A78BFA" />
             </TouchableOpacity>
@@ -173,7 +157,7 @@ export default function HomeScreen() {
         )}
 
         {/* Vibe Search Card */}
-        <TouchableOpacity style={[styles.vibeCard, { borderColor: theme.cardBorder }]} onPress={() => router.push('/vibe-search')}>
+        <TouchableOpacity style={styles.vibeCard} onPress={() => router.push('/vibe-search')}>
           <LinearGradient colors={['#818CF8', '#A78BFA', '#C4B5FD']} style={StyleSheet.absoluteFillObject} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} />
           <View style={styles.vibeDeco} />
           <View style={styles.vibeContent}>
@@ -187,7 +171,7 @@ export default function HomeScreen() {
         </TouchableOpacity>
 
         {/* Daily Mix Card */}
-        <TouchableOpacity style={[styles.dailyMixCard, { borderColor: theme.cardBorder }]} onPress={() => router.push('/daily-mix')}>
+        <TouchableOpacity style={styles.dailyMixCard} onPress={() => router.push('/daily-mix')}>
           <LinearGradient colors={['#C4B5FD', '#818CF8']} style={StyleSheet.absoluteFillObject} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} />
           <View style={styles.dailyMixDeco} />
           <View style={styles.dailyMixContent}>
@@ -196,7 +180,7 @@ export default function HomeScreen() {
               <Text style={styles.dailyMixTitle}>Your Daily Mix</Text>
               <Text style={styles.dailyMixSub}>20 tracks picked just for you</Text>
             </View>
-            <View style={[styles.dailyMixBtn, { backgroundColor: theme.isDark ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.85)' }]}>
+            <View style={styles.dailyMixBtn}>
               <Ionicons name="play" size={20} color="#7C3AED" />
             </View>
           </View>
@@ -209,12 +193,12 @@ export default function HomeScreen() {
             {MOODS.map((mood, i) => (
               <TouchableOpacity
                 key={i}
-                style={[styles.moodChip, { borderColor: theme.isDark ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.9)' }]}
+                style={styles.moodChip}
                 onPress={() => router.push({ pathname: '/(tabs)/search', params: { q: mood.query } })}
               >
                 <LinearGradient colors={mood.colors} style={StyleSheet.absoluteFillObject} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} />
                 <Text style={styles.moodEmoji}>{mood.emoji}</Text>
-                <Text style={[styles.moodLabel, { color: theme.text }]}>{mood.label}</Text>
+                <Text style={styles.moodLabel}>{mood.label}</Text>
               </TouchableOpacity>
             ))}
           </ScrollView>
@@ -298,7 +282,7 @@ export default function HomeScreen() {
               {trending.slice(0, 5).map((track, i) => (
                 <TouchableOpacity
                   key={track.video_id}
-                  style={[styles.trendingRow, { backgroundColor: theme.card, borderColor: theme.cardBorder }]}
+                  style={styles.trendingRow}
                   onPress={() => playTrack(track, trending)}
                 >
                   <LinearGradient colors={['rgba(255,255,255,0.8)', 'rgba(255,255,255,0.4)']} style={StyleSheet.absoluteFillObject} />
@@ -313,8 +297,8 @@ export default function HomeScreen() {
                     </LinearGradient>
                   )}
                   <View style={styles.trendingInfo}>
-                    <Text style={[styles.trendingTitle, { color: theme.text }]} numberOfLines={1}>{track.title}</Text>
-                    <Text style={[styles.trendingArtist, { color: theme.textSecondary }]} numberOfLines={1}>{track.artist}</Text>
+                    <Text style={styles.trendingTitle} numberOfLines={1}>{track.title}</Text>
+                    <Text style={styles.trendingArtist} numberOfLines={1}>{track.artist}</Text>
                   </View>
                   <Ionicons name="play-circle" size={30} color="#C4B5FD" />
                 </TouchableOpacity>
@@ -329,8 +313,8 @@ export default function HomeScreen() {
             <View style={styles.emptyCard}>
               <LinearGradient colors={['rgba(167,139,250,0.1)', 'rgba(125,211,252,0.05)']} style={StyleSheet.absoluteFillObject} />
               <Text style={styles.emptyEmoji}>🎵</Text>
-              <Text style={[styles.emptyTitle, { color: theme.text }]}>Start listening</Text>
-              <Text style={[styles.emptySub, { color: theme.textSecondary }]}>Search for your favourite music to get started</Text>
+              <Text style={styles.emptyTitle}>Start listening</Text>
+              <Text style={styles.emptySub}>Search for your favourite music to get started</Text>
               <TouchableOpacity style={styles.emptyBtn} onPress={() => router.push('/(tabs)/search')}>
                 <LinearGradient colors={['#C4B5FD', '#A78BFA']} style={StyleSheet.absoluteFillObject} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
                   <Text style={styles.emptyBtnText}>Search Music</Text>
@@ -354,7 +338,7 @@ const styles = StyleSheet.create({
   blob2: { position: 'absolute', top: 200, left: -80, width: 240, height: 240, borderRadius: 120 },
   scroll: { paddingBottom: 20 },
   header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingTop: 64, paddingHorizontal: 24, marginBottom: 24 },
-  greeting: { fontSize: 28, fontFamily: 'Outfit_900Black', fontWeight: '900', letterSpacing: -1, color: '#1E1B4B', letterSpacing: -0.5 },
+  greeting: { fontSize: 28, fontWeight: '900', color: '#1E1B4B', letterSpacing: -0.5 },
   subGreeting: { fontSize: 14, color: '#6B7280', marginTop: 4 },
   searchBtn: { width: 46, height: 46, borderRadius: 23, alignItems: 'center', justifyContent: 'center', overflow: 'hidden', borderWidth: 1.5, borderColor: 'rgba(167,139,250,0.3)' },
   jumpBackCard: { marginHorizontal: 24, marginBottom: 24, borderRadius: 20, overflow: 'hidden', borderWidth: 1.5, borderColor: 'rgba(167,139,250,0.25)' },
@@ -362,54 +346,54 @@ const styles = StyleSheet.create({
   jumpBackContent: { flexDirection: 'row', alignItems: 'center', padding: 14, gap: 14 },
   jumpBackThumb: { width: 56, height: 56, borderRadius: 14, alignItems: 'center', justifyContent: 'center', overflow: 'hidden' },
   jumpBackInfo: { flex: 1 },
-  jumpBackLabel: { fontSize: 11, color: '#A78BFA', fontFamily: 'PlusJakartaSans_700Bold', fontWeight: '700', letterSpacing: 1, marginBottom: 3 },
-  jumpBackTitle: { fontSize: 15, fontFamily: 'Outfit_900Black', fontWeight: '800', letterSpacing: -0.5, color: '#1E1B4B', marginBottom: 2 },
+  jumpBackLabel: { fontSize: 11, color: '#A78BFA', fontWeight: '700', letterSpacing: 1, marginBottom: 3 },
+  jumpBackTitle: { fontSize: 15, fontWeight: '800', color: '#1E1B4B', marginBottom: 2 },
   jumpBackArtist: { fontSize: 12, color: '#6B7280' },
   moodsSection: { marginBottom: 8 },
   moodsScroll: { paddingLeft: 24, paddingRight: 12, gap: 10 },
   moodChip: { paddingHorizontal: 16, paddingVertical: 12, borderRadius: 20, overflow: 'hidden', alignItems: 'center', gap: 4, minWidth: 80, borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.9)' },
   moodEmoji: { fontSize: 20 },
-  moodLabel: { fontSize: 12, fontFamily: 'PlusJakartaSans_700Bold', fontWeight: '700', color: '#1E1B4B' },
+  moodLabel: { fontSize: 12, fontWeight: '700', color: '#1E1B4B' },
   section: { marginBottom: 8 },
   sectionHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 24, paddingVertical: 12 },
-  sectionTitle: { fontSize: 18, fontFamily: 'Outfit_900Black', fontWeight: '800', letterSpacing: -0.5, color: '#1E1B4B' },
-  seeAll: { fontSize: 13, color: '#A78BFA', fontFamily: 'PlusJakartaSans_700Bold', fontWeight: '600' },
+  sectionTitle: { fontSize: 18, fontWeight: '800', color: '#1E1B4B' },
+  seeAll: { fontSize: 13, color: '#A78BFA', fontWeight: '600' },
   horizontalScroll: { paddingLeft: 24, paddingRight: 12, gap: 14 },
   trackCard: { width: CARD_W },
   trackCardThumb: { width: CARD_W, height: CARD_W, borderRadius: 18, overflow: 'hidden', marginBottom: 10, position: 'relative', borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.9)' },
   trackCardImg: { width: CARD_W, height: CARD_W, borderRadius: 18, alignItems: 'center', justifyContent: 'center' },
   trackCardPlay: { position: 'absolute', bottom: 8, right: 8, width: 30, height: 30, borderRadius: 15, backgroundColor: 'rgba(0,0,0,0.35)', alignItems: 'center', justifyContent: 'center' },
-  trackCardTitle: { fontSize: 13, fontFamily: 'PlusJakartaSans_700Bold', fontWeight: '700', color: '#1E1B4B', lineHeight: 18, marginBottom: 2 },
+  trackCardTitle: { fontSize: 13, fontWeight: '700', color: '#1E1B4B', lineHeight: 18, marginBottom: 2 },
   trackCardArtist: { fontSize: 11, color: '#6B7280' },
   reasonBadge: { marginTop: 4, backgroundColor: 'rgba(167,139,250,0.15)', paddingHorizontal: 8, paddingVertical: 3, borderRadius: 8, alignSelf: 'flex-start' },
-  reasonText: { fontSize: 10, color: '#7C3AED', fontFamily: 'PlusJakartaSans_700Bold', fontWeight: '700' },
+  reasonText: { fontSize: 10, color: '#7C3AED', fontWeight: '700' },
   trendingList: { paddingHorizontal: 16, gap: 6 },
   trendingRow: { flexDirection: 'row', alignItems: 'center', gap: 12, padding: 12, borderRadius: 18, overflow: 'hidden', borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.9)' },
   trendingRank: { width: 28, height: 28, borderRadius: 8, backgroundColor: 'rgba(167,139,250,0.15)', alignItems: 'center', justifyContent: 'center' },
-  trendingRankText: { fontSize: 13, fontFamily: 'Outfit_900Black', fontWeight: '900', letterSpacing: -1, color: '#7C3AED' },
+  trendingRankText: { fontSize: 13, fontWeight: '900', color: '#7C3AED' },
   trendingThumb: { width: 44, height: 44, borderRadius: 10, alignItems: 'center', justifyContent: 'center' },
   trendingInfo: { flex: 1 },
-  trendingTitle: { fontSize: 14, fontFamily: 'PlusJakartaSans_700Bold', fontWeight: '700', color: '#1E1B4B', marginBottom: 2 },
+  trendingTitle: { fontSize: 14, fontWeight: '700', color: '#1E1B4B', marginBottom: 2 },
   trendingArtist: { fontSize: 12, color: '#6B7280' },
   emptyWrap: { paddingHorizontal: 24, marginTop: 20 },
   emptyCard: { padding: 40, borderRadius: 28, overflow: 'hidden', alignItems: 'center', borderWidth: 1.5, borderColor: 'rgba(167,139,250,0.15)' },
   emptyEmoji: { fontSize: 56, marginBottom: 16 },
-  emptyTitle: { fontSize: 20, fontFamily: 'Outfit_900Black', fontWeight: '800', letterSpacing: -0.5, color: '#1E1B4B', marginBottom: 8 },
+  emptyTitle: { fontSize: 20, fontWeight: '800', color: '#1E1B4B', marginBottom: 8 },
   emptySub: { fontSize: 14, color: '#6B7280', textAlign: 'center', lineHeight: 22, marginBottom: 24 },
   vibeCard: { marginHorizontal: 24, marginBottom: 12, borderRadius: 24, overflow: 'hidden', height: 90, borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.9)' },
   vibeDeco: { position: 'absolute', left: -20, bottom: -20, width: 100, height: 100, borderRadius: 50, backgroundColor: 'rgba(255,255,255,0.12)' },
   vibeContent: { flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: 18 },
-  vibeBadge: { fontSize: 9, fontFamily: 'Outfit_900Black', fontWeight: '800', letterSpacing: -0.5, color: 'rgba(255,255,255,0.8)', letterSpacing: 2, marginBottom: 3 },
-  vibeTitle: { fontSize: 18, fontFamily: 'Outfit_900Black', fontWeight: '900', letterSpacing: -1, color: '#FFFFFF', letterSpacing: -0.3 },
+  vibeBadge: { fontSize: 9, fontWeight: '800', color: 'rgba(255,255,255,0.8)', letterSpacing: 2, marginBottom: 3 },
+  vibeTitle: { fontSize: 18, fontWeight: '900', color: '#FFFFFF', letterSpacing: -0.3 },
   vibeSub: { fontSize: 11, color: 'rgba(255,255,255,0.8)', marginTop: 1 },
   vibeEmoji: { fontSize: 32 },
   dailyMixCard: { marginHorizontal: 24, marginBottom: 16, borderRadius: 24, overflow: 'hidden', height: 100, borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.9)' },
   dailyMixDeco: { position: 'absolute', right: -30, top: -30, width: 140, height: 140, borderRadius: 70, backgroundColor: 'rgba(255,255,255,0.15)' },
   dailyMixContent: { flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: 20 },
-  dailyMixBadge: { fontSize: 10, fontFamily: 'Outfit_900Black', fontWeight: '800', letterSpacing: -0.5, color: 'rgba(255,255,255,0.8)', letterSpacing: 2, marginBottom: 4 },
-  dailyMixTitle: { fontSize: 20, fontFamily: 'Outfit_900Black', fontWeight: '900', letterSpacing: -1, color: '#FFFFFF', letterSpacing: -0.5 },
+  dailyMixBadge: { fontSize: 10, fontWeight: '800', color: 'rgba(255,255,255,0.8)', letterSpacing: 2, marginBottom: 4 },
+  dailyMixTitle: { fontSize: 20, fontWeight: '900', color: '#FFFFFF', letterSpacing: -0.5 },
   dailyMixSub: { fontSize: 12, color: 'rgba(255,255,255,0.8)', marginTop: 2 },
-  dailyMixBtn: { width: 48, height: 48, borderRadius: 24, backgroundColor: 'rgba(255,255,255,0.85)', alignItems: 'center', justifyContent: 'center' },
+  dailyMixBtn: { width: 48, height: 48, borderRadius: 24, backgroundColor: 'rgba(255,255,255,0.9)', alignItems: 'center', justifyContent: 'center' },
   emptyBtn: { borderRadius: 30, overflow: 'hidden' },
-  emptyBtnText: { fontSize: 14, fontFamily: 'PlusJakartaSans_700Bold', fontWeight: '700', color: '#FFFFFF', paddingHorizontal: 28, paddingVertical: 13 },
+  emptyBtnText: { fontSize: 14, fontWeight: '700', color: '#FFFFFF', paddingHorizontal: 28, paddingVertical: 13 },
 });

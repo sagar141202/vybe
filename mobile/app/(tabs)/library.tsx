@@ -1,8 +1,6 @@
 import { Image,View, Text, StyleSheet, ScrollView,
   TouchableOpacity, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useThemeStore } from '../../stores/themeStore';
-import ThemeBackground from '../../components/ThemeBackground';
 import { StatusBar } from 'expo-status-bar';
 import { router } from 'expo-router';
 import { useLibraryStore } from '../../stores/libraryStore';
@@ -25,7 +23,7 @@ const THUMB_COLORS = [
 function TrackRow({ track, index, onPress }: any) {
   const colorIndex = track.video_id.charCodeAt(0) % THUMB_COLORS.length;
   return (
-    <TouchableOpacity style={[styles.trackRow, { backgroundColor: theme.card, borderColor: theme.cardBorder }]} onPress={onPress}>
+    <TouchableOpacity style={styles.trackRow} onPress={onPress}>
       <View style={styles.trackThumbWrap}>
         {track.thumbnail_url ? (
           <Image source={{ uri: track.thumbnail_url }} style={styles.trackThumb} resizeMode="cover" />
@@ -45,7 +43,6 @@ function TrackRow({ track, index, onPress }: any) {
 }
 
 export default function LibraryScreen() {
-  const theme = useThemeStore(s => s.theme);
   const [downloadCount, setDownloadCount] = useState(0);
   const likedTracks = useLibraryStore(s => s.likedTracks);
   const recentlyPlayed = useLibraryStore(s => s.recentlyPlayed);
@@ -65,30 +62,30 @@ export default function LibraryScreen() {
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
-      <LinearGradient colors={theme.isDark ? [theme.gradientStart, theme.gradientMid, theme.gradientEnd] : ['#FAFBFF', '#F0F4FF', '#F8FAFF']} style={StyleSheet.absoluteFillObject} />
+      <LinearGradient colors={['#FAFBFF', '#F0F4FF', '#F8FAFF']} style={StyleSheet.absoluteFillObject} />
 
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
         <View style={styles.header}>
-          <Text style={[styles.title, { color: theme.text }]}>Library</Text>
-          <Text style={[styles.sub, { color: theme.textSecondary }]}>Your personal collection</Text>
+          <Text style={styles.title}>Library</Text>
+          <Text style={styles.sub}>Your personal collection</Text>
         </View>
 
         {/* Top cards */}
         <View style={styles.cardsRow}>
-          <TouchableOpacity style={[styles.bigCard, { borderColor: theme.isDark ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.9)' }]} onPress={() => router.push('/liked')}>
+          <TouchableOpacity style={styles.bigCard} onPress={() => router.push('/liked')}>
             <LinearGradient colors={['#FBCFE8', '#F9A8D4']} style={StyleSheet.absoluteFillObject} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} />
             <View style={styles.cardOverlay} />
             <Text style={styles.cardIconEmoji}>❤️</Text>
-            <Text style={[styles.cardTitle, { color: theme.text }]}>Liked Songs</Text>
-            <Text style={[styles.cardCount, { color: theme.textSecondary }]}>{likedTracks.length} tracks</Text>
+            <Text style={styles.cardTitle}>Liked Songs</Text>
+            <Text style={styles.cardCount}>{likedTracks.length} tracks</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={[styles.bigCard, { borderColor: theme.isDark ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.9)' }]} onPress={() => router.push('/downloads')}>
+          <TouchableOpacity style={styles.bigCard} onPress={() => router.push('/downloads')}>
             <LinearGradient colors={['#86EFAC', '#6EE7B7']} style={StyleSheet.absoluteFillObject} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} />
             <View style={styles.cardOverlay} />
             <Text style={styles.cardIconEmoji}>⬇️</Text>
-            <Text style={[styles.cardTitle, { color: theme.text }]}>Downloads</Text>
-            <Text style={[styles.cardCount, { color: theme.textSecondary }]}>{downloadCount} tracks</Text>
+            <Text style={styles.cardTitle}>Downloads</Text>
+            <Text style={styles.cardCount}>{downloadCount} tracks</Text>
           </TouchableOpacity>
         </View>
 
@@ -96,7 +93,7 @@ export default function LibraryScreen() {
         {SECTIONS.map((s, i) => (
           <TouchableOpacity
             key={i}
-            style={[styles.sectionCard, { backgroundColor: theme.card, borderColor: theme.cardBorder }]}
+            style={styles.sectionCard}
             onPress={() => s.route && router.push(s.route as any)}
             activeOpacity={s.route ? 0.7 : 1}
           >
@@ -106,8 +103,8 @@ export default function LibraryScreen() {
               <Text style={styles.sectionEmoji}>{s.emoji}</Text>
             </LinearGradient>
             <View style={styles.sectionInfo}>
-              <Text style={[styles.sectionName, { color: theme.text }]}>{s.name}</Text>
-              <Text style={[styles.sectionCount, { color: theme.textSecondary }]}>{s.count}</Text>
+              <Text style={styles.sectionName}>{s.name}</Text>
+              <Text style={styles.sectionCount}>{s.count}</Text>
             </View>
             <Ionicons name="chevron-forward" size={20} color={s.route ? '#C4B5FD' : '#E5E7EB'} />
           </TouchableOpacity>
@@ -190,45 +187,45 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#FAFBFF' },
   scroll: { paddingBottom: 160 },
   header: { paddingTop: 64, paddingHorizontal: 24, marginBottom: 24 },
-  title: { fontSize: 36, fontFamily: 'Outfit_900Black', fontWeight: '900', letterSpacing: -1, color: '#1E1B4B', letterSpacing: -1 },
+  title: { fontSize: 36, fontWeight: '900', color: '#1E1B4B', letterSpacing: -1 },
   sub: { fontSize: 14, color: '#6B7280', marginTop: 4 },
   cardsRow: { flexDirection: 'row', paddingHorizontal: 24, gap: 12, marginBottom: 12 },
   bigCard: { flex: 1, height: 140, borderRadius: 22, overflow: 'hidden', justifyContent: 'flex-end', padding: 16, borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.9)' },
   cardOverlay: { ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(255,255,255,0.1)' },
   cardIconEmoji: { fontSize: 28, marginBottom: 8 },
-  cardTitle: { fontSize: 16, fontFamily: 'Outfit_900Black', fontWeight: '800', letterSpacing: -0.5, color: '#1E1B4B' },
+  cardTitle: { fontSize: 16, fontWeight: '800', color: '#1E1B4B' },
   cardCount: { fontSize: 12, color: '#6B7280', marginTop: 2 },
   sectionCard: { flexDirection: 'row', alignItems: 'center', marginHorizontal: 24, marginBottom: 8, padding: 16, borderRadius: 20, overflow: 'hidden', borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.9)', gap: 14 },
   sectionCardBorder: { position: 'absolute', inset: 0, borderRadius: 20, borderWidth: 1, borderColor: 'rgba(167,139,250,0.1)' },
   sectionIcon: { width: 46, height: 46, borderRadius: 13, alignItems: 'center', justifyContent: 'center' },
   sectionEmoji: { fontSize: 20 },
   sectionInfo: { flex: 1 },
-  sectionName: { fontSize: 16, fontFamily: 'PlusJakartaSans_700Bold', fontWeight: '700', color: '#1E1B4B', marginBottom: 2 },
+  sectionName: { fontSize: 16, fontWeight: '700', color: '#1E1B4B', marginBottom: 2 },
   sectionCount: { fontSize: 12, color: '#6B7280' },
   section: { marginTop: 24 },
   sectionHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 24, marginBottom: 12 },
-  sectionTitle: { fontSize: 20, fontFamily: 'Outfit_900Black', fontWeight: '800', letterSpacing: -0.5, color: '#1E1B4B' },
-  seeAll: { fontSize: 13, color: '#A78BFA', fontFamily: 'PlusJakartaSans_700Bold', fontWeight: '600' },
+  sectionTitle: { fontSize: 20, fontWeight: '800', color: '#1E1B4B' },
+  seeAll: { fontSize: 13, color: '#A78BFA', fontWeight: '600' },
   trackList: { paddingHorizontal: 24, gap: 4 },
-  trackRow: { flexDirection: 'row', alignItems: 'center', gap: 12, padding: 10, borderRadius: 16, backgroundColor: 'rgba(255,255,255,0.85)', borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.9)', marginBottom: 6 },
+  trackRow: { flexDirection: 'row', alignItems: 'center', gap: 12, padding: 10, borderRadius: 16, backgroundColor: 'rgba(255,255,255,0.7)', borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.9)', marginBottom: 6 },
   trackThumbWrap: { width: 46, height: 46, borderRadius: 10, overflow: 'hidden' },
   trackThumb: { width: 46, height: 46, borderRadius: 10, alignItems: 'center', justifyContent: 'center' },
   trackInfo: { flex: 1 },
-  trackTitle: { fontSize: 14, fontFamily: 'PlusJakartaSans_700Bold', fontWeight: '700', color: '#1E1B4B', marginBottom: 2 },
+  trackTitle: { fontSize: 14, fontWeight: '700', color: '#1E1B4B', marginBottom: 2 },
   trackArtist: { fontSize: 12, color: '#6B7280' },
   recentScroll: { paddingLeft: 24, paddingRight: 12 },
   recentCard: { width: 130, marginRight: 12 },
   recentThumbWrap: { width: 130, height: 130, borderRadius: 18, overflow: 'hidden', marginBottom: 8, position: 'relative' },
   recentThumb: { width: 130, height: 130, borderRadius: 18, alignItems: 'center', justifyContent: 'center' },
   recentPlayOverlay: { position: 'absolute', bottom: 8, right: 8, width: 36, height: 36, borderRadius: 18, backgroundColor: 'rgba(0,0,0,0.4)', alignItems: 'center', justifyContent: 'center' },
-  recentTitle: { fontSize: 13, fontFamily: 'PlusJakartaSans_700Bold', fontWeight: '700', color: '#1E1B4B', lineHeight: 18 },
+  recentTitle: { fontSize: 13, fontWeight: '700', color: '#1E1B4B', lineHeight: 18 },
   recentArtist: { fontSize: 11, color: '#6B7280', marginTop: 2 },
   emptyWrap: { paddingHorizontal: 24, marginTop: 32 },
   emptyCard: { padding: 40, borderRadius: 28, overflow: 'hidden', alignItems: 'center', borderWidth: 1.5, borderColor: 'rgba(167,139,250,0.15)' },
   emptyEmoji: { fontSize: 56, marginBottom: 16 },
-  emptyTitle: { fontSize: 20, fontFamily: 'Outfit_900Black', fontWeight: '800', letterSpacing: -0.5, color: '#1E1B4B', marginBottom: 8 },
+  emptyTitle: { fontSize: 20, fontWeight: '800', color: '#1E1B4B', marginBottom: 8 },
   emptySub: { fontSize: 14, color: '#6B7280', textAlign: 'center', lineHeight: 22, marginBottom: 24 },
   emptyBtn: { borderRadius: 30, overflow: 'hidden' },
   emptyBtnGrad: { paddingHorizontal: 28, paddingVertical: 13, borderRadius: 30 },
-  emptyBtnText: { fontSize: 14, fontFamily: 'PlusJakartaSans_700Bold', fontWeight: '700', color: '#FFFFFF' },
+  emptyBtnText: { fontSize: 14, fontWeight: '700', color: '#FFFFFF' },
 });

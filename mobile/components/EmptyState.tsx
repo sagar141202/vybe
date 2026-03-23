@@ -36,8 +36,8 @@ const styles = StyleSheet.create({
   wrap: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 32 },
   card: { width: '100%', padding: 40, borderRadius: 28, overflow: 'hidden', alignItems: 'center', borderWidth: 1.5, borderColor: 'rgba(167,139,250,0.15)', gap: 10 },
   emoji: { fontSize: 56, marginBottom: 6 },
-  title: { fontSize: 20, fontFamily: 'Outfit_900Black', fontWeight: '800', color: '#1E1B4B', textAlign: 'center' },
+  title: { fontSize: 20, fontWeight: '800', color: '#1E1B4B', textAlign: 'center' },
   subtitle: { fontSize: 14, color: '#6B7280', textAlign: 'center', lineHeight: 22 },
   btn: { marginTop: 8, paddingHorizontal: 28, paddingVertical: 13, borderRadius: 30, overflow: 'hidden' },
-  btnText: { fontSize: 14, fontFamily: 'PlusJakartaSans_700Bold', fontWeight: '700', color: '#FFFFFF' },
+  btnText: { fontSize: 14, fontWeight: '700', color: '#FFFFFF' },
 });
