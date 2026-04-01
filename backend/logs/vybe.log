@@ -7,3 +7,278 @@
 2026-03-22 23:16:28 | INFO     | main:97 - GET /trending/ → 200 (40.9ms)
 2026-03-22 23:16:58 | INFO     | services.scheduler:27 - Nightly recommendation rebuild starting...
 2026-03-22 23:16:58 | ERROR    | services.scheduler:58 - Recommendation rebuild failed: password authentication failed for user "vybe"
+2026-04-01 16:39:39 | INFO     | services.background_jobs:82 - Background worker task created
+2026-04-01 16:39:39 | INFO     | services.scheduler:96 - Scheduler started — nightly rebuild at 2:00 AM, warmup in 30s
+2026-04-01 16:39:39 | INFO     | main:89 - Vybe API started
+2026-04-01 16:39:39 | INFO     | services.background_jobs:13 - Background job worker started
+2026-04-01 16:40:09 | INFO     | services.scheduler:27 - Nightly recommendation rebuild starting...
+2026-04-01 16:40:13 | ERROR    | services.scheduler:58 - Recommendation rebuild failed: the greenlet library is required to use this function. No module named 'greenlet'
+2026-04-01 16:44:30 | INFO     | services.background_jobs:82 - Background worker task created
+2026-04-01 16:44:30 | INFO     | services.scheduler:96 - Scheduler started — nightly rebuild at 2:00 AM, warmup in 30s
+2026-04-01 16:44:30 | INFO     | main:89 - Vybe API started
+2026-04-01 16:44:30 | INFO     | services.background_jobs:13 - Background job worker started
+2026-04-01 16:44:58 | INFO     | main:97 - GET /trending → 307 (103.0ms)
+2026-04-01 16:44:58 | INFO     | routers.trending:62 - Fetching fresh trending tracks...
+2026-04-01 16:44:58 | INFO     | services.search_service:43 - Searching YouTube Music: 'top hindi songs 2025'
+2026-04-01 16:45:01 | INFO     | services.search_service:72 - Search returned 20 tracks for 'top hindi songs 2025'
+2026-04-01 16:45:01 | INFO     | routers.trending:50 - Fetched 20 trending tracks
+2026-04-01 16:45:01 | INFO     | services.scheduler:27 - Nightly recommendation rebuild starting...
+2026-04-01 16:45:01 | INFO     | main:97 - GET /trending/ → 200 (2521.1ms)
+2026-04-01 16:45:01 | INFO     | services.annoy_service:40 - Building index from 6 tracks
+2026-04-01 16:45:01 | INFO     | services.annoy_service:74 - Index built: 6 tracks → /tmp/vybe_index/tracks_vectors.npy
+2026-04-01 16:45:01 | INFO     | services.scheduler:34 - Index rebuilt: {'status': 'ok', 'count': 6, 'path': '/tmp/vybe_index/tracks_vectors.npy'}
+2026-04-01 16:45:01 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-04-01 16:45:01 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-04-01 16:45:01 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-04-01 16:45:01 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-04-01 16:45:01 | INFO     | main:97 - GET /recommendations/similar → 200 (2703.7ms)
+2026-04-01 16:45:01 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-04-01 16:45:01 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-04-01 16:45:01 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-04-01 16:45:01 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-04-01 16:45:01 | INFO     | main:97 - GET /recommendations/ → 200 (2613.0ms)
+2026-04-01 16:45:01 | INFO     | services.recommendation_service:144 - Top recommendation: Track vaSRih9T (score=0.4951)
+2026-04-01 16:45:01 | ERROR    | services.scheduler:58 - Recommendation rebuild failed: cache_set() got an unexpected keyword argument 'ttl'
+2026-04-01 16:45:06 | INFO     | routers.stream:38 - Cache MISS for stream: 4smEofP_5Q4 — fetching
+2026-04-01 16:45:06 | INFO     | services.stream_service:34 - Extracting stream URL for video_id: 4smEofP_5Q4
+2026-04-01 16:45:10 | ERROR    | services.stream_service:45 - yt-dlp failed for 4smEofP_5Q4: ERROR: [youtube] 4smEofP_5Q4: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies
+2026-04-01 16:45:10 | INFO     | main:97 - GET /stream/4smEofP_5Q4 → 404 (4083.1ms)
+2026-04-01 16:46:15 | INFO     | services.background_jobs:82 - Background worker task created
+2026-04-01 16:46:15 | INFO     | services.scheduler:96 - Scheduler started — nightly rebuild at 2:00 AM, warmup in 30s
+2026-04-01 16:46:15 | INFO     | main:89 - Vybe API started
+2026-04-01 16:46:15 | INFO     | services.background_jobs:13 - Background job worker started
+2026-04-01 16:46:45 | INFO     | services.scheduler:27 - Nightly recommendation rebuild starting...
+2026-04-01 16:46:45 | INFO     | services.annoy_service:40 - Building index from 6 tracks
+2026-04-01 16:46:45 | INFO     | services.annoy_service:74 - Index built: 6 tracks → /tmp/vybe_index/tracks_vectors.npy
+2026-04-01 16:46:45 | INFO     | services.scheduler:34 - Index rebuilt: {'status': 'ok', 'count': 6, 'path': '/tmp/vybe_index/tracks_vectors.npy'}
+2026-04-01 16:46:45 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-04-01 16:46:45 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-04-01 16:46:45 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-04-01 16:46:45 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-04-01 16:46:45 | INFO     | services.recommendation_service:144 - Top recommendation: Track vaSRih9T (score=0.4951)
+2026-04-01 16:46:45 | ERROR    | services.scheduler:58 - Recommendation rebuild failed: cache_set() got an unexpected keyword argument 'ttl'
+2026-04-01 16:51:40 | INFO     | services.background_jobs:82 - Background worker task created
+2026-04-01 16:51:40 | INFO     | services.scheduler:96 - Scheduler started — nightly rebuild at 2:00 AM, warmup in 30s
+2026-04-01 16:51:40 | INFO     | main:89 - Vybe API started
+2026-04-01 16:51:40 | INFO     | services.background_jobs:13 - Background job worker started
+2026-04-01 16:52:10 | INFO     | services.scheduler:27 - Nightly recommendation rebuild starting...
+2026-04-01 16:52:10 | INFO     | services.annoy_service:40 - Building index from 6 tracks
+2026-04-01 16:52:10 | INFO     | services.annoy_service:74 - Index built: 6 tracks → /tmp/vybe_index/tracks_vectors.npy
+2026-04-01 16:52:10 | INFO     | services.scheduler:34 - Index rebuilt: {'status': 'ok', 'count': 6, 'path': '/tmp/vybe_index/tracks_vectors.npy'}
+2026-04-01 16:52:10 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-04-01 16:52:10 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-04-01 16:52:10 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-04-01 16:52:10 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-04-01 16:52:10 | INFO     | services.recommendation_service:144 - Top recommendation: Track vaSRih9T (score=0.4951)
+2026-04-01 16:52:10 | ERROR    | services.scheduler:58 - Recommendation rebuild failed: cache_set() got an unexpected keyword argument 'ttl'
+2026-04-01 16:52:11 | INFO     | routers.stream:38 - Cache MISS for stream: ge4M2dVBgTw — fetching
+2026-04-01 16:52:11 | INFO     | services.stream_service:35 - Extracting stream URL for video_id: ge4M2dVBgTw
+2026-04-01 16:52:30 | ERROR    | services.stream_service:46 - yt-dlp failed for ge4M2dVBgTw: ERROR: [youtube] ge4M2dVBgTw: Requested format is not available. Use --list-formats for a list of available formats
+2026-04-01 16:52:30 | INFO     | main:97 - GET /stream/ge4M2dVBgTw → 404 (18747.6ms)
+2026-04-01 16:53:46 | INFO     | services.background_jobs:82 - Background worker task created
+2026-04-01 16:53:46 | INFO     | services.scheduler:96 - Scheduler started — nightly rebuild at 2:00 AM, warmup in 30s
+2026-04-01 16:53:46 | INFO     | main:89 - Vybe API started
+2026-04-01 16:53:46 | INFO     | services.background_jobs:13 - Background job worker started
+2026-04-01 16:54:16 | INFO     | services.scheduler:27 - Nightly recommendation rebuild starting...
+2026-04-01 16:54:16 | INFO     | services.annoy_service:40 - Building index from 6 tracks
+2026-04-01 16:54:16 | INFO     | services.annoy_service:74 - Index built: 6 tracks → /tmp/vybe_index/tracks_vectors.npy
+2026-04-01 16:54:16 | INFO     | services.scheduler:34 - Index rebuilt: {'status': 'ok', 'count': 6, 'path': '/tmp/vybe_index/tracks_vectors.npy'}
+2026-04-01 16:54:16 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-04-01 16:54:16 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-04-01 16:54:16 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-04-01 16:54:16 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-04-01 16:54:16 | INFO     | services.recommendation_service:144 - Top recommendation: Track vaSRih9T (score=0.4951)
+2026-04-01 16:54:16 | INFO     | services.scheduler:55 - Cached 6 recommendations in Redis
+2026-04-01 16:54:29 | INFO     | services.background_jobs:82 - Background worker task created
+2026-04-01 16:54:29 | INFO     | services.scheduler:96 - Scheduler started — nightly rebuild at 2:00 AM, warmup in 30s
+2026-04-01 16:54:29 | INFO     | main:89 - Vybe API started
+2026-04-01 16:54:29 | INFO     | services.background_jobs:13 - Background job worker started
+2026-04-01 16:54:39 | INFO     | main:97 - GET /trending → 307 (0.8ms)
+2026-04-01 16:54:39 | INFO     | routers.trending:60 - Trending cache HIT (20 tracks)
+2026-04-01 16:54:39 | INFO     | main:97 - GET /trending/ → 200 (6.0ms)
+2026-04-01 16:54:39 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-04-01 16:54:39 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-04-01 16:54:39 | INFO     | main:97 - GET /recommendations/similar → 200 (157.6ms)
+2026-04-01 16:54:39 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-04-01 16:54:39 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-04-01 16:54:39 | INFO     | main:97 - GET /recommendations/ → 200 (69.8ms)
+2026-04-01 16:54:44 | INFO     | routers.stream:38 - Cache MISS for stream: ge4M2dVBgTw — fetching
+2026-04-01 16:54:44 | INFO     | services.stream_service:35 - Extracting stream URL for video_id: ge4M2dVBgTw
+2026-04-01 16:54:59 | INFO     | services.scheduler:27 - Nightly recommendation rebuild starting...
+2026-04-01 16:54:59 | INFO     | services.annoy_service:40 - Building index from 6 tracks
+2026-04-01 16:54:59 | INFO     | services.annoy_service:74 - Index built: 6 tracks → /tmp/vybe_index/tracks_vectors.npy
+2026-04-01 16:54:59 | INFO     | services.scheduler:34 - Index rebuilt: {'status': 'ok', 'count': 6, 'path': '/tmp/vybe_index/tracks_vectors.npy'}
+2026-04-01 16:54:59 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-04-01 16:54:59 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-04-01 16:54:59 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-04-01 16:54:59 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-04-01 16:54:59 | INFO     | services.recommendation_service:144 - Top recommendation: Track vaSRih9T (score=0.4951)
+2026-04-01 16:54:59 | INFO     | services.scheduler:55 - Cached 6 recommendations in Redis
+2026-04-01 16:55:12 | ERROR    | services.stream_service:46 - yt-dlp failed for ge4M2dVBgTw: ERROR: [youtube] ge4M2dVBgTw: Requested format is not available. Use --list-formats for a list of available formats
+2026-04-01 16:55:12 | INFO     | main:97 - GET /stream/ge4M2dVBgTw → 404 (28602.7ms)
+2026-04-01 16:57:31 | INFO     | services.background_jobs:82 - Background worker task created
+2026-04-01 16:57:31 | INFO     | services.scheduler:96 - Scheduler started — nightly rebuild at 2:00 AM, warmup in 30s
+2026-04-01 16:57:31 | INFO     | main:89 - Vybe API started
+2026-04-01 16:57:31 | INFO     | services.background_jobs:13 - Background job worker started
+2026-04-01 16:57:54 | INFO     | routers.stream:38 - Cache MISS for stream: ge4M2dVBgTw — fetching
+2026-04-01 16:57:54 | INFO     | services.stream_service:35 - Extracting stream URL for video_id: ge4M2dVBgTw
+2026-04-01 16:58:01 | INFO     | services.scheduler:27 - Nightly recommendation rebuild starting...
+2026-04-01 16:58:01 | INFO     | services.annoy_service:40 - Building index from 6 tracks
+2026-04-01 16:58:01 | INFO     | services.annoy_service:74 - Index built: 6 tracks → /tmp/vybe_index/tracks_vectors.npy
+2026-04-01 16:58:01 | INFO     | services.scheduler:34 - Index rebuilt: {'status': 'ok', 'count': 6, 'path': '/tmp/vybe_index/tracks_vectors.npy'}
+2026-04-01 16:58:01 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-04-01 16:58:01 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-04-01 16:58:01 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-04-01 16:58:01 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-04-01 16:58:01 | INFO     | services.recommendation_service:144 - Top recommendation: Track vaSRih9T (score=0.4951)
+2026-04-01 16:58:01 | INFO     | services.scheduler:55 - Cached 6 recommendations in Redis
+2026-04-01 16:58:02 | ERROR    | services.stream_service:46 - yt-dlp failed for ge4M2dVBgTw: ERROR: [youtube] ge4M2dVBgTw: Requested format is not available. Use --list-formats for a list of available formats
+2026-04-01 16:58:02 | INFO     | main:97 - GET /stream/ge4M2dVBgTw → 404 (7432.5ms)
+2026-04-01 16:58:07 | INFO     | main:97 - GET /trending → 307 (0.9ms)
+2026-04-01 16:58:07 | INFO     | routers.trending:60 - Trending cache HIT (20 tracks)
+2026-04-01 16:58:07 | INFO     | main:97 - GET /trending/ → 200 (6.3ms)
+2026-04-01 16:58:07 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-04-01 16:58:07 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-04-01 16:58:07 | INFO     | main:97 - GET /recommendations/similar → 200 (19.1ms)
+2026-04-01 16:58:07 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-04-01 16:58:07 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-04-01 16:58:07 | INFO     | main:97 - GET /recommendations/ → 200 (20.5ms)
+2026-04-01 16:58:10 | INFO     | routers.stream:38 - Cache MISS for stream: ge4M2dVBgTw — fetching
+2026-04-01 16:58:10 | INFO     | services.stream_service:35 - Extracting stream URL for video_id: ge4M2dVBgTw
+2026-04-01 16:58:16 | ERROR    | services.stream_service:46 - yt-dlp failed for ge4M2dVBgTw: ERROR: [youtube] ge4M2dVBgTw: Requested format is not available. Use --list-formats for a list of available formats
+2026-04-01 16:58:16 | INFO     | main:97 - GET /stream/ge4M2dVBgTw → 404 (5743.4ms)
+2026-04-01 17:02:01 | INFO     | services.background_jobs:82 - Background worker task created
+2026-04-01 17:02:01 | INFO     | services.scheduler:96 - Scheduler started — nightly rebuild at 2:00 AM, warmup in 30s
+2026-04-01 17:02:01 | INFO     | main:89 - Vybe API started
+2026-04-01 17:02:01 | INFO     | services.background_jobs:13 - Background job worker started
+2026-04-01 17:02:31 | INFO     | services.scheduler:27 - Nightly recommendation rebuild starting...
+2026-04-01 17:02:31 | INFO     | services.annoy_service:40 - Building index from 6 tracks
+2026-04-01 17:02:31 | INFO     | services.annoy_service:74 - Index built: 6 tracks → /tmp/vybe_index/tracks_vectors.npy
+2026-04-01 17:02:31 | INFO     | services.scheduler:34 - Index rebuilt: {'status': 'ok', 'count': 6, 'path': '/tmp/vybe_index/tracks_vectors.npy'}
+2026-04-01 17:02:31 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-04-01 17:02:31 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-04-01 17:02:31 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-04-01 17:02:31 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-04-01 17:02:31 | INFO     | services.recommendation_service:144 - Top recommendation: Track vaSRih9T (score=0.4951)
+2026-04-01 17:02:31 | INFO     | services.scheduler:55 - Cached 6 recommendations in Redis
+2026-04-01 17:10:53 | INFO     | services.background_jobs:82 - Background worker task created
+2026-04-01 17:10:53 | INFO     | services.scheduler:96 - Scheduler started — nightly rebuild at 2:00 AM, warmup in 30s
+2026-04-01 17:10:53 | INFO     | main:89 - Vybe API started
+2026-04-01 17:10:53 | INFO     | services.background_jobs:13 - Background job worker started
+2026-04-01 17:11:00 | INFO     | services.background_jobs:82 - Background worker task created
+2026-04-01 17:11:00 | INFO     | services.scheduler:96 - Scheduler started — nightly rebuild at 2:00 AM, warmup in 30s
+2026-04-01 17:11:00 | INFO     | main:89 - Vybe API started
+2026-04-01 17:11:00 | INFO     | services.background_jobs:13 - Background job worker started
+2026-04-01 17:11:10 | INFO     | main:97 - GET /trending → 307 (1.0ms)
+2026-04-01 17:11:10 | INFO     | routers.trending:60 - Trending cache HIT (20 tracks)
+2026-04-01 17:11:10 | INFO     | main:97 - GET /trending/ → 200 (184.6ms)
+2026-04-01 17:11:10 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-04-01 17:11:10 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-04-01 17:11:10 | INFO     | main:97 - GET /recommendations/similar → 200 (304.8ms)
+2026-04-01 17:11:10 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-04-01 17:11:10 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-04-01 17:11:10 | INFO     | main:97 - GET /recommendations/ → 200 (154.9ms)
+2026-04-01 17:11:16 | INFO     | routers.search:43 - Cache MISS for search: 'anisu' — fetching from YouTube Music
+2026-04-01 17:11:16 | INFO     | services.search_service:43 - Searching YouTube Music: 'anisu'
+2026-04-01 17:11:17 | INFO     | services.search_service:72 - Search returned 20 tracks for 'anisu'
+2026-04-01 17:11:17 | INFO     | routers.search:60 - Cached 20 results for 'anisu' (TTL: 30min)
+2026-04-01 17:11:17 | INFO     | main:97 - GET /search → 200 (998.5ms)
+2026-04-01 17:11:21 | INFO     | routers.search:43 - Cache MISS for search: 'bisi' — fetching from YouTube Music
+2026-04-01 17:11:21 | INFO     | services.search_service:43 - Searching YouTube Music: 'bisi'
+2026-04-01 17:11:22 | INFO     | services.search_service:72 - Search returned 20 tracks for 'bisi'
+2026-04-01 17:11:22 | INFO     | routers.search:60 - Cached 20 results for 'bisi' (TTL: 30min)
+2026-04-01 17:11:22 | INFO     | main:97 - GET /search → 200 (1494.6ms)
+2026-04-01 17:11:22 | INFO     | routers.search:43 - Cache MISS for search: 'bisilu' — fetching from YouTube Music
+2026-04-01 17:11:22 | INFO     | services.search_service:43 - Searching YouTube Music: 'bisilu'
+2026-04-01 17:11:23 | INFO     | services.search_service:72 - Search returned 20 tracks for 'bisilu'
+2026-04-01 17:11:23 | INFO     | routers.search:60 - Cached 20 results for 'bisilu' (TTL: 30min)
+2026-04-01 17:11:23 | INFO     | main:97 - GET /search → 200 (631.9ms)
+2026-04-01 17:11:26 | INFO     | routers.stream:38 - Cache MISS for stream: Gf-cxRMVEBU — fetching
+2026-04-01 17:11:26 | INFO     | services.stream_service:35 - Extracting stream URL for video_id: Gf-cxRMVEBU
+2026-04-01 17:11:29 | INFO     | services.stream_service:60 - Got stream URL for Gf-cxRMVEBU | format: 18 - 360x360 (360p)
+2026-04-01 17:11:29 | INFO     | main:97 - GET /stream/Gf-cxRMVEBU → 200 (2339.7ms)
+2026-04-01 17:11:30 | INFO     | services.scheduler:27 - Nightly recommendation rebuild starting...
+2026-04-01 17:11:30 | INFO     | services.annoy_service:40 - Building index from 6 tracks
+2026-04-01 17:11:30 | INFO     | services.annoy_service:74 - Index built: 6 tracks → /tmp/vybe_index/tracks_vectors.npy
+2026-04-01 17:11:30 | INFO     | services.scheduler:34 - Index rebuilt: {'status': 'ok', 'count': 6, 'path': '/tmp/vybe_index/tracks_vectors.npy'}
+2026-04-01 17:11:30 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-04-01 17:11:30 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-04-01 17:11:30 | INFO     | services.recommendation_service:31 - Computing user vector from 40 plays
+2026-04-01 17:11:30 | INFO     | services.recommendation_service:62 - User vector: BPM=163.7 Energy=0.1959 Key=C#
+2026-04-01 17:11:30 | INFO     | services.recommendation_service:144 - Top recommendation: Track vaSRih9T (score=0.4951)
+2026-04-01 17:11:30 | INFO     | services.scheduler:55 - Cached 6 recommendations in Redis
+2026-04-01 17:11:39 | WARNING  | routers.likes:32 - Like error: (sqlalchemy.dialects.postgresql.asyncpg.IntegrityError) <class 'asyncpg.exceptions.NotNullViolationError'>: null value in column "user_id" of relation "liked_tracks" violates not-null constraint
+DETAIL:  Failing row contains (12, null, Gf-cxRMVEBU, 2026-04-01 11:41:39.100106+00).
+[SQL: INSERT INTO liked_tracks (user_id, video_id) VALUES ($1::UUID, $2::VARCHAR) RETURNING liked_tracks.id, liked_tracks.liked_at]
+[parameters: (None, 'Gf-cxRMVEBU')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2026-04-01 17:11:39 | INFO     | main:97 - POST /likes/Gf-cxRMVEBU → 200 (35.3ms)
+2026-04-01 17:11:43 | INFO     | routers.lyrics:113 - Fetching lyrics: Rajesh Krishnan — Bisilu Kudureyondu
+2026-04-01 17:11:43 | INFO     | services.lyrics_service:47 - lrclib lookup: Rajesh Krishnan — Bisilu Kudureyondu
+2026-04-01 17:11:44 | WARNING  | services.lyrics_service:63 - lrclib: no result for Rajesh Krishnan — Bisilu Kudureyondu
+2026-04-01 17:11:44 | INFO     | services.lyrics_service:96 - lrclib search: Rajesh Krishnan — Bisilu Kudureyondu
+2026-04-01 17:11:45 | INFO     | routers.lyrics:82 - Saved lyrics to Postgres: Gf-cxRMVEBU
+2026-04-01 17:11:45 | INFO     | main:97 - GET /lyrics/Gf-cxRMVEBU → 200 (2134.7ms)
+2026-04-01 17:12:01 | INFO     | main:97 - POST /discord/update → 200 (21.1ms)
+2026-04-01 17:12:01 | INFO     | routers.stream:117 - Inserted track: Bisilu Kudureyondu
+2026-04-01 17:12:01 | INFO     | routers.stream:122 - Logged play: Gf-cxRMVEBU
+2026-04-01 17:12:01 | INFO     | main:97 - POST /stream/Gf-cxRMVEBU/played → 200 (112.9ms)
+2026-04-01 17:13:48 | INFO     | routers.stream:38 - Cache MISS for stream: ge4M2dVBgTw — fetching
+2026-04-01 17:13:48 | INFO     | services.stream_service:35 - Extracting stream URL for video_id: ge4M2dVBgTw
+2026-04-01 17:13:51 | INFO     | services.stream_service:60 - Got stream URL for ge4M2dVBgTw | format: 18 - 360x360 (360p)
+2026-04-01 17:13:51 | INFO     | main:97 - GET /stream/ge4M2dVBgTw → 200 (3409.1ms)
+2026-04-01 17:13:52 | INFO     | main:97 - POST /discord/update → 200 (161.9ms)
+2026-04-01 17:13:52 | INFO     | routers.stream:122 - Logged play: Gf-cxRMVEBU
+2026-04-01 17:13:52 | INFO     | main:97 - POST /stream/Gf-cxRMVEBU/played → 200 (316.9ms)
+2026-04-01 17:14:57 | WARNING  | routers.likes:32 - Like error: (sqlalchemy.dialects.postgresql.asyncpg.IntegrityError) <class 'asyncpg.exceptions.NotNullViolationError'>: null value in column "user_id" of relation "liked_tracks" violates not-null constraint
+DETAIL:  Failing row contains (13, null, ge4M2dVBgTw, 2026-04-01 11:44:57.471307+00).
+[SQL: INSERT INTO liked_tracks (user_id, video_id) VALUES ($1::UUID, $2::VARCHAR) RETURNING liked_tracks.id, liked_tracks.liked_at]
+[parameters: (None, 'ge4M2dVBgTw')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2026-04-01 17:14:57 | INFO     | main:97 - POST /likes/ge4M2dVBgTw → 200 (23.6ms)
+2026-04-01 17:15:01 | INFO     | routers.lyrics:98 - Redis HIT for lyrics: ge4M2dVBgTw
+2026-04-01 17:15:01 | INFO     | main:97 - GET /lyrics/ge4M2dVBgTw → 200 (9.0ms)
+2026-04-01 17:15:58 | INFO     | routers.stream:36 - Cache HIT for stream: Gf-cxRMVEBU
+2026-04-01 17:15:58 | INFO     | main:97 - GET /stream/Gf-cxRMVEBU → 200 (7.2ms)
+2026-04-01 17:15:59 | INFO     | main:97 - POST /discord/update → 200 (6.3ms)
+2026-04-01 17:15:59 | INFO     | routers.stream:122 - Logged play: ge4M2dVBgTw
+2026-04-01 17:15:59 | INFO     | main:97 - POST /stream/ge4M2dVBgTw/played → 200 (33.7ms)
+2026-04-01 17:16:12 | INFO     | services.recommendation_service:31 - Computing user vector from 41 plays
+2026-04-01 17:16:12 | INFO     | services.recommendation_service:62 - User vector: BPM=163.6 Energy=0.1920 Key=C#
+2026-04-01 17:16:12 | INFO     | main:97 - GET /recommendations/similar → 200 (25.9ms)
+2026-04-01 17:16:12 | INFO     | routers.stream:38 - Cache MISS for stream: oDyMLiIskPg — fetching
+2026-04-01 17:16:12 | INFO     | services.stream_service:35 - Extracting stream URL for video_id: oDyMLiIskPg
+2026-04-01 17:16:15 | INFO     | services.stream_service:60 - Got stream URL for oDyMLiIskPg | format: 18 - 380x360 (360p)
+2026-04-01 17:16:15 | INFO     | main:97 - GET /stream/oDyMLiIskPg → 200 (2254.1ms)
+2026-04-01 17:16:17 | INFO     | routers.stream:36 - Cache HIT for stream: ge4M2dVBgTw
+2026-04-01 17:16:17 | INFO     | main:97 - GET /stream/ge4M2dVBgTw → 200 (6.1ms)
+2026-04-01 17:16:30 | INFO     | main:97 - POST /discord/update → 200 (2.2ms)
+2026-04-01 17:16:30 | INFO     | routers.stream:122 - Logged play: Gf-cxRMVEBU
+2026-04-01 17:16:30 | INFO     | main:97 - POST /stream/Gf-cxRMVEBU/played → 200 (24.1ms)
+2026-04-01 18:00:00 | INFO     | services.scheduler:12 - Refreshing trending tracks cache...
+2026-04-01 18:00:00 | INFO     | services.search_service:43 - Searching YouTube Music: 'top hindi songs 2025'
+2026-04-01 18:00:01 | INFO     | services.search_service:72 - Search returned 20 tracks for 'top hindi songs 2025'
+2026-04-01 18:00:01 | INFO     | routers.trending:50 - Fetched 20 trending tracks
+2026-04-01 18:00:01 | INFO     | services.scheduler:20 - Trending cache refreshed: 20 tracks
+2026-04-01 21:21:58 | INFO     | main:97 - GET /trending → 307 (20.9ms)
+2026-04-01 21:21:58 | INFO     | services.recommendation_service:31 - Computing user vector from 41 plays
+2026-04-01 21:21:58 | INFO     | services.recommendation_service:62 - User vector: BPM=163.6 Energy=0.1920 Key=C#
+2026-04-01 21:21:58 | INFO     | main:97 - GET /recommendations/similar → 200 (47.5ms)
+2026-04-01 21:21:58 | INFO     | routers.trending:60 - Trending cache HIT (20 tracks)
+2026-04-01 21:21:58 | INFO     | main:97 - GET /trending/ → 200 (3.7ms)
+2026-04-01 21:21:58 | INFO     | services.recommendation_service:31 - Computing user vector from 41 plays
+2026-04-01 21:21:58 | INFO     | services.recommendation_service:62 - User vector: BPM=163.6 Energy=0.1920 Key=C#
+2026-04-01 21:21:58 | INFO     | main:97 - GET /recommendations/ → 200 (27.8ms)
+2026-04-01 21:22:09 | INFO     | routers.stream:36 - Cache HIT for stream: Gf-cxRMVEBU
+2026-04-01 21:22:09 | INFO     | main:97 - GET /stream/Gf-cxRMVEBU → 200 (5.4ms)
+2026-04-01 21:22:41 | INFO     | main:97 - POST /discord/update → 200 (15.0ms)
+2026-04-01 21:22:41 | INFO     | routers.stream:122 - Logged play: Gf-cxRMVEBU
+2026-04-01 21:22:41 | INFO     | main:97 - POST /stream/Gf-cxRMVEBU/played → 200 (153.8ms)
+2026-04-01 21:23:51 | INFO     | services.background_jobs:82 - Background worker task created
+2026-04-01 21:23:51 | INFO     | services.scheduler:96 - Scheduler started — nightly rebuild at 2:00 AM, warmup in 30s
+2026-04-01 21:23:51 | INFO     | main:89 - Vybe API started
+2026-04-01 21:23:51 | INFO     | services.background_jobs:13 - Background job worker started
+2026-04-01 21:23:52 | INFO     | services.background_jobs:82 - Background worker task created
+2026-04-01 21:23:52 | INFO     | services.scheduler:96 - Scheduler started — nightly rebuild at 2:00 AM, warmup in 30s
+2026-04-01 21:23:52 | INFO     | main:89 - Vybe API started
+2026-04-01 21:23:52 | INFO     | services.background_jobs:13 - Background job worker started

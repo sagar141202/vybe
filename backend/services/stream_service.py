@@ -23,11 +23,13 @@ async def get_stream_url(video_id: str) -> StreamResult | None:
     cmd = [
         "yt-dlp",
         "--format",
-        "bestaudio[ext=webm]/bestaudio[ext=m4a]/bestaudio",
+        "bestaudio/best",
         "--get-url",
         "--get-format",
         "--no-warnings",
         "--quiet",
+        "--extractor-args",
+        "youtube:player_client=android",
         url,
     ]
 

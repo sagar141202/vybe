@@ -24,7 +24,7 @@ httpx==0.28.1
 
 # Lyrics
 lyricsgenius==3.0.1
-syncedlyrics==0.4.3
+syncedlyrics
 
 # ML / recommendations
 scikit-learn==1.6.0

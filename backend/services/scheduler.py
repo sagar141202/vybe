@@ -50,8 +50,8 @@ async def rebuild_recommendations():
         # 4. Cache in Redis (24 hours)
         from cache import cache_set
 
-        await cache_set("recommendations:feed", recs, ttl=60 * 60 * 24)
-        await cache_set("recommendations:vector", vector, ttl=60 * 60 * 24)
+        await cache_set("recommendations:feed", recs, ttl_seconds=60 * 60 * 24)
+        await cache_set("recommendations:vector", vector, ttl_seconds=60 * 60 * 24)
         logger.info(f"Cached {len(recs)} recommendations in Redis")
 
     except Exception as e:
