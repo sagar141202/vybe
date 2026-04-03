@@ -83,12 +83,14 @@ function MiniPlayer({ onPress }: { onPress?: () => void }) {
           </TouchableOpacity>
         </Animated.View>
         <View style={styles.controls}>
-          <PlayPauseButton
-            isPlaying={isPlaying}
-            onPress={togglePlayPause}
-            size={44}
-            colors={['#C4B5FD', '#A78BFA']}
-          />
+          <View style={styles.playBtnWrapper}>
+            <PlayPauseButton
+              isPlaying={isPlaying}
+              onPress={togglePlayPause}
+              size={44}
+              colors={['#C4B5FD', '#A78BFA']}
+            />
+          </View>
           <TouchableOpacity
             style={styles.nextBtn}
             onPress={nextTrack}
@@ -125,6 +127,7 @@ const styles = StyleSheet.create({
   title: { fontSize: 14, fontWeight: '700', color: '#1E1B4B', marginBottom: 2 },
   artist: { fontSize: 12, color: '#6B7280' },
   controls: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+  playBtnWrapper: { padding: 12, margin: -12 },
   playBtn: { borderRadius: 22, overflow: 'hidden' },
   playGrad: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center' },
   playIcon: { fontSize: 16 },
