@@ -76,12 +76,19 @@ function MiniPlayer({ onPress }: { onPress?: () => void }) {
           <Text style={styles.artist} numberOfLines={1}>{currentTrack.artist}</Text>
         </View>
         <View style={styles.controls}>
-          <PlayPauseButton
-            isPlaying={isPlaying}
-            onPress={(e?: any) => { togglePlayPause(); }} accessibilityLabel={isPlaying ? "Pause" : "Play"} accessibilityRole="button"
-            size={44}
-            colors={['#C4B5FD', '#A78BFA']}
-          />
+          <TouchableOpacity
+            onPress={(e) => { e.stopPropagation(); togglePlayPause(); }}
+            activeOpacity={1}
+            accessibilityLabel={isPlaying ? "Pause" : "Play"}
+            accessibilityRole="button"
+          >
+            <PlayPauseButton
+              isPlaying={isPlaying}
+              onPress={togglePlayPause}
+              size={44}
+              colors={['#C4B5FD', '#A78BFA']}
+            />
+          </TouchableOpacity>
           <TouchableOpacity
             style={styles.nextBtn}
             onPress={(e) => { e.stopPropagation(); nextTrack(); }} accessibilityLabel="Next track" accessibilityRole="button"
