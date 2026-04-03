@@ -62,8 +62,8 @@ function MiniPlayer({ onPress }: { onPress?: () => void }) {
         style={styles.content}
         onPress={() => router.push('/player')}
         accessibilityLabel="Open full player"
-        accessibilityRole="button"
         activeOpacity={0.9}
+        accessibilityRole="button"
       >
         <View style={styles.thumbWrap}>
           {currentTrack.thumbnail_url
