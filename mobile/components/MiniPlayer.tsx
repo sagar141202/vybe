@@ -31,6 +31,7 @@ function MiniPlayer({ onPress }: { onPress?: () => void }) {
   }, [!!currentTrack]);
 
   const panResponder = useRef(PanResponder.create({
+    onStartShouldSetPanResponder: () => false,
     onMoveShouldSetPanResponder: (_, { dx, dy }) =>
       Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10,
     onPanResponderRelease: (_, { dx }) => { if (dx < -50) nextTrack(); },
