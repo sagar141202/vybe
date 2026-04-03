@@ -31,6 +31,8 @@ interface PlayerState {
   isShuffled: boolean;
   repeatMode: 'none' | 'all' | 'one';
   radioMode: boolean;
+  // Track sources for smart recommendations
+  seedTrack: Track | null; // Track that started this queue/autoplay
 
   setCurrentTrack: (track: Track) => void;
   setQueue: (queue: Track[], index?: number) => void;
@@ -42,6 +44,13 @@ interface PlayerState {
   toggleShuffle: () => void;
   toggleRepeat: () => void;
   toggleRadio: () => void;
+  // New queue management actions
+  addToQueue: (track: Track) => void;
+  playNext: (track: Track) => void;
+  removeFromQueue: (index: number) => void;
+  moveQueueItem: (fromIndex: number, toIndex: number) => void;
+  clearQueue: () => void;
+  setSeedTrack: (track: Track | null) => void;
 }
 
 export const usePlayerStore = create<PlayerState>((set, get) => ({
@@ -55,6 +64,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
   isShuffled: false,
   repeatMode: 'none',
   radioMode: true,
+  seedTrack: null,
 
   setCurrentTrack: (track) => set({ currentTrack: track }),
 
@@ -69,7 +79,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
   setDuration: (dur) => set({ duration: dur }),
 
   nextTrack: () => {
-    const { queue, currentIndex, repeatMode, isShuffled } = get();
+    const { queue, currentIndex, repeatMode, isShuffled, seedTrack, radioMode } = get();
     if (queue.length === 0) return;
 
     if (repeatMode === 'one') {
@@ -83,15 +93,34 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
     if (nextIndex >= queue.length) {
       if (repeatMode === 'all') {
         nextIndex = 0;
-      } else if (get().radioMode) {
-        // Radio mode — fetch more recommendations
-        const lastTrack = queue[queue.length - 1];
+      } else if (radioMode) {
+        // Radio mode — fetch smart recommendations
+        const currentTrack = queue[currentIndex];
+        // Use seed track if available, otherwise use current track
+        const seed = seedTrack || currentTrack;
+
+        // Get recently played to exclude
+        const recentIds = queue.slice(-10).map(t => t.video_id);
+
         set({ isPlaying: false });
         import('../services/radioService').then(({ fetchRadioTracks }) => {
-          fetchRadioTracks(lastTrack).then(newTracks => {
+          fetchRadioTracks(seed, {
+            limit: 10,
+            excludeIds: recentIds,
+          }).then(newTracks => {
             if (newTracks.length > 0) {
-              set({ queue: newTracks, currentIndex: 0, currentTrack: newTracks[0] });
+              // Append new tracks to queue instead of replacing
+              const newQueue = [...queue, ...newTracks];
+              const newIndex = currentIndex + 1;
+              set({
+                queue: newQueue,
+                currentIndex: newIndex,
+                currentTrack: newTracks[0],
+                position: 0
+              });
               emitPlay(newTracks[0]);
+            } else {
+              set({ isPlaying: false });
             }
           });
         });
@@ -163,5 +192,97 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
     const { radioMode } = get();
     set({ radioMode: !radioMode });
     console.log('Radio mode:', !radioMode);
+  },
+
+  setSeedTrack: (track) => set({ seedTrack: track }),
+
+  addToQueue: (track) => {
+    const { queue, originalQueue, isShuffled } = get();
+    // Prevent duplicates at the end of queue
+    const lastTracks = queue.slice(-5);
+    if (lastTracks.some(t => t.video_id === track.video_id)) {
+      return;
+    }
+    const newQueue = [...queue, track];
+    set({
+      queue: newQueue,
+      originalQueue: isShuffled ? originalQueue : newQueue,
+    });
+  },
+
+  playNext: (track) => {
+    const { queue, currentIndex, originalQueue, isShuffled } = get();
+    // Check if track already exists in upcoming queue
+    const upcomingIndices: number[] = [];
+    for (let i = currentIndex + 1; i < queue.length; i++) {
+      if (queue[i].video_id === track.video_id) {
+        upcomingIndices.push(i);
+      }
+    }
+
+    let newQueue = [...queue];
+    // Remove existing instances from upcoming
+    if (upcomingIndices.length > 0) {
+      upcomingIndices.reverse().forEach(idx => {
+        newQueue.splice(idx, 1);
+      });
+    }
+
+    // Insert after current
+    const insertIndex = currentIndex + 1;
+    newQueue.splice(insertIndex, 0, track);
+
+    set({
+      queue: newQueue,
+      originalQueue: isShuffled ? originalQueue : newQueue,
+    });
+  },
+
+  removeFromQueue: (index) => {
+    const { queue, currentIndex, originalQueue, isShuffled } = get();
+    if (index < 0 || index >= queue.length) return;
+
+    const newQueue = queue.filter((_, i) => i !== index);
+    const newIndex = index < currentIndex ? currentIndex - 1 : currentIndex;
+
+    set({
+      queue: newQueue,
+      originalQueue: isShuffled ? originalQueue.filter((_, i) => {
+        // Find the original index
+        const track = queue[index];
+        return track ? i !== originalQueue.findIndex(t => t.video_id === track.video_id) : true;
+      }) : newQueue,
+      currentIndex: newIndex,
+    });
+  },
+
+  moveQueueItem: (fromIndex, toIndex) => {
+    const { queue, currentIndex } = get();
+    if (fromIndex < 0 || fromIndex >= queue.length || toIndex < 0 || toIndex >= queue.length) return;
+
+    const newQueue = [...queue];
+    const [moved] = newQueue.splice(fromIndex, 1);
+    newQueue.splice(toIndex, 0, moved);
+
+    // Recalculate current index
+    let newCurrentIndex = currentIndex;
+    if (fromIndex === currentIndex) {
+      newCurrentIndex = toIndex;
+    } else if (fromIndex < currentIndex && toIndex >= currentIndex) {
+      newCurrentIndex = currentIndex - 1;
+    } else if (fromIndex > currentIndex && toIndex <= currentIndex) {
+      newCurrentIndex = currentIndex + 1;
+    }
+
+    set({ queue: newQueue, currentIndex: newCurrentIndex });
+  },
+
+  clearQueue: () => {
+    const { currentTrack } = get();
+    if (currentTrack) {
+      set({ queue: [currentTrack], currentIndex: 0, originalQueue: [currentTrack], isShuffled: false });
+    } else {
+      set({ queue: [], currentIndex: 0, originalQueue: [], isShuffled: false });
+    }
   },
 }));

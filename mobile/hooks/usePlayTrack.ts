@@ -126,15 +126,30 @@ export function usePlayTrack() {
   const setCurrentTrack = usePlayerStore(s => s.setCurrentTrack);
   const setIsPlaying = usePlayerStore(s => s.setIsPlaying);
   const setQueue = usePlayerStore(s => s.setQueue);
+  const setSeedTrack = usePlayerStore(s => s.setSeedTrack);
   const setIsLoading = useUIStore(s => s.setIsLoading);
   const addToRecent = useLibraryStore(s => s.addToRecent);
 
-  const playTrack = useCallback(async (track: any, queue?: any[]) => {
+  const playTrack = useCallback(async (track: any, queue?: any[], options?: { setSeed?: boolean }) => {
     try {
       setIsLoading(true);
       setCurrentTrack(track);
       setIsPlaying(false);
-      if (queue) setQueue(queue, queue.findIndex((t: any) => t.video_id === track.video_id));
+
+      if (queue) {
+        const index = queue.findIndex((t: any) => t.video_id === track.video_id);
+        setQueue(queue, index >= 0 ? index : 0);
+
+        // Set seed track for smart autoplay recommendations
+        if (options?.setSeed !== false) {
+          setSeedTrack(track);
+        }
+      } else {
+        // No queue provided - single track mode, radio will handle next songs
+        setQueue([track], 0);
+        setSeedTrack(track);
+      }
+
       await _playTrack(track);
       addToRecent(track);
     } catch (e: any) {
